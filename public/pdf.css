@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.kop {
+    text-align: center;
+    align-content: center;
+}
+.logo {
+    margin: auto;
+    margin-left: 50%;
+    margin-right: auto;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.line {
+    border-top: 3px solid black;
+    height: 2px;
+    border-bottom: 1px solid black;
+}
+.judul {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-underline: 1px solid black;
+    text-transform: uppercase;
+}
