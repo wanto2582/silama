@@ -5,10 +5,9 @@
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post with CKEditor 4</title>
+    <title>Layanan Masyarakat dan Administrasi Desa</title>
     {{-- Ini akan memuat CKEditor dari public/js/ckeditor --}}
     <script src="{{ asset('lib/ckeditor/ckeditor.js') }}"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js']) {{-- Vite untuk JS/CSS custom --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
         @isset($title)
