@@ -316,4 +316,32 @@ Route::middleware(['auth', 'verified', 'role:staff|admin'])->group(function () {
     Route::post('/pengguna-baru/tolak/{id}', [UserController::class, 'baru_tolak'])->name('pengguna-baru.tolak');
 });
 
+Route::prefix('kades-dashboard')->name('kades.')->group(function () {
+    // ... (route-route lain yang sudah ada) ...
+
+    // Route untuk preview PDF
+    Route::get('/pengajuan/{id}/preview-pdf', [KadesController::class, 'previewPdf'])->name('pengajuan.preview_pdf');
+});
+
+// Anda mungkin juga perlu route unduh.surat di luar grup jika digunakan secara publik
+// atau sesuaikan dengan struktur routing Anda.
+Route::get('/unduh-surat/{id}', function($id) {
+    // Logika untuk mengunduh surat (sama seperti di method previewPdf tapi mungkin return download)
+    $ps = \App\Models\Surat\PengajuanSurat::with('detail_surats')->findOrFail($id);
+    $list = $ps->detail_surats->first();
+    if (!$list) {
+        abort(404, 'Detail Surat tidak ditemukan.');
+    }
+    setlocale(LC_TIME, 'id_ID');
+    \Carbon\Carbon::setLocale('id');
+    $selesaiStatus = \App\Models\Surat\PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+    $indeks = array_flip($selesaiStatus);
+    $user = \App\Models\User::where('id', $list->users_id)->first();
+    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+    return $pdf->download('surat_' . $list->jenis_surat . '_' . $list->id . '.pdf');
+})->name('unduh.surat');
+
+
+
 require __DIR__ . '/auth.php';
