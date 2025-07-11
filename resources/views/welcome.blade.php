@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Silama</title>
+    <title>Silama Desa</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -50,7 +50,7 @@
                 <img src="{{ asset('template/dist/assets/img/avatar/letter.gif') }}" alt="Logo Desa"
                     class="">
                 {{-- @endif --}}
-                <h1 class="sitename">Silama</h1>
+                <h1 class="sitename">Silama-Desa</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -85,7 +85,7 @@
                     </h1>
                     <p data-aos="fade-up" data-aos-delay="100" style="font-size: 1.25rem; color: #444; margin-bottom: 1.2rem; background: rgba(255,255,255,0.6); display: inline-block; padding: 0.3em 1.2em; border-radius: 8px; box-shadow: 0 1px 8px rgba(54,136,162,0.06);">Sistem Layanan Masyarakat dan Administrasi Desa</p>
                     <div class="d-flex gap-3" data-aos="fade-up" data-aos-delay="200" style="margin-bottom: 1.5rem;">
-                        <a href="#about" class="btn-get-started" style="font-weight: 600; font-size: 1.1rem; padding: 0.7em 2em; border-radius: 30px; background: #3688a2; color: #fff; box-shadow: 0 2px 8px rgba(54,136,162,0.12); transition: background 0.2s;">Ajukan Surat</a>
+                        <a href="https://wa.me/6285299768443" target="_blank" class="btn-get-started" style="font-weight: 600; font-size: 1.1rem; padding: 0.7em 2em; border-radius: 30px; background: #3688a2; color: #fff; box-shadow: 0 2px 8px rgba(54,136,162,0.12); transition: background 0.2s;">Ajukan Surat</a>
                         <a href="https://www.youtube.com/watch?v=yaMfl5OLLm4"
                             class="glightbox btn-watch-video d-flex align-items-center" style="font-weight: 500; font-size: 1.1rem; color: #3688a2; background: #fff; border: 1.5px solid #3688a2; border-radius: 30px; padding: 0.7em 1.7em; margin-left: 0.7em; box-shadow: 0 2px 8px rgba(54,136,162,0.08); transition: background 0.2s;"><i
                                 class="bi bi-play-circle" style="font-size: 1.5rem; margin-right: 0.5em;"></i><span>Video Tutorial</span></a>
