@@ -32,7 +32,8 @@
                         <option value="skk">Surat Keterangan Kematian </option>
                         <option value="sktm">Surat Keterangan Tidak Mampu </option>
                          <option value="skkk">Surat Keterangan Kepemilikan Kendaraan </option>
-                        <option value="sku">Surat Keterangan Usaha </option>    
+                        <option value="sku">Surat Keterangan Usaha </option>
+                        <option value="skl">Surat Keterangan Kelahiran </option>    
                     </select>
                  </div>
                 </div>
@@ -75,6 +76,7 @@
     <x-form-surat.skk id="skk" :detailSurat="$detailSurat" />
     <x-form-surat.sktm id="sktm" :detailSurat="$detailSurat" />
     <x-form-surat.skkk id="skkk" :detailSurat="$detailSurat" />
+    <x-form-surat.skl id="skl" :detailSurat="$detailSurat" />
     <x-form-surat.sku id="sku" :detailSurat="$detailSurat" :warga="$warga" />
 
     {{-- SURAT PERNYATAAN --}}
@@ -92,6 +94,7 @@
         document.getElementById("sktm").style.display = "none";
         document.getElementById("skkk").style.display = "none";
         document.getElementById("sku").style.display = "none";
+        document.getElementById("skl").style.display = "none";
 
         // Semua card SURAT PERNYATAAN disembunyikan terlebih dahulu
         document.getElementById("spa").style.display = "none";
@@ -112,6 +115,8 @@
             document.getElementById("skkk").style.display = "block";
         } else if (selectedValue === "sku") {
             document.getElementById("sku").style.display = "block";
+        } else if (selectedValue === "skl") {
+            document.getElementById("skl").style.display = "block";
         // Tampilkan card SURAT PERNYATAAN sesuai dengan nilai yang dipilih
         } else if (selectedValue === "spa") {
             document.getElementById("spa").style.display = "block";

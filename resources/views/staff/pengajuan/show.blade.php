@@ -17,7 +17,10 @@
                         <x-detail-surat.skkk :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
                     @elseif ($detailSurat->kode_surat == 'sku')
                         <x-detail-surat.sku :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
-                    {{-- SURAT PERNYATAAN --}}
+                    @elseif ($detailSurat->kode_surat == 'skl')
+                        <x-detail-surat.skl :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
+
+                        {{-- SURAT PERNYATAAN --}}
                     @elseif ($detailSurat->kode_surat == 'spa')
                         <x-detail-surat.spa :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
                     @elseif ($detailSurat->kode_surat == 'spb')

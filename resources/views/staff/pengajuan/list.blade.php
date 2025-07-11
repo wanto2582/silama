@@ -25,6 +25,7 @@
                                         <option value="Surat Keterangan Kepemilikan Kendaraan">Surat Keterangan Kepemilikan Kendaraan (SKKK)</option>
                                         <option value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu (SKTM)</option>
                                         <option value="Surat Keterangan Usaha">Surat Keterangan Usaha (SKU)</option>
+                                        <option value="Surat Keterangan Kelahiran">Surat Keterangan Kelahiran (SKL)</option>
                                         <option value="Surat Pernyataan a">Surat Keterangan Usaha (SKU)</option>
                                         <option value="Surat Pernyataan b">Surat Keterangan Usaha (SKU)</option>
                                     </select>

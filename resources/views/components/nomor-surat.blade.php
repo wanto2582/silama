@@ -23,6 +23,8 @@ $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'skk') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
+} elseif ($type === 'skl') {
+$nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 
 // SURAT PERNYATAAN
 } elseif ($type === 'spa') {

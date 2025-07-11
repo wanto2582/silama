@@ -79,7 +79,9 @@
             </div>
             <div class="container text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 data-aos="fade-up">Selamat datang di <span>Silama</span></h1>
+                    <h1 data-aos="fade-up">
+                        <span id="typewriter-text" style="color: inherit;">Selamat datang di <span style="color: inherit;">Silama</span></span>
+                    </h1>
                     <p data-aos="fade-up" data-aos-delay="100">Sistem Layanan Masyarakat dan Administrasi Desa<br>
                     </p>
                     <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
@@ -722,8 +724,14 @@
     </footer>
 
     <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6285299768443" target="_blank" id="whatsapp-float" class="whatsapp-float d-flex align-items-center justify-content-center" style="position: fixed; left: 30px; bottom: 30px; z-index: 9999; width: 50px; height: 50px; background: #25d366; color: #fff; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2); font-size: 2rem; text-align: center;">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
     <!-- Preloader -->
     <div id="preloader"></div>
@@ -737,6 +745,77 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('/landing-page/assets/js/main.js') }}"></script>
+
+    <!-- Typewriter Effect Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const el = document.getElementById('typewriter-text');
+            const phrases = [
+                'Selamat datang di <b>Silama-Desa</b>',
+                'Sistem Layanan Masyarakat dan Administrasi Desa',
+                'Mudah, Cepat, dan Efisien',
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 80;
+            let pauseDelay = 1200;
+
+            function typeLoop() {
+                const currentPhrase = phrases[phraseIndex];
+                let displayed = currentPhrase.substring(0, charIndex);
+                el.innerHTML = displayed + '<span class="type-cursor">|</span>';
+
+                if (!isDeleting && charIndex < currentPhrase.length) {
+                    charIndex++;
+                    setTimeout(typeLoop, typingSpeed);
+                } else if (isDeleting && charIndex > 0) {
+                    charIndex--;
+                    setTimeout(typeLoop, typingSpeed / 2);
+                } else {
+                    if (!isDeleting) {
+                        isDeleting = true;
+                        setTimeout(typeLoop, pauseDelay);
+                    } else {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        setTimeout(typeLoop, 500);
+                    }
+                }
+            }
+            typeLoop();
+        });
+    </script>
+
+    <style>
+        .type-cursor {
+            display: inline-block;
+            color: inherit;
+            animation: blink 1s steps(1) infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+
+    <!-- Optional: Custom CSS for WhatsApp Button (if needed) -->
+    <style>
+        .whatsapp-float:hover {
+            background: #128c7e;
+            color: #fff;
+            text-decoration: none;
+        }
+        @media (max-width: 575.98px) {
+            #whatsapp-float {
+                left: 15px;
+                bottom: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.7rem;
+            }
+        }
+    </style>
 
 </body>
 

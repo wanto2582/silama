@@ -233,6 +233,43 @@ class SuratController extends Controller
             ]);
         }
 
+        if ($request->jenis_surat == 'skl') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'tujuan' => $request->tujuan,
+                'jenis_surat' => 'Surat Keterangan Kelahiran',
+                'kode_surat' => 'skl',
+                'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                'ttd_nama' => $request->ttd_nama,
+                'ttd_jabatan' => $request->ttd_jabatan,
+                'anak_nama' => $request->anak_nama,
+                'anak_ke' => $request->anak_ke,
+                'anak_ke_angka' => $request->anak_ke_angka,
+                'anak_gender' => $request->anak_gender,
+                'anak_tempat_lahir' => $request->anak_tempat_lahir,
+                'anak_tanggal_lahir' => $request->anak_tanggal_lahir,
+                'anak_alamat' => $request->anak_alamat,
+                'penolong' => $request->penolong,
+                'penolong_alamat' => $request->penolong_alamat,
+                'ibu_nik' => $request->ibu_nik,
+                'ibu_nama' => $request->ibu_nama,
+                'ibu_tempat_lahir' => $request->ibu_tempat_lahir,
+                'ibu_tanggal_lahir' => $request->ibu_tanggal_lahir,
+                'ibu_alamat' => $request->ibu_alamat,
+                'ayah_nik' => $request->ayah_nik,
+                'ayah_nama' => $request->ayah_nama,
+                'ayah_tempat_lahir' => $request->ayah_tempat_lahir,
+                'ayah_tanggal_lahir' => $request->ayah_tanggal_lahir,
+                'ayah_alamat' => $request->ayah_alamat,
+
+
+            ]);
+        }
+
         if ($request->jenis_surat == 'spa') {
             DetailSurat::create([
                 'users_id' => Auth::user()->id,
@@ -468,6 +505,38 @@ class SuratController extends Controller
                 'nama_instansi' => $request->nama_instansi,
                 'mulai_usaha' => $request->mulai_usaha,
                 'alamat_usaha' => $request->alamat_usaha,
+            ]);
+        }
+
+        if ($request->jenis_surat == 'skl') {
+            DetailSurat::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'jenis_surat' => 'Surat Keterangan Kelahiran',
+                'kode_surat' => 'skl',
+                'berkas' => $request->hasFile('berkas') ? $request->file('berkas')->store('assets/berkas', 'public') : $detailSurat->berkas,
+                'tujuan' => $request->tujuan,
+                'ttd_nama' => $request->ttd_nama,
+                'ttd_jabatan' => $request->ttd_jabatan,
+                'anak_nama' => $request->anak_nama,
+                'anak_ke' => $request->anak_ke,
+                'anak_ke_angka' => $request->anak_ke_angka,
+                'anak_gender' => $request->anak_gender,
+                'anak_tempat_lahir' => $request->anak_tempat_lahir,
+                'anak_tanggal_lahir' => $request->anak_tanggal_lahir,
+                'anak_alamat' => $request->anak_alamat,
+                'penolong' => $request->penolong,
+                'penolong_alamat' => $request->penolong_alamat,
+                'ibu_nik' => $request->ibu_nik,
+                'ibu_nama' => $request->ibu_nama,
+                'ibu_tempat_lahir' => $request->ibu_tempat_lahir,
+                'ibu_tanggal_lahir' => $request->ibu_tanggal_lahir,
+                'ibu_alamat' => $request->ibu_alamat,
+                'ayah_nik' => $request->ayah_nik,
+                'ayah_nama' => $request->ayah_nama,
+                'ayah_tempat_lahir' => $request->ayah_tempat_lahir,
+                'ayah_tanggal_lahir' => $request->ayah_tanggal_lahir,
+                'ayah_alamat' => $request->ayah_alamat,
             ]);
         }
 

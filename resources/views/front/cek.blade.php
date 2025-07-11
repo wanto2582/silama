@@ -104,6 +104,10 @@
                     <br>
                     Dipergunakan untuk : <strong>{{ $list->tujuan }}</strong> <br>
 
+                    <!-- Tombol Preview Dokumen PDF -->
+
+                    <!-- Preview Dokumen PDF di halaman -->
+                    
                     <hr class="mb-30 mt-30">
                     <h2 class="mb-30 h4">Tanda Tangan Valid ✅</h2>
                     <b p style="color: blue;"> Dibuat </b>Pada : <br>{{ \Carbon\Carbon::parse($ps->created_at)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }} <br>
@@ -120,12 +124,21 @@
                     @else
                     <h2 class="h4">Data Tidak Ditemukan ❌</h2>
                     @endif
+
+                    <div class="mb-3 mt-3">
+                        <button class="btn btn-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
+                            <i class="bi bi-eye"></i> Preview Dokumen
+                        </button>
+                    </div>
+                    <div id="pdf-preview" style="display: none; margin-bottom: 20px;">
+                        <iframe src="{{ url('storage/pdf/' . $ps->id . '.pdf') }}" width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
+                    </div>
+                    
                     
                 </div>
             </div>
         </div>
     </div>
-	
                     <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt=""
                         data-aos="zoom-out" data-aos-delay="300">
                 </div>
