@@ -799,12 +799,12 @@
             51%, 100% { opacity: 0; }
         }
         .hero.section {
-            padding-top: 40px !important;
+            padding-top: 90px !important;
             padding-bottom: 20px !important;
         }
         @media (max-width: 767.98px) {
             .hero.section {
-                padding-top: 50px !important;
+                padding-top: 80px !important;
                 padding-bottom: 10px !important;
             }
             .hero-img {
@@ -823,12 +823,14 @@
                 min-height: 45vh !important;
             }
             .hero.section .d-flex.gap-3 {
-                gap: 0.5rem !important;
+                gap: 0.1rem !important;
             }
             #typewriter-text { 
-                font-size: 2.0rem !important;
-                text-align: center;
-                padding-top: -50px !important;
+                font-size: 1.7rem !important;
+                text-align: justify;
+                /* padding text: 5px 0; */
+                padding-top: 10px !important;
+                line-height: 0.2;
             }
         }
     </style>
