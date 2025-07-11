@@ -99,7 +99,7 @@
         <!-- Featured Services Section -->
         <section id="featured-services" class="featured-services section light-background">
 
-            <div class="container">
+            <div class="container" style="padding-top: -50px; padding-bottom: 30px;">
 
                 <div class="row gy-4">
 
@@ -789,9 +789,9 @@
         <style>
         .type-cursor {
             display: inline-block;
-            color: #3688a2;
+            color: #3688a2, yellowgreen;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1em;
             animation: blink 1s steps(1) infinite;
         }
         @keyframes blink {
@@ -799,13 +799,13 @@
             51%, 100% { opacity: 0; }
         }
         .hero.section {
-            padding-top: 90px !important;
-            padding-bottom: 40px !important;
+            padding-top: 40px !important;
+            padding-bottom: 20px !important;
         }
         @media (max-width: 767.98px) {
             .hero.section {
-                padding-top: 70px !important;
-                padding-bottom: 20px !important;
+                padding-top: 50px !important;
+                padding-bottom: 10px !important;
             }
             .hero-img {
                 max-width: 90vw !important;
@@ -816,8 +816,19 @@
                 padding: 0.5em 1.2em !important;
                 border-radius: 22px !important;
             }
+            .hero.section .d-flex.flex-column {
+                min-height: unset !important;
+            }
+            .hero.section {
+                min-height: 45vh !important;
+            }
             .hero.section .d-flex.gap-3 {
                 gap: 0.5rem !important;
+            }
+            #typewriter-text { 
+                font-size: 2.0rem !important;
+                text-align: center;
+                padding-top: -50px !important;
             }
         }
     </style>
