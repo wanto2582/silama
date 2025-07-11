@@ -73,28 +73,27 @@
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="beranda" class="hero section">
-            <div class="hero-bg">
-                <img src="{{ asset('/landing-page/assets/img/hero-bg-light.webp') }}" alt="">
+        <section id="beranda" class="hero section" style="padding-top: 90px; padding-bottom: 40px; position: relative; min-height: 70vh; background: linear-gradient(135deg, #e0f7fa 0%, #fff 100%); overflow: hidden;">
+            <div class="hero-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                <img src="{{ asset('/landing-page/assets/img/hero-bg-light.webp') }}" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(120deg, rgba(54,136,162,0.12) 0%, rgba(255,255,255,0.7) 100%);"></div>
             </div>
-            <div class="container text-center">
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <h1 data-aos="fade-up">
-                        <span id="typewriter-text" style="color: inherit;">Selamat datang di <span style="color: inherit;">Silama</span></span>
+            <div class="container text-center" style="position: relative; z-index: 2;">
+                <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 45vh;">
+                    <h1 data-aos="fade-up" style="font-size: 2.7rem; font-weight: 800; color: #3688a2; margin-bottom: 0.5rem; letter-spacing: 1px;">
+                        <span id="typewriter-text" style="color: inherit; padding: 0.2em 0.7em; border-radius: 12px; text-align: center; box-shadow: 0 2px 12px rgba(54,136,162,0.08);">Selamat datang di <span style="color: #eab415;">Silama</span></span>
                     </h1>
-                    <p data-aos="fade-up" data-aos-delay="100">Sistem Layanan Masyarakat dan Administrasi Desa<br>
-                    </p>
-                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                        <a href="#about" class="btn-get-started">Ajukan Surat</a>
+                    <p data-aos="fade-up" data-aos-delay="100" style="font-size: 1.25rem; color: #444; margin-bottom: 1.2rem; background: rgba(255,255,255,0.6); display: inline-block; padding: 0.3em 1.2em; border-radius: 8px; box-shadow: 0 1px 8px rgba(54,136,162,0.06);">Sistem Layanan Masyarakat dan Administrasi Desa</p>
+                    <div class="d-flex gap-3" data-aos="fade-up" data-aos-delay="200" style="margin-bottom: 1.5rem;">
+                        <a href="#about" class="btn-get-started" style="font-weight: 600; font-size: 1.1rem; padding: 0.7em 2em; border-radius: 30px; background: #3688a2; color: #fff; box-shadow: 0 2px 8px rgba(54,136,162,0.12); transition: background 0.2s;">Ajukan Surat</a>
                         <a href="https://www.youtube.com/watch?v=yaMfl5OLLm4"
-                            class="glightbox btn-watch-video d-flex align-items-center"><i
-                                class="bi bi-play-circle"></i><span>Video Tutorial</span></a>
+                            class="glightbox btn-watch-video d-flex align-items-center" style="font-weight: 500; font-size: 1.1rem; color: #3688a2; background: #fff; border: 1.5px solid #3688a2; border-radius: 30px; padding: 0.7em 1.7em; margin-left: 0.7em; box-shadow: 0 2px 8px rgba(54,136,162,0.08); transition: background 0.2s;"><i
+                                class="bi bi-play-circle" style="font-size: 1.5rem; margin-right: 0.5em;"></i><span>Video Tutorial</span></a>
                     </div>
                     <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt=""
-                        data-aos="zoom-out" data-aos-delay="300">
+                        data-aos="zoom-out" data-aos-delay="300" style="max-width: 350px; border-radius: 18px; box-shadow: 0 4px 24px rgba(54,136,162,0.10); margin-top: 0.5rem;">
                 </div>
             </div>
-
         </section><!-- /Hero Section -->
 
         <!-- Featured Services Section -->
@@ -787,15 +786,39 @@
         });
     </script>
 
-    <style>
+        <style>
         .type-cursor {
             display: inline-block;
-            color: inherit;
+            color: #3688a2;
+            font-weight: bold;
+            font-size: 1.2em;
             animation: blink 1s steps(1) infinite;
         }
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
+        }
+        .hero.section {
+            padding-top: 90px !important;
+            padding-bottom: 40px !important;
+        }
+        @media (max-width: 767.98px) {
+            .hero.section {
+                padding-top: 70px !important;
+                padding-bottom: 20px !important;
+            }
+            .hero-img {
+                max-width: 90vw !important;
+            }
+            .hero.section .btn-get-started,
+            .hero.section .btn-watch-video {
+                font-size: 0.95rem !important;
+                padding: 0.5em 1.2em !important;
+                border-radius: 22px !important;
+            }
+            .hero.section .d-flex.gap-3 {
+                gap: 0.5rem !important;
+            }
         }
     </style>
 
