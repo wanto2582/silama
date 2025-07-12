@@ -750,8 +750,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const el = document.getElementById('typewriter-text');
             const phrases = [
-                'Selamat datang di <b>Silama-Desa</b>',
-                'Sistem Layanan Masyarakat dan Administrasi Desa',
+                'Selamat datang di Silama-Desa',
                 'Mudah, Cepat, dan Efisien',
             ];
             let phraseIndex = 0;
