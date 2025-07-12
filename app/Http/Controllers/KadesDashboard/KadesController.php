@@ -5,6 +5,8 @@ namespace App\Http\Controllers\KadesDashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Surat\DetailSurat;
 use App\Models\Surat\PengajuanSurat;
+use App\Models\Suratkeluar\DetailSuratkeluar;
+use App\Models\Suratkeluar\PengajuanSuratkeluar;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -137,8 +139,10 @@ class KadesController extends Controller
 
     public function dashboard()
     {
+        
         $ps = PengajuanSurat::get();
-        return view('kades.dashboard', compact('ps'));
+        $pskeluar = PengajuanSuratkeluar::get();
+        return view('kades.dashboard', compact('ps', 'pskeluar'));
     }
 
     public function list()

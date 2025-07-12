@@ -108,7 +108,7 @@
                             </div>
                         </div>
                         <div class="widget-data">
-                            {{-- <div class="h4 mb-0">{{count($listkeluar->where('status', 'Dikonfirmasi'))}}</div> --}}
+                            <div class="h4 mb-0">{{count($pskeluar->where('status', 'Dikonfirmasi'))}}</div>
                             <div class="weight-600 font-14">Surat belum ditanda tangani</div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="widget-data">
-                            {{-- <div class="h4 mb-0">{{count($pskeluar->whereIn('status', ['Selesai']))}}</div> --}}
+                            <div class="h4 mb-0">{{count($pskeluar->whereIn('status', ['Selesai']))}}</div>
                             <div class="weight-600 font-14">Surat sudah ditanda tangani</div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="widget-data">
-                            {{-- <div class="h4 mb-0">{{count($pskeluar->whereIn('status', ['Ditolak']))}}</div> --}}
+                            <div class="h4 mb-0">{{count($pskeluar->whereIn('status', ['Ditolak']))}}</div>
                             <div class="weight-600 font-14">Surat ditolak</div>
                         </div>
                     </div>

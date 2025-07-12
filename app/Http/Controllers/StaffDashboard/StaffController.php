@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\StaffDashboard;
 
 use App\Exports\ReportPengajuan;
+use App\Exports\ReportPengajuankeluar;
 use App\Http\Controllers\Controller;
 use App\Models\Surat\DetailSurat;
+use App\Models\Suratkeluar\DetailSuratkeluar;
 use App\Models\Surat\PengajuanSurat;
+use App\Models\Suratkeluar\PengajuanSuratkeluar;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -82,7 +85,8 @@ class StaffController extends Controller
     public function dashboard()
     {
         $ps = PengajuanSurat::get();
-        return view('staff.dashboard', compact('ps'));
+        $pskeluar = PengajuanSuratkeluar::get();
+        return view('staff.dashboard', compact('ps', 'pskeluar'));
     }
 
     public function list(Request $request)
