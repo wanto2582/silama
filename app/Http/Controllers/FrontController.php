@@ -113,8 +113,16 @@ class FrontController extends Controller
             return $pdf->stream('Surat Keterangan Kepemilikan Kendaraan - ' . $listkeluar->nama . '.pdf');
         } else if ($listkeluar->jenis_surat == 'Surat Keterangan Tidak Mampu') {
             return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $listkeluar->nama . '.pdf');
-            } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kelahiran') {
+        } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kelahiran') {
             return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $listkeluar->nama . '.pdf');
+        //surat izin / rekomendasi
+        } else if ($listkeluar->jenis_surat == 'Surat Izin Kepala Desa') {
+            return $pdf->stream('Surat Izin Kepala Desa - ' . $listkeluar->nama . '.pdf');
+        // SURAT PERNYATAAN
+        } else if ($listkeluar->jenis_surat == 'Surat Pernyataan a') {
+            return $pdf->stream('Surat Pernyataan a - ' . $listkeluar->nama . '.pdf');
+        } else if ($listkeluar->jenis_surat == 'Surat Pernyataan b') {
+            return $pdf->stream('Surat Pernyataan b - ' . $listkeluar->nama . '.pdf');
         }
     }
 

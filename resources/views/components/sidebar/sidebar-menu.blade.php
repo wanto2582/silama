@@ -101,7 +101,19 @@
                 <span class="micon bi bi-files" style="color:white"></span><span class="mtext" style="color:white">Buku Administrasi</span>
             </a>
             <ul class="submenu">
-                <x-menu.sidebar-menu-item class=" text-indent no-arrow {{request()->is('desa.peraturan-desa.index') ? 'active' : ''}}" link="{{route('desa.peraturan-desa.index')}}" icon="" title="Peraturan Desa" />
+                <style>
+                    .sidebar-menu .submenu .sidebar-menu-item .mtext,
+                    .sidebar-menu .submenu .sidebar-menu-item span,
+                    .sidebar-menu .submenu .sidebar-menu-item {
+                        max-width: 210px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                </style>
+                <x-menu.sidebar-menu-item class="text-indent no-arrow {{request()->is('desa.peraturan-desa.index') ? 'active' : ''}}" link="{{route('desa.peraturan-desa.index')}}" icon="" title="Peraturan Desa" />
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.peraturan-kades.index') ? 'active' : ''}}" link="{{route('desa.peraturan-kades.index')}}" icon="" title="Peraturan Kades" />
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.peraturan-berkades.index') ? 'active' : ''}}" link="{{route('desa.peraturan-berkades.index')}}" icon="" title="Peraturan Bersama Kades" />
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.keputusan-kades.index') ? 'active' : ''}}" link="{{route('desa.keputusan-kades.index')}}" icon="" title="Keputusan Kepala Desa" />

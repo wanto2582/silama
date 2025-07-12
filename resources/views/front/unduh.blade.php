@@ -12,6 +12,10 @@
     <x-template-surat.sku :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 @elseif($list->kode_surat == 'skl')
     <x-template-surat.skl :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
+{{-- SURAT IZIN/REKOMENDASI --}}
+@elseif($list->kode_surat == 'sikd')
+    <x-template-surat.sikd :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
+    {{-- SURAT PERNYATAAN --}}
 @elseif($list->kode_surat == 'spa')
     <x-template-surat.spa :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 @elseif($list->kode_surat == 'spb')

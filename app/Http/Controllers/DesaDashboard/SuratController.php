@@ -266,6 +266,23 @@ class SuratController extends Controller
                 'ayah_tanggal_lahir' => $request->ayah_tanggal_lahir,
                 'ayah_alamat' => $request->ayah_alamat,
 
+            ]);
+        }
+
+        if ($request->jenis_surat == 'sikd') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'tujuan' => $request->tujuan,
+                'jenis_surat' => 'Surat Izin Kepala Desa',
+                'kode_surat' => 'sikd',
+                'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                'ttd_nama' => $request->ttd_nama,
+                'ttd_jabatan' => $request->ttd_jabatan,
+                
 
             ]);
         }
@@ -539,6 +556,21 @@ class SuratController extends Controller
                 'ayah_alamat' => $request->ayah_alamat,
             ]);
         }
+
+        if ($request->jenis_surat == 'sikd') {
+            DetailSurat::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'jenis_surat' => 'Surat Izin Kepala Desa',
+                'kode_surat' => 'sikd',
+                'berkas' => $request->hasFile('berkas') ? $request->file('berkas')->store('assets/berkas', 'public') : $detailSurat->berkas,
+                'tujuan' => $request->tujuan,
+                'ttd_nama' => $request->ttd_nama,
+                'ttd_jabatan' => $request->ttd_jabatan,
+               
+            ]);
+        }
+
 
         if ($request->jenis_surat == 'spa') {
             DetailSurat::where('id', $id)->update([

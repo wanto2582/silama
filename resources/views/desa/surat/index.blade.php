@@ -61,7 +61,7 @@
                     <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
                         <option value="">Pilih SURAT IZIN/REKOMENDASI</option>
                         <option value="spa">Surat Rekomendasi a </option>
-                        <option value="spb">Surat Izin a </option>
+                        <option value="sikd">Surat Izin Kepala Desa </option>
                     </select>
                  </div>
             </div>
@@ -78,7 +78,9 @@
     <x-form-surat.skkk id="skkk" :detailSurat="$detailSurat" />
     <x-form-surat.skl id="skl" :detailSurat="$detailSurat" />
     <x-form-surat.sku id="sku" :detailSurat="$detailSurat" :warga="$warga" />
-
+     {{-- SURAT IZIN / REKOMENDASI --}}
+    <x-form-surat.sikd id="sikd" :detailSurat="$detailSurat" />
+    <x-form-surat.spb id="spb" :detailSurat="$detailSurat" />
     {{-- SURAT PERNYATAAN --}}
     <x-form-surat.spa id="spa" :detailSurat="$detailSurat" />
     <x-form-surat.spb id="spb" :detailSurat="$detailSurat" />
@@ -95,6 +97,9 @@
         document.getElementById("skkk").style.display = "none";
         document.getElementById("sku").style.display = "none";
         document.getElementById("skl").style.display = "none";
+        // Semua card SURAT IZIN / REKOMENDASI disembunyikan terlebih dahulu
+        document.getElementById("sikd").style.display = "none";
+        document.getElementById("spb").style.display = "none";
 
         // Semua card SURAT PERNYATAAN disembunyikan terlebih dahulu
         document.getElementById("spa").style.display = "none";
@@ -120,6 +125,11 @@
         // Tampilkan card SURAT PERNYATAAN sesuai dengan nilai yang dipilih
         } else if (selectedValue === "spa") {
             document.getElementById("spa").style.display = "block";
+        } else if (selectedValue === "spb") {
+            document.getElementById("spb").style.display = "block";
+        // Tampilkan card SURAT IZIN / REKOMENDASI sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "sikd") {
+            document.getElementById("sikd").style.display = "block";
         } else if (selectedValue === "spb") {
             document.getElementById("spb").style.display = "block";
 
