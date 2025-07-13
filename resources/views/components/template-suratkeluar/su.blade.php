@@ -104,7 +104,7 @@
         }
 
         .ttd {
-            margin-top: 20px;
+            margin-top: 0px;
         }
 
         .ttd-kiri,
@@ -195,30 +195,41 @@
             </tr>
            
         </table>
+
+        <table style="padding: 0 50px 0 50px; margin-top: 20px; text-align: justify;">
+            
+            <tr>
+                <td style="text-align: left; vertical-align: top; padding: 15px -20px 0px 0px;">Yth.</td>
+                <td style="text-align: left; padding-left:0px; padding-top: -30px; padding: 0px 0px 0px 0px; ">
+                    {!! $listkeluar->yth ?? ''!!}</td>
+            </tr>
+           
+        </table>
     
-        <p style="padding: 0 50px 0 52px; text-align: justify;">
-        Yth &nbsp; <span>{{$listkeluar->yth ?? ''}}</span></p>
-         <p style="padding: 0 50px 0 50px; padding-left: 140px; line-height:1em; text-align: justify;">
+    
+        {{-- <p style="padding: 0 50px 0 52px; text-align: justify;">
+        Yth. &nbsp; <span>{!! $listkeluar->yth ?? ''!!}</span></p> --}}
+         <p style="padding: 0 50px 0 50px; padding-left: 90px; line-height:1em; text-align: justify;">
         Masing-masing</p>
-          <p style="padding: 0 50px 0 50px; padding-left: 140px; margin-top: -10px; line-height:1 em; text-align: justify;">
+          <p style="padding: 0 50px 0 50px; padding-left: 90px; margin-top: -10px; line-height:1 em; text-align: justify;">
         di_</p>
         <p style="padding: 0 50px 0 50px; padding-left: 140px; line-height:1 em; margin-top: -10px; text-align: justify;">
         Tempat</p>
         
-        <div class="ttdkanan" style="padding: 0 50px 0 50px; margin-top: -40px; text-indent:30px; line-height:1.5em; text-align: justify; border-collapse: collapse;" >
+        <div class="ttdkanan" style="padding: 0 50px 0 140px; margin-top: -40px; text-indent:40px; line-height:1.5em; text-align: justify; border-collapse: collapse;" >
         {!! $listkeluar->paragraf_1 ?? '' !!}
         </div>
         {{-- <p style="padding: 0 50px 0 52px; text-align: justify;">
          {!! $listkeluar->paragraf_1 ?? '' !!}</p>
          --}}
-        <table style="padding: 0 50px 0 50px; padding-left: 140px;  text-align: justify;">
+        <table style="padding: 0 50px 0 50px; padding-left: 180px;  text-align: justify;">
             
             <tr>
-                <td style="text-align: left;">Hari dan tanggal</td>
+                <td style="text-align: left;">Hari/tanggal</td>
                 <td style="text-align: left; padding-left: 10px;">: {{$listkeluar->hari ?? ''}} </td>
             </tr>
             <tr>
-                <td style="text-align: left;">Waktu</td>
+                <td style="text-align: left;">Pukul</td>
                 <td style="text-align: left; padding-left: 10px;">: {{$listkeluar->waktu ?? ''}}</td>
             </tr>
             <tr>
@@ -227,9 +238,11 @@
             </tr>
            
         </table>
-
-        <p style="padding: 0 50px 0 50px; line-height:1.5em; text-align: justify;">
-        demikian surat ini disampaikan untuk diketahui sebagaimana mestinya, atas perhatian dan kerjasamanya diucapkan terima kasih.
+        <div class="ttdkanan" style="padding: 0 50px 0 140px; margin-top: 0px; line-height:1.5em; text-align: justify; border-collapse: collapse;" >
+        {!! $listkeluar->paragraf_2 ?? '' !!}
+        </div>
+        <p style="padding: 0 50px 0 140px; line-height:1.5em; margin-bottom: -20; text-indent:30px; text-align: justify;">
+        Demikian surat ini disampaikan untuk diketahui sebagaimana mestinya, atas perhatian dan kerjasamanya diucapkan terima kasih.
         <br>          
         </p>
         
@@ -240,7 +253,7 @@
                 <br>
                 <br>
                 <p style="margin-bottom: 5px;">Manyampa, {{\Carbon\Carbon::parse($listkeluar->created_at)->isoFormat('D MMMM YYYY') ?? ''}}
-                    <br style="margin-bottom: 5px;"><b>KEPALA DESA,</b>
+                    <br style="margin-bottom: -20px;"><b>KEPALA DESA,</b>
                 </p>
                 <br>
                 <br>
@@ -261,11 +274,11 @@
 
     <div class="container">
         <div class="ttdkiri">
+                
                 <br>
-                <br>    
                 <br>
                 <br>
-                <br>   
+                <br>
                 <br>
                 <br>
             <table style="padding: 0 50px 0 50px; margin-top: 130px; text-align: justify; border-collapse: collapse;">

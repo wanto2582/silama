@@ -63,6 +63,11 @@
         <td>{!!  $detailSuratkeluar->paragraf_1 ?? '' !!}</td>
     </tr>
     <tr>
+        <td width="30%">Penekanan </td>
+        <td width="1%">:</td>
+        <td>{!!  $detailSuratkeluar->paragraf_2 ?? '' !!}</td>
+    </tr>
+    <tr>
         <td width="30%">Tembusan </td>
         <td width="1%">:</td>
         <td>{!!  $detailSuratkeluar->tembusan ?? '' !!}</td>

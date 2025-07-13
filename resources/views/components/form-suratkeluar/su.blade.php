@@ -55,23 +55,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label><b>Yth :</b> </x-input-label>
-                            <x-text-input name="yth" type="text" class="form-control" />
+                            <textarea name="yth" type="text" class=" ckeditor form-control" ></textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('yth')" />
                         </div>
                     </div>
                     
                     <div class="col-md-6">
                         <div class="form-group">
-                            <x-input-label><b>Hari / Tanggal :</b> &nbsp; ex <em class="text-blue">( Selasa/8 Juli 2025 )</em></x-input-label>
-                            <x-text-input name="hari" type="text" class="form-control" placeholder=" Selasa/8 Juli 2025" />
+                            <x-input-label><b>Hari / Tanggal :</b> &nbsp; ex <em class="text-blue">( Selasa / 8 Juli 2025 )</em></x-input-label>
+                            <x-text-input name="hari" type="text" class="form-control" placeholder=" Selasa / 8 Juli 2025" />
                             <x-input-error class="mt-2" :messages="$errors->get('hari')" />
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <x-input-label><b>Waktu :</b> &nbsp; ex <em class="text-blue">( Pukul 13.00 Wita )</em></x-input-label>
-                            <x-text-input name="waktu" type="text" class="form-control" placeholder=" Pukul 13.00 Wita" />
+                            <x-input-label><b>Waktu :</b> &nbsp; ex <em class="text-blue">( 13:00 )</em></x-input-label>
+                            <x-text-input name="waktu" type="text" class="form-control" placeholder=" 13:00" />
                             <x-input-error class="mt-2" :messages="$errors->get('waktu')" />
                         </div>
                     </div>
@@ -90,6 +90,15 @@
                             </x-input-label>
                             <textarea name="paragraf_1" type="textarea" class="ckeditor form-control" ></textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('paragraf_1')" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <x-input-label><b>Penekanan :</b> 
+                            <em class="text-blue"> &nbsp; ( Kosongkan jika tidak diperlukan )</em>
+                            </x-input-label>
+                            <textarea name="paragraf_2" type="textarea" class="ckeditor form-control" ></textarea>
+                            <x-input-error class="mt-2" :messages="$errors->get('paragraf_2')" />
                         </div>
                     </div>
                     <div class="col-md-6">
