@@ -14,15 +14,15 @@
             font-family: Arial, sans-serif;
         }
 
-        .header {
+         .header {
             display: table;
             font-size: 15px;
             /* font-weight: 300; */
             font-family: Arial, sans-serif;
             width: 100%;
             margin-bottom: 15px;
+            margin-top: -10px;
         }
-
         al {
              margin: 10px 0;
                 padding: 5px;
@@ -195,6 +195,38 @@
     margin-top: 50px;
     text-align: right;
   }
+     
+        .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20px; /* Tinggi footer */
+        border-top: 1px solid #ccc;
+        padding: 10px 30px;
+        font-size: 10px;
+        color: #555;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Memisahkan teks dan gambar */
+    }
+
+    .footer-text {
+        text-align: left;
+        flex: 1; /* Menggunakan ruang yang tersedia */
+        padding-right: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        margin-top: -20px;
+        font-style: italic;
+    }
+
+    .footer-image {
+        width: 40px; /* Lebar gambar */
+        height: 40px; /* Tinggi gambar */
+        float: right;
+        margin-top: -30px;
+    }
     </style>
 </head>
 

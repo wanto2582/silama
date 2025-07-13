@@ -21,6 +21,7 @@
             font-family: Arial, sans-serif;
             width: 100%;
             margin-bottom: 15px;
+            margin-top: -10px;
         }
 
         al {
@@ -154,6 +155,69 @@
             z-index: 2;
             /* Pastikan logo berada di lapisan terdepan */
         }
+        .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20px; /* Tinggi footer */
+        border-top: 1px solid #ccc;
+        padding: 10px 30px;
+        font-size: 10px;
+        color: #555;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Memisahkan teks dan gambar */
+    }
+
+    .footer-text {
+        text-align: left;
+        flex: 1; /* Menggunakan ruang yang tersedia */
+        padding-right: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        margin-top: -20px;
+        font-style: italic;
+    }
+
+    .footer-image {
+        width: 40px; /* Lebar gambar */
+        height: 40px; /* Tinggi gambar */
+        float: right;
+        margin-top: -30px;
+    }
+     
+        .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20px; /* Tinggi footer */
+        border-top: 1px solid #ccc;
+        padding: 10px 30px;
+        font-size: 10px;
+        color: #555;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Memisahkan teks dan gambar */
+    }
+
+    .footer-text {
+        text-align: left;
+        flex: 1; /* Menggunakan ruang yang tersedia */
+        padding-right: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        margin-top: -20px;
+        font-style: italic;
+    }
+
+    .footer-image {
+        width: 40px; /* Lebar gambar */
+        height: 40px; /* Tinggi gambar */
+        float: right;
+        margin-top: -30px;
+    }
     </style>
 </head>
 
@@ -196,22 +260,21 @@
            
         </table>
 
-        <table style="padding: 0 50px 0 50px; margin-top: 20px; text-align: justify;">
+        <table style="padding: 0 50px 0 50px; margin-top: 5px; text-align: left; border-collapse: collapse;">
             
             <tr>
-                <td style="text-align: left; vertical-align: top; padding: 15px -20px 0px 0px;">Yth.</td>
-                <td style="text-align: left; padding-left:0px; padding-top: -30px; padding: 0px 0px 0px 0px; ">
+                <td style="text-align: left; width: 2%; vertical-align: top; padding-top: 15px; border-collapse: collapse;">
+                    Yth.</td>
+                <td style="padding: 0 0px 0 -20px; text-align: left;">
                     {!! $listkeluar->yth ?? ''!!}</td>
             </tr>
            
         </table>
     
     
-        {{-- <p style="padding: 0 50px 0 52px; text-align: justify;">
-        Yth. &nbsp; <span>{!! $listkeluar->yth ?? ''!!}</span></p> --}}
-         <p style="padding: 0 50px 0 50px; padding-left: 90px; line-height:1em; text-align: justify;">
+         <p style="padding: 0 50px 0 50px; padding-left: 100px; line-height:1em; text-align: justify;">
         Masing-masing</p>
-          <p style="padding: 0 50px 0 50px; padding-left: 90px; margin-top: -10px; line-height:1 em; text-align: justify;">
+          <p style="padding: 0 50px 0 50px; padding-left: 100px; margin-top: -10px; line-height:1 em; text-align: justify;">
         di_</p>
         <p style="padding: 0 50px 0 50px; padding-left: 140px; line-height:1 em; margin-top: -10px; text-align: justify;">
         Tempat</p>
@@ -241,7 +304,7 @@
         <div class="ttdkanan" style="padding: 0 50px 0 140px; margin-top: 0px; line-height:1.5em; text-align: justify; border-collapse: collapse;" >
         {!! $listkeluar->paragraf_2 ?? '' !!}
         </div>
-        <p style="padding: 0 50px 0 140px; line-height:1.5em; margin-bottom: -20; text-indent:30px; text-align: justify;">
+        <p style="padding: 0 50px 0 140px; line-height:1.5em; margin-bottom: -30; text-indent:30px; text-align: justify;">
         Demikian surat ini disampaikan untuk diketahui sebagaimana mestinya, atas perhatian dan kerjasamanya diucapkan terima kasih.
         <br>          
         </p>
@@ -281,7 +344,7 @@
                 <br>
                 <br>
                 <br>
-            <table style="padding: 0 50px 0 50px; margin-top: 130px; text-align: justify; border-collapse: collapse;">
+            <table style="padding: 0 50px 0 50px; margin-top: 110px; text-align: justify; border-collapse: collapse;">
             <tr>
                 <td style="text-align: left; "><u>Tembusan :</u></td>
             </tr>
@@ -299,6 +362,18 @@
             </div>
         </div>   
 
+    </div>
+
+    <div class="footer">
+        <div class="footer-text">
+            <p>
+                *Dokumen ini tersimpan dalam arsip desa manyampa dan telah ditandatangani secara elektronik
+            </p>
+        </div>
+        <div class="footer-image">
+            <img src="data:image/png;base64, {!! base64_encode(QrCode::size(40)->generate('http://127.0.0.1:8000/cekkeluar/surat/'.$listkeluar->id)) !!} " style="align: right;" alt="Kunci Elektronik" class="footer-lock-icon">
+
+            </div>
     </div>
     
 </body>
