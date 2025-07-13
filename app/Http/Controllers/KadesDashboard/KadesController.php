@@ -100,6 +100,11 @@ class KadesController extends Controller
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
         } else if ($list->jenis_surat == 'Surat Keterangan Kelahiran') {
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+         // LAYOUTE SURAT KETERANGAN
+        } else if ($list->jenis_surat == 'Layoute Surat Keterangan') {
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+           
             // SURAT IZIN / REKOMENDASI
         } else if ($list->jenis_surat == 'Surat Izin Kepala Desa') {
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);

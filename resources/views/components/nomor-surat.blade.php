@@ -25,6 +25,9 @@ $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'skl') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
+// SURAT KETERANGAN LAINYA
+} elseif ($type === 'lsk') {
+$nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 // SURAT IZIN/REKOMENDASI
 } elseif ($type === 'sikd') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;

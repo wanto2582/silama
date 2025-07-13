@@ -33,7 +33,8 @@
                         <option value="sktm">Surat Keterangan Tidak Mampu </option>
                          <option value="skkk">Surat Keterangan Kepemilikan Kendaraan </option>
                         <option value="sku">Surat Keterangan Usaha </option>
-                        <option value="skl">Surat Keterangan Kelahiran </option>    
+                        <option value="skl">Surat Keterangan Kelahiran </option>
+                        <option value="lsk">Surat Keteranngan Lainya </option>     
                     </select>
                  </div>
                 </div>
@@ -78,6 +79,8 @@
     <x-form-surat.skkk id="skkk" :detailSurat="$detailSurat" />
     <x-form-surat.skl id="skl" :detailSurat="$detailSurat" />
     <x-form-surat.sku id="sku" :detailSurat="$detailSurat" :warga="$warga" />
+     {{-- SURAT KETERANGAN LAINYA --}}
+    <x-form-surat.lsk id="lsk" :detailSurat="$detailSurat" />
      {{-- SURAT IZIN / REKOMENDASI --}}
     <x-form-surat.sikd id="sikd" :detailSurat="$detailSurat" />
     <x-form-surat.spb id="spb" :detailSurat="$detailSurat" />
@@ -97,6 +100,8 @@
         document.getElementById("skkk").style.display = "none";
         document.getElementById("sku").style.display = "none";
         document.getElementById("skl").style.display = "none";
+        // Semua card LAYOUTE SURAT KETERANGN disembunyikan terlebih dahulu
+        document.getElementById("lsk").style.display = "none";
         // Semua card SURAT IZIN / REKOMENDASI disembunyikan terlebih dahulu
         document.getElementById("sikd").style.display = "none";
         document.getElementById("spb").style.display = "none";
@@ -122,6 +127,9 @@
             document.getElementById("sku").style.display = "block";
         } else if (selectedValue === "skl") {
             document.getElementById("skl").style.display = "block";
+         // Tampilkan card LAYOTE SURAK KETERANGAN sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "lsk") {
+            document.getElementById("lsk").style.display = "block";
         // Tampilkan card SURAT PERNYATAAN sesuai dengan nilai yang dipilih
         } else if (selectedValue === "spa") {
             document.getElementById("spa").style.display = "block";

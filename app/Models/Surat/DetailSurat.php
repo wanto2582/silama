@@ -14,6 +14,7 @@ class DetailSurat extends Model
             'pengajuan_surat_id',
             'nomor_surat',
             'tanggal_surat',
+            'nama_surat',
             'nama',
             'nik',
             'nkk',
