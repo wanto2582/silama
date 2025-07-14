@@ -6,6 +6,8 @@
                 <div class="card-box height-100-p pd-20">
                     @if ($detailSuratkeluar->kode_surat == 'su')
                         <x-detail-suratkeluar.su :detailSuratkeluar="$detailSuratkeluar" :pengajuanSuratkeluar="$pengajuanSuratkeluar" :user="$user"/>
+                    @elseif ($detailSuratkeluar->kode_surat == 'su5')
+                        <x-detail-suratkeluar.su5 :detailSuratkeluar="$detailSuratkeluar" :pengajuanSuratkeluar="$pengajuanSuratkeluar" :user="$user"/>
                     @elseif ($detailSuratkeluar->kode_surat == 'spt')
                         <x-detail-suratkeluar.spt :detailSuratkeluar="$detailSuratkeluar" :pengajuanSuratkeluar="$pengajuanSuratkeluar" :user="$user"/>
                      @elseif ($detailSuratkeluar->kode_surat == 'sku')

@@ -3,46 +3,55 @@
     <!-- Simple Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Riwayat Surat Keluar</h4>
+            <h4 class="text-blue h4">Riwayat Pengajuan</h4>
         </div>
         <div class="card-body">
-            <form action="" id="formFilter" class="mb-4">
-                <div class="row">
-                    <div class="col-md-4 col-12 mb-2">
-                        <label for="jenis_surat" class="font-weight-bold">Jenis Surat</label>
-                        <select name="jenis_surat" id="jenis_surat" class="form-control">
-                            <option value="">Pilih Jenis Surat</option>
-                            <option value="Surat Undangan">Surat Undangan (SU)</option>
-                            <option value="Surat Undangan 1-5">Surat Undangan (SU5)</option>
-                            <option value="Surat Perintah Tugas">Surat Perintah Tugas (SPT)</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 col-12 mb-2">
-                        <label for="nik" class="font-weight-bold">NIK</label>
-                        <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukan NIK">
-                    </div>
-                    <div class="col-md-4 col-12 d-flex align-items-end justify-content-md-end justify-content-start mt-md-0 mt-2">
-                        <button type="button" class="btn btn-success btn-rounded font-weight-bold mr-2 submit-download shadow-sm flex-fill" style="min-width: 120px;">
-                            <i class="fa fa-download mr-1"></i> Download
-                        </button>
-                        <button type="button" class="btn btn-primary btn-rounded font-weight-bold submit-filter shadow-sm flex-fill" style="min-width: 120px;">
-                            <i class="fa fa-filter mr-1"></i> Filter
-                        </button>
+            <form action="" id="formFilter">
+                <div class="col-md-6 pl-2 mt-2">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="form-group row">
+                                <div class="col-sm-3 col-form-label">
+                                    <label for="jenis_surat">Jenis Surat</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select name="jenis_surat" id="jenis_surat" class="form-control" style="width: 100%; height: 38px">
+                                        <option value="">Pilih Jenis Surat</option>
+                                        <option value="Surat Undangan">Surat Undangan (SU)</option>
+                                        <option value="Surat Undangan 1-5">Surat Undangan (SU5)</option>
+                                        <option value="Surat Perintah Tugas">Surat Perintah Tugas (SPT)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-3 col-form-label">
+                                    <label for="nik">Tgl Surat</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukan nik">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-9">
+                            <div class="form-group row pull-right ">
+
+                                <button type="button" class="btn btn-rounded btn-success text-bold submit-download" style="float: right !important;">
+                                    <span>Download</span>
+                                </button>
+
+                                <button type="button" class="btn btn-rounded btn-primary text-bold submit-filter" style="float: right !important;">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </form>
-            <style>
-                @media (max-width: 767.98px) {
-                    #formFilter .btn {
-                        min-width: 100px !important;
-                        margin-bottom: 8px;
-                    }
-                    #formFilter .d-flex {
-                        flex-direction: column !important;
-                        align-items: stretch !important;
-                    }
-                }
-            </style>
             <table id="contentTable" class="display table table-striped table-hover table-responsive" style="width:100%">
                 <thead>
                     <tr>
@@ -171,16 +180,7 @@
                     {
                         data: 'detail_suratkeluars.yth',
                         name: 'detail_suratkeluars.yth',
-                        defaultContent: '-',
-                        render: function(data, type, row) {
-                            if (type === 'display' && data) {
-                                // Menghilangkan tag HTML dan menampilkan sebagai teks biasa
-                                var div = document.createElement("div");
-                                div.innerHTML = data;
-                                return div.textContent || div.innerText || "-";
-                            }
-                            return data || '-';
-                        }
+                        defaultContent: '-'
                     },
                     {
                         data: 'detail_suratkeluars.jenis_surat',
@@ -202,6 +202,7 @@
                                         if (row.keterangan) {
                                             return '<span class="badge badge-danger">Ditolak</span><br>Keterangan : ' + row.keterangan;
                                         } else {
+                                            // If no 'keterangan', display 'Ditolak' with the badge
                                             return '<span class="badge badge-danger">Ditolak</span>';
                                         }
                                     case 'Dikonfirmasi':

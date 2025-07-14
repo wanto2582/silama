@@ -27,8 +27,9 @@
                 <div class="col-md-12">
                     <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
                         <option value="">Pilih SURAT UNDANGAN</option>
-                        <option value="su">Surat Undangan</option>
-                        <option value="sku">Surat Undangan b</option>
+                         <option value="su">Surat Undangan 1</option>
+                        <option value="su5">Surat Undangan 1-5</option>
+                       
                         
                     </select>
                 </div>
@@ -81,6 +82,7 @@
     @endif
 
     <x-form-suratkeluar.su id="su" :detailSuratkeluar="$detailSuratkeluar" />
+    <x-form-suratkeluar.su5 id="su5" :detailSuratkeluar="$detailSuratkeluar" />
     <x-form-suratkeluar.spt id="spt" :detailSuratkeluar="$detailSuratkeluar" />
     <x-form-suratkeluar.sku id="sku" :detailSuratkeluar="$detailSuratkeluar" :warga="$warga" />
 
@@ -90,13 +92,16 @@
     function showCard(selectedValue) {
         // Semua card disembunyikan terlebih dahulu
         document.getElementById("su").style.display = "none";
-         document.getElementById("spt").style.display = "none";
+        document.getElementById("su5").style.display = "none";
+        document.getElementById("spt").style.display = "none";
         document.getElementById("sku").style.display = "none";
 
         // Tampilkan card sesuai dengan nilai yang dipilih
         if (selectedValue === "su") {
             document.getElementById("su").style.display = "block";
-            } else if (selectedValue === "spt") {
+        } else if (selectedValue === "su5") {
+            document.getElementById("su5").style.display = "block";
+        } else if (selectedValue === "spt") {
             document.getElementById("spt").style.display = "block";
         } else if (selectedValue === "sku") {
             document.getElementById("sku").style.display = "block";

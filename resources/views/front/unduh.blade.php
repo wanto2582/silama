@@ -15,12 +15,12 @@
     {{-- LAYOUTE SURAT KETERANGAN LAINYA --}}
 @elseif($list->kode_surat == 'lsk')
     <x-template-surat.lsk :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
-{{-- SURAT IZIN/REKOMENDASI --}}
+    {{-- SURAT IZIN/REKOMENDASI --}}
 @elseif($list->kode_surat == 'sikd')
     <x-template-surat.sikd :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
     {{-- SURAT PERNYATAAN --}}
-@elseif($list->kode_surat == 'spa')
-    <x-template-surat.spa :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
+@elseif($list->kode_surat == 'sptn')
+    <x-template-surat.sptn :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 @elseif($list->kode_surat == 'spb')
     <x-template-surat.spb :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 

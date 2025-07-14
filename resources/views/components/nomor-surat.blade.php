@@ -32,10 +32,13 @@ $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'sikd') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 // SURAT PERNYATAAN
-} elseif ($type === 'spa') {
+} elseif ($type === 'sptn') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'spb') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
+// SURAT PENGANTAR
+
+
 } else {
 $nomorSurat = $index . '/ ' . $prefix . ' / ' . $romanMonth . ' / ' . $currentYear;
 }

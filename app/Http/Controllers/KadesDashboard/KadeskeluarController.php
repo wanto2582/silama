@@ -49,7 +49,7 @@ class KadeskeluarController extends Controller
         \Carbon\Carbon::setLocale('id');
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
-        $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $listkeluar->users_id)->first();
         $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
@@ -59,7 +59,9 @@ class KadeskeluarController extends Controller
             return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
             return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
-         } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
+        } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
+            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
             return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         
         }
@@ -115,8 +117,8 @@ class KadeskeluarController extends Controller
 
     public function berkassuratkeluar($id)
     {
-        // $selesaiStatus = PengajuanSuratkeluar::where('status', 'selesai')->orderBy('created_at', 'asc')->get();
-        $selesaiStatus = PengajuanSuratkeluar::where('status', 'selesai')->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        // $selesaiStatus = PengajuanSuratkeluar::where('status', 'selesai')->orderBy('created_at', 'desc')->get();
+        $selesaiStatus = PengajuanSuratkeluar::where('status', 'selesai')->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
 
         // Output indeks

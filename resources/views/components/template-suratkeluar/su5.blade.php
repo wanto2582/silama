@@ -263,10 +263,10 @@
         <table style="padding: 0 50px 0 50px; margin-top: 5px; text-align: left; border-collapse: collapse;">
             
             <tr>
-                <td style="text-align: left; width: 3%; padding-right: 20px; border-collapse: collapse;">
+                <td style="text-align: left; width: 2%; vertical-align: top; padding-top: 15px; border-collapse: collapse;">
                     Yth.</td>
-                <td style="padding: 0 0px 0 0px; text-align: left;">
-                    {{ $listkeluar->yth ?? '' }}</td>
+                <td style="padding: 0 0px 0 -20px; text-align: left;">
+                    {!! $listkeluar->yth ?? ''!!}</td>
             </tr>
            
         </table>

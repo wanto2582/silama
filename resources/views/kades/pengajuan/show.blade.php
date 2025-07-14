@@ -10,33 +10,13 @@
                 </div>
             </div>
             <div class="col-xl-4 mb-30">
-                <div class="card-box height-100-p pd-20">
+                <div class="card-box height-100-p pd-20"> 
                     <h2 class="h4 mb-20">Aksi</h2>
-                    {{-- <form action="{{route('kades.pengajuan.acc', $list->id)}}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @if ($ps->status == 'Selesai')
-                            <small>
-                                Surat ini sudah selesai
-                            </small>
-                        @else
-                        <x-button.primary-button >SETUJUI</x-button.primary-button>
-                        @endif
-                    </form> --}}
+                    
                     <button data-toggle="modal" data-target="#passwordModal" class="btn btn-primary btn-block mb-2">Tanda Tangani</button>
                     <button data-toggle="modal" data-target="#passwordModal1" class="btn btn-danger btn-block mb-2">Tolak</button>
                     <br>
-                    {{-- <form action="{{route('kades.pengajuan.rej', $list->id)}}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @if ($ps->status == 'Selesai')
-                            <small>
-                                Surat ini sudah selesai
-                            </small>
-                        @else
-                            <x-button.primary-button width="100%">TOLAK</x-button.primary-button>
-                        @endif
-                    </form> --}}
+                    
                 </div>
             </div>
         </div>

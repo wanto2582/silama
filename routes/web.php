@@ -334,7 +334,7 @@ Route::get('/unduh-surat/{id}', function($id) {
     }
     setlocale(LC_TIME, 'id_ID');
     \Carbon\Carbon::setLocale('id');
-    $selesaiStatus = \App\Models\Surat\PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+    $selesaiStatus = \App\Models\Surat\PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
     $indeks = array_flip($selesaiStatus);
     $user = \App\Models\User::where('id', $list->users_id)->first();
     $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);

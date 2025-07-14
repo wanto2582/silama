@@ -362,6 +362,31 @@ class SuratController extends Controller
                 'paragraf_1' => $request->paragraf_1,
             ]);
         }
+         if ($request->jenis_surat == 'sptn') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Pernyataan', 
+                'kode_surat' => 'sptn',
+                'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'paragraf_1' => $request->paragraf_1,
+            ]);
+        }
 
         Alert::success('Sukses!', 'Surat Berhasil Dibuat');
         return redirect()->route('desa.surat.riwayat');
@@ -662,6 +687,29 @@ class SuratController extends Controller
                 'dusun' => $request->dusun,
                 'rt' => $request->rt,
                 'rw' => $request->rw,
+            ]);
+        }
+         if ($request->jenis_surat == 'sptn') {
+            DetailSurat::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Pernyataan',
+                'kode_surat' => 'sptn',
+                'berkas' => $request->hasFile('berkas') ? $request->file('berkas')->store('assets/berkas', 'public') : $detailSurat->berkas,
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'paragraf_1' => $request->paragraf_1,
             ]);
         }
 

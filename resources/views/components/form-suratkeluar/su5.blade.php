@@ -1,10 +1,10 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
     <form method="POST" action="{{ route('desa.suratkeluar.store') }}" enctype="multipart/form-data">
         @csrf
-        <x-text-input value="su" name="jenis_surat" type="text" hidden />
+        <x-text-input value="su5" name="jenis_surat" type="text" hidden />
 
         <div class="clearfix">
-            <h4 class="text-blue h4">Surat Undangan</h4>
+            <h4 class="text-blue h4">Surat Undangan 1-5</h4>
         </div>
         <div class="wizard-content">
             <section>
@@ -55,7 +55,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label><b>Yth :</b> </x-input-label>
-                              <x-text-input name="yth" type="text" class="form-control" placeholder="" />
+                            <textarea name="yth" type="text" class=" ckeditor form-control" ></textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('yth')" />
                         </div>
                     </div>

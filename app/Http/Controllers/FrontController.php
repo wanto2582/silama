@@ -61,7 +61,7 @@ class FrontController extends Controller
         \Carbon\Carbon::setLocale('id');
         $list = DetailSurat::where('id', $id)->first();
         $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
-        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai', 'Ditolak'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai', 'Ditolak'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $list->users_id)->first();
@@ -95,7 +95,7 @@ class FrontController extends Controller
         \Carbon\Carbon::setLocale('id');
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
-        $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai', 'Ditolak'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai', 'Ditolak'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $listkeluar->users_id)->first();
@@ -103,8 +103,6 @@ class FrontController extends Controller
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
          if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
             return $pdf->stream('Surat Keterangan Usaha - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
-            return $pdf->stream('Surat Undangan - ' . $listkeluar->nama . '.pdf');
         } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
             return $pdf->stream('Surat Perintah Tugas - ' . $listkeluar->nama . '.pdf');
         } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kematian') {
@@ -114,8 +112,13 @@ class FrontController extends Controller
         } else if ($listkeluar->jenis_surat == 'Surat Keterangan Tidak Mampu') {
             return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $listkeluar->nama . '.pdf');
         } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kelahiran') {
-            return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $listkeluar->nama . '.pdf');
-        //surat izin / rekomendasi
+            return $pdf->stream('Surat Keterangan Kelahiran - ' . $listkeluar->nama . '.pdf');
+        //SURAT UNDANGAN
+        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
+            return $pdf->stream('Surat Undangan - ' . $listkeluar->nama . '.pdf');
+         } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
+            return $pdf->stream('Surat Undangan 5 - ' . $listkeluar->nama . '.pdf');
+            //surat izin / rekomendasi
         } else if ($listkeluar->jenis_surat == 'Surat Izin Kepala Desa') {
             return $pdf->stream('Surat Izin Kepala Desa - ' . $listkeluar->nama . '.pdf');
         // SURAT PERNYATAAN

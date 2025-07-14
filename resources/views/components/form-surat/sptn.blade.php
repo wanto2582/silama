@@ -1,10 +1,10 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
     <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
-        <x-text-input value="lsk" name="jenis_surat" type="text" hidden />
+        <x-text-input value="sptn" name="jenis_surat" type="text" hidden />
 
         <div class="clearfix">
-            <h4 class="text-blue h4">SURAT KETERANGAN LAINYA</h4>
+            <h4 class="text-blue h4">SURAT PERNYATAAN</h4>
         </div>
         <div class="wizard-content">
             <section>
@@ -12,8 +12,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <x-input-label>Nama Surat : <em class="text-blue">( Tulis dengan huruf kapital )</em></x-input-label>
-                            <x-text-input name="nama_surat" type="text" class="form-control" placeholder="SURAT KETERANGAN ...." />
+                            <x-input-label>Nama Surat : <em class="text-blue">( tulis dengan huruf kapital )</em></x-input-label>
+                            <x-text-input name="nama_surat" type="text" class="form-control" placeholder="SURAT PERNYATAAN ...." />
                             <x-input-error class="mt-2" :messages="$errors->get('nama_surat')" />
                         </div>
                     </div>

@@ -108,6 +108,43 @@ class SuratkeluarController extends Controller
             ]);
         }
 
+        if ($request->jenis_surat == 'su5') {
+            DetailSuratkeluar::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_suratkeluar_id' => $pengajuankeluar->id,
+                'nama' => $request->nama,
+                'bin' => $request->bin,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'status_pernikahan' => $request->status_pernikahan,
+                'pekerjaan' => $request->pekerjaan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Undangan 5',
+                'kode_surat' => 'su5',
+                // 'berkassuratkeluar' => $request->file('berkassuratkeluar')->store('assets/berkassuratkeluar', 'public'),
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'tujuan' => $request->tujuan,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+                'paragraf_3' => $request->paragraf_3,
+                'tembusan' => $request->tembusan,
+                'sifat' => $request->sifat,
+                'lampiran' => $request->lampiran,
+                'perihal' => $request->perihal,
+                'yth' => $request->yth,
+                'hari' => $request->hari,
+                'waktu' => $request->waktu,
+                'tempat' => $request->tempat,
+                'tgl_surat' => $request->tgl_surat,
+            ]);
+        }
+
         if ($request->jenis_surat == 'spt') {
             DetailSuratkeluar::create([
                 'users_id' => Auth::user()->id,
@@ -242,6 +279,42 @@ class SuratkeluarController extends Controller
                 'alamat' => $request->alamat,
                 'jenis_surat' => 'Surat Undangan',
                 'kode_surat' => 'su',
+                // 'berkassuratkeluar' => $request->hasFile('berkassuratkeluar') ? $request->file('berkassuratkeluar')->store('assets/berkassuratkeluar', 'public') : $detailSuratkeluar->berkassuratkeluar,
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'tujuan' => $request->tujuan,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+                'paragraf_3' => $request->paragraf_3,
+                'yth' => $request->yth,
+                'tembusan' => $request->tembusan,
+                'sifat' => $request->sifat,
+                'lampiran' => $request->lampiran,
+                'perihal' => $request->perihal,
+                'hari' => $request->hari,
+                'waktu' => $request->waktu,
+                'tempat' => $request->tempat,
+                'tgl_surat' => $request->tgl_surat,
+                
+            ]);
+        }
+
+         if ($request->jenis_surat == 'su5') {
+            DetailSuratkeluar::where('id', $id)->update([
+                'nama' => $request->nama,
+                'bin' => $request->bin,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'status_pernikahan' => $request->status_pernikahan,
+                'pekerjaan' => $request->pekerjaan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Undangan 5',
+                'kode_surat' => 'su5',
                 // 'berkassuratkeluar' => $request->hasFile('berkassuratkeluar') ? $request->file('berkassuratkeluar')->store('assets/berkassuratkeluar', 'public') : $detailSuratkeluar->berkassuratkeluar,
                 'dusun' => $request->dusun,
                 'rt' => $request->rt,

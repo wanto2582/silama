@@ -18,7 +18,12 @@
 <br>
 <table class="table table-bordered">
     <tr>
-        <td width="30%">Nama Pengaju</td>
+        <td width="30%">Nama Surat </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->nama_surat ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Nama </td>
         <td width="1%">:</td>
         <td>{{ $detailSurat->nama ?? '' }}</td>
     </tr>
@@ -27,10 +32,15 @@
         <td width="1%">:</td>
         <td>{{ $detailSurat->nik ?? '' }}</td>
     </tr>
-    <tr>
-        <td width="30%">Tempat, Tanggal Lahir </td>
+   <tr>
+        <td width="30%">Tempat Lahir </td>
         <td width="1%">:</td>
-        <td>{{ $detailSurat->tempat_lahir .', '. \Carbon\Carbon::parse($detailSurat->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
+        <td>{{ $detailSurat->tempat_lahir ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Tanggal Lahir </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->tanggal_lahir ?? '' }}</td>
     </tr>
     <tr>
         <td width="30%">Jenis Kelamin </td>
@@ -48,9 +58,9 @@
         <td>{{ $detailSurat->kewarganegaraan ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Alamat </td>
+        <td width="30%">Isi Surat </td>
         <td width="1%">:</td>
-        <td>{{'Dusun '. $detailSurat->dusun .', RT.'. $detailSurat->rt .', RW.'. $detailSurat->rw ?? ''}}</td>
+        <td>{{$detailSurat->paragraf_1 ?? ''}}</td>
     </tr>
     <tr>
         <td width="30%">Keperluan </td>

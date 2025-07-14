@@ -1,81 +1,76 @@
 <x-app-layout>
-    <x-slot name="title">Riwayat</x-slot>
+    <x-slot name="title">RIWAYAT PENGAJUAN</x-slot>
     <!-- Simple Datatable start -->
-    <div class="card-box mb-30">
-        <div class="pd-20">
-            <h4 class="text-blue h4">Riwayat Pengajuan</h4>
+    <div class="card-box mb-30 shadow-lg rounded-lg border-primary">
+        <div class="pd-20 border-bottom pb-3 mb-4 d-flex align-items-center">
+            <i class="icon-copy dw dw-history mr-3 text-blue" style="font-size: 2.5rem;"></i>
+            <div class="flex-grow-1">
+                <h4 class="text-blue h4 mb-1">RIWAYAT PENGAJUAN</h4>
+                <p class="mb-0 text-muted">LIHAT DAN KELOLA RIWAYAT PENGAJUAN SURAT ANDA DI SINI.</p>
+            </div>
         </div>
-        <div class="card-body">
+        <div class="card-body py-4 px-4">
             <form action="" id="formFilter">
-                <div class="col-md-6 pl-2 mt-2">
-                    <div class="row">
-                        <div class="col-12">
-
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-form-label">
-                                    <label for="jenis_surat">Jenis Surat</label>
-                                </div>
-                                <div class="col-sm-6"> 
-                                    <select name="jenis_surat" id="jenis_surat" class="form-control" style="width: 100%; height: 38px">
-                                        <option value="">Pilih Jenis Surat</option>
-                                        <option value="Surat Keterangan Domisili">Surat Keterangan Domisili (SKD)</option>
-                                        <option value="Surat Keterangan Sakit">Surat Keterangan Sakit (SKS)</option>
-                                        <option value="Surat Keterangan Kematian">Surat Keterangan Kematian (SKK)</option>
-                                        <option value="Surat Keterangan Kepemilikan Kendaraan">Surat Keterangan Kepemilikan Kendaraan (SKKK)</option>
-                                        <option value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu (SKTM)</option>
-                                        <option value="Surat Keterangan Usaha">Surat Keterangan Usaha (SKU)</option>
-                                        <option value="Surat Keterangan Kelahiran">Surat Keterangan Kelahiran (SKL)</option>
-                                        <option value="Surat Pernyataan a">Surat Keterangan Usaha (SKU)</option>
-                                        <option value="Surat Pernyataan b">Surat Keterangan Usaha (SKU)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-form-label">
-                                    <label for="nik">NIK</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukan NIK">
-                                </div>
-                            </div>
-
+                <div class="row mb-4 align-items-end">
+                    <div class="col-md-5">
+                        <div class="form-group mb-0">
+                            <label for="jenis_surat" class="col-form-label font-weight-bold text-uppercase">JENIS SURAT</label>
+                            <select name="jenis_surat" id="jenis_surat" class="form-control custom-select shadow-sm rounded" style="width: 100%; height: 45px">
+                                <option value="">PILIH JENIS SURAT</option>
+                                <option value="Surat Keterangan Domisili">SURAT KETERANGAN DOMISILI (SKD)</option>
+                                <option value="Surat Keterangan Sakit">SURAT KETERANGAN SAKIT (SKS)</option>
+                                <option value="Surat Keterangan Kematian">SURAT KETERANGAN KEMATIAN (SKK)</option>
+                                <option value="Surat Keterangan Kepemilikan Kendaraan">SURAT KETERANGAN KEPEMILIKAN KENDARAAN (SKKK)</option>
+                                <option value="Surat Keterangan Tidak Mampu">SURAT KETERANGAN TIDAK MAMPU (SKTM)</option>
+                                <option value="Surat Keterangan Usaha">SURAT KETERANGAN USAHA (SKU)</option>
+                                <option value="Surat Keterangan Kelahiran">SURAT KETERANGAN KELAHIRAN (SKL)</option>
+                                <option value="Surat Pernyataan">SURAT PERNYATAAN (SPTN)</option>
+                            </select>
                         </div>
-
-                        <div class="col-9">
-                            <div class="form-group row pull-right ">
-
-                                <button type="button" class="btn btn-rounded btn-success text-bold submit-download" style="float: right !important;">
-                                    <span>Download</span>
-                                </button>
-
-                                <button type="button" class="btn btn-rounded btn-primary text-bold submit-filter" style="float: right !important;">
-                                    Filter
-                                </button>
-                            </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group mb-0">
+                            <label for="nik" class="col-form-label font-weight-bold text-uppercase">NIK</label>
+                            <input type="text" class="form-control shadow-sm rounded" id="nik" name="nik" placeholder="MASUKKAN NIK">
                         </div>
-
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-end align-items-end">
+                        <button type="button" class="btn btn-primary text-bold submit-filter w-100 mr-2 rounded-pill shadow-sm">
+                            <i class="icon-copy dw dw-search"></i> FILTER
+                        </button>
+                        <button type="button" class="btn btn-success text-bold submit-download w-100 rounded-pill shadow-sm">
+                             download
+                        </button>
                     </div>
                 </div>
             </form>
-            <table id="contentTable" class="display table table-striped table-hover table-responsive" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="table-plus">#</th>
-                        <th>Nama</th>
-                        <th>NIK</th>
-                        <th>Jenis Surat</th>
-                        <th>Status</th>
-                        <th class="datatable-nosort">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
+            <hr class="my-4">
+            <div class="table-responsive">
+                <table id="contentTable" class="display table table-striped table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="table-plus text-uppercase font-weight-bold">#</th>
+                            <th class="text-uppercase font-weight-bold">NAMA</th>
+                            <th class="text-uppercase font-weight-bold">NIK</th>
+                            <th class="text-uppercase font-weight-bold">JENIS SURAT</th>
+                            <th class="text-uppercase font-weight-bold">STATUS</th>
+                            <th class="datatable-nosort text-uppercase font-weight-bold">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <!-- Simple Datatable End -->
+    <!-- DATATABLES CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- DATATABLES JAVASCRIPT -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
     <script type="text/javascript">
         var url = {
             table: "{{route('desa.surat.riwayat_table')}}",
@@ -97,36 +92,28 @@
 
                 let nik = $('#nik').val(),
                     jenis_surat = $('#jenis_surat').val();
-                let urlDownload = [];
-
-
                 let finalUrl = url.download;
                 let params = [];
 
-                // Kondisi untuk filter nik
+                // KONDISI UNTUK FILTER NIK
                 if (nik) {
                     params.push(`nik=${nik}`);
                 }
 
-                // Kondisi untuk filter jenis_surat
+                // KONDISI UNTUK FILTER JENIS_SURAT
                 if (jenis_surat) {
                     params.push(`jenis_surat=${jenis_surat}`);
                 }
 
-                // Gabungkan parameter ke finalUrl
+                // GABUNGKAN PARAMETER KE FINALURL
                 if (params.length > 0) {
                     finalUrl = finalUrl + '?' + params.join('&');
                 }
 
-
                 window.open(finalUrl);
-
-
-                // console.log(finalUrl);
-                // $('#formFilter').submit();
             });
 
-            $('#formFilter').validate({ // initialize the plugin
+            $('#formFilter').validate({ // INITIALIZE THE PLUGIN
                 rules: {
                     start_date: {
                         required: false,
@@ -139,17 +126,10 @@
                     let nik = $('#nik').val(),
                         jenis_surat = $('#jenis_surat').val();
 
-                    console.log(nik, jenis_surat);
                     $('#contentTable').dataTable().fnDestroy();
                     loadDataTable(nik, jenis_surat);
-                    // let data = $('#formFilter').serialize();
-
-
                 }
             });
-
-
-
         });
 
 
@@ -197,22 +177,21 @@
                             if (type === 'display') {
                                 switch (data) {
                                     case 'Diproses':
-                                        return '<span class="badge badge-warning">Menunggu Konfirmasi</span>';
+                                        return '<span class="badge badge-warning text-uppercase">MENUNGGU KONFIRMASI</span>';
                                     case 'Ditolak':
                                         if (row.keterangan) {
-                                            return '<span class="badge badge-danger">Ditolak</span><br>Keterangan : ' + row.keterangan;
+                                            return '<span class="badge badge-danger text-uppercase">DITOLAK</span><br>KETERANGAN : ' + row.keterangan.toUpperCase();
                                         } else {
-                                            // If no 'keterangan', display 'Ditolak' with the badge
-                                            return '<span class="badge badge-danger">Ditolak</span>';
+                                            return '<span class="badge badge-danger text-uppercase">DITOLAK</span>';
                                         }
                                     case 'Dikonfirmasi':
-                                        return '<span class="badge badge-primary">Ttd</span>';
+                                        return '<span class="badge badge-primary text-uppercase">TTD</span>';
                                     case 'Selesai':
-                                        return '<span class="badge badge-success">Selesai</span>';
+                                        return '<span class="badge badge-success text-uppercase">SELESAI</span>';
                                     case 'Expired':
-                                        return '<span class="badge badge-danger">Expired</span>';
+                                        return '<span class="badge badge-danger text-uppercase">EXPIRED</span>';
                                     default:
-                                        return data || '-';
+                                        return (data || '-').toUpperCase();
                                 }
                             }
                             return data;
@@ -226,9 +205,11 @@
                         className: 'text-center',
                         width: '15%'
                     },
-                ]
+                ],
+                // MENAMBAHKAN PENGURUTAN DEFAULT AGAR DATA TERBARU BERADA DI ATAS
+                // MENGURUTKAN BERDASARKAN KOLOM PERTAMA ('#') SECARA DESCENDING
+                order: [[0, 'desc']]
             });
-
         }
     </script>
 

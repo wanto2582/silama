@@ -26,8 +26,8 @@
 
 
                         {{-- SURAT PERNYATAAN --}}
-                    @elseif ($detailSurat->kode_surat == 'spa')
-                        <x-detail-surat.spa :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
+                    @elseif ($detailSurat->kode_surat == 'sptn')
+                        <x-detail-surat.sptn :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
                     @elseif ($detailSurat->kode_surat == 'spb')
                         <x-detail-surat.spb :detailSurat="$detailSurat" :pengajuanSurat="$pengajuanSurat" :user="$user"/>
                     @endif

@@ -12,7 +12,7 @@ $romanMonth = $romanMonths[$currentMonth];
 // Format nomor surat berdasarkan tipe
 if ($type === 'su') {
 $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
-} elseif ($type === 'sks') {
+} elseif ($type === 'su5') {
 $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'sku') {
 $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;

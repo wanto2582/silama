@@ -188,20 +188,26 @@
                     </div>
                     @endif
                 </div>
-            </div>
+            </div> 
         </div>
         <div class="user-info-dropdown">
             <div class="dropdown">
                 <a
                     class="dropdown-toggle"
                     href="#"
-                    role="button"
+                    role="button" 
                     data-toggle="dropdown">
-                    <span class="user-icon">
-                        @if(Auth::user()->detail_users()->first())
-                        <img src="{{asset('storage/'.Auth::user()->detail_users()->first()->photo)}}" alt="" />
+                    <span class="user-icon"> 
+                        @php
+                            $detailUser = Auth::user()->detail_users()->first();
+                            $photo = $detailUser && $detailUser->photo ? asset('storage/' . $detailUser->photo) : null;
+                        @endphp
+ 
+                        @if($photo)
+                            <img src="{{asset('photo/profile-photo.jpeg')}}" alt="" />
+                            {{-- {{asset('vendors/images/banner-img.png')}} --}}
                         @else
-                        <img src="{{ asset('storage/default/profile.jpg') }}" alt="Foto Profil Default">
+                            <i class="dw dw-user1" style="font-size: 32px; color: #aaa;"></i>
                         @endif
                     </span>
                     <span class="user-name">{{auth()->user()->name}}</span>
