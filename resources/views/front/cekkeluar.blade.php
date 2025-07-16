@@ -98,9 +98,9 @@
                                     <br>Dengan data sebagai berikut:
                                     <br>
                                     <hr>
-                                    Nama : <strong>{{ $listkeluar->nama }}</strong> <br>
-                                    NIK : <strong>{{ $listkeluar->nik }}</strong> <br>
-                                    Jenis Surat : <strong>{{ $listkeluar->jenis_surat }}</strong> <br>
+                                    __ : <strong>{{ $listkeluar->nama }}</strong> <br>
+                                    __ : <strong>{{ $listkeluar->nik }}</strong> <br>
+                                    __ : <strong>{{ $listkeluar->jenis_surat }}</strong> <br>
                                     <br>
                                     Dipergunakan untuk : <strong>{{ $listkeluar->tujuan }}</strong> <br>
 
@@ -127,7 +127,7 @@
 
                                     <div class="mb-3 mt-3">
                                         <button class="btn btn-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
-                                            <i class="bi bi-eye"></i> Preview Dokumen
+                                            <i class="bi bi-eye"></i> Lihat Dokumen
                                         </button>
                                     </div>
 

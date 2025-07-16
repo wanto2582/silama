@@ -127,7 +127,7 @@
 
                                     <div class="mb-3 mt-3">
                                         <button class="btn btn-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
-                                            <i class="bi bi-eye"></i> Preview Dokumen
+                                            <i class="bi bi-eye"></i> Lihat Dokumen
                                         </button>
                                     </div>
 
