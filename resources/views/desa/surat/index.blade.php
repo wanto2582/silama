@@ -63,11 +63,11 @@
                             <option value="sptn">SURAT PERNYATAAN (SPTN)</option>
                         </optgroup>
                         <optgroup label="SURAT PENGANTAR">
-                            <option value="spa">SURAT PENGANTAR A (SPA)</option>
-                            <option value="spb">SURAT PENGANTAR B (SPB)</option>
+                            <option value="spa">.....</option>
+                            <option value="spb">.....</option>
                         </optgroup>
                         <optgroup label="SURAT IZIN / REKOMENDASI">
-                            <option value="sra">SURAT REKOMENDASI A (SRA)</option> {{-- ASUMSI NILAI BARU UNTUK REKOMEN A --}}
+                            <option value="sra">.....</option> {{-- ASUMSI NILAI BARU UNTUK REKOMEN A --}}
                             <option value="sikd">SURAT IZIN KEPALA DESA (SIKD)</option>
                         </optgroup>
                     </select>

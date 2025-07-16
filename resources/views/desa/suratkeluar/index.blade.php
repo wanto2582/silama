@@ -244,19 +244,19 @@
                         </optgroup>
                         <optgroup label="SURAT PERINTAH / TUGAS">
                             <option value="spt">Surat Perintah Tugas</option>
-                            <option value="spt_lain">Surat Perintah Tugas Lainnya</option> {{-- CONTOH OPSI TAMBAHAN --}}
+                            <option value="spt_lain">.........</option> {{-- CONTOH OPSI TAMBAHAN --}}
                         </optgroup>
                         <optgroup label="SURAT EDARAN / PENGUMUMAN">
-                            <option value="se">Surat Edaran Umum</option> {{-- CONTOH OPSI BARU --}}
-                            <option value="pengumuman">Pengumuman Resmi</option> {{-- CONTOH OPSI BARU --}}
+                            <option value="se">........</option> {{-- CONTOH OPSI BARU --}}
+                            <option value="pengumuman">...........</option> {{-- CONTOH OPSI BARU --}}
                         </optgroup>
                         <optgroup label="SURAT PENGANTAR">
-                            <option value="sp">Surat Pengantar Umum</option> {{-- CONTOH OPSI BARU --}}
-                            <option value="sp_lain">Surat Pengantar Lainnya</option> {{-- CONTOH OPSI TAMBAHAN --}}
+                            <option value="sp">.........</option> {{-- CONTOH OPSI BARU --}}
+                            <option value="sp_lain">..........</option> {{-- CONTOH OPSI TAMBAHAN --}}
                         </optgroup>
                         <optgroup label="SURAT LAINNYA">
-                            <option value="sku">Surat </option> {{-- MEMINDAHKAN SKU KE SINI --}}
-                            <option value="sl_lain">Surat Lainnya (Custom)</option> {{-- CONTOH OPSI TAMBAHAN --}}
+                            <option value="sku">.......</option> {{-- MEMINDAHKAN SKU KE SINI --}}
+                            <option value="sl_lain">.......</option> {{-- CONTOH OPSI TAMBAHAN --}}
                         </optgroup>
                     </select>
                 </div>
