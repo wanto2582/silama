@@ -18,35 +18,72 @@
     <div class="pd-20 card-box mb-30">
         <div class="clearfix">
             <div class="pull-left">
-                <h4 class="text-blue h4">Buat Surat Baru</h4>
+                <h4 class="text-blue h4">Daftar Surat Keluar</h4>
             </div>
         </div>
 
         <form>
             <div class="form-group row"> 
                 <div class="col-md-12">
-
                     <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
-                        <option value="">Pilih Jenis Surat</option>
-                        <option value="skd">Surat Keterangan Domisili (SKD)</option>
-                        <option value="sks">Surat Keterangan Sakit (SKS)</option>
-                        <option value="skk">Surat Keterangan Kematian (SKK)</option>
-                        <option value="sktm">Surat Keterangan Tidak Mampu (SKTM)</option>
-                         <option value="skkk">Surat Keterangan Kepemilikan Kendaraan (SKKK)</option>
-                        <option value="sku">Surat Keterangan Usaha (SKU)</option>    
+                        <option value="">Pilih SURAT UNDANGAN</option>
+                         <option value="su">Surat Undangan 1</option>
+                        <option value="su5">Surat Undangan 1-5</option>
+                       
+                        
                     </select>
-
                 </div>
             </div>
+            <div class="form-group row"> 
+                <div class="col-md-12">
+                    <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
+                        <option value="">Pilih SURAT PERINTAH/TUGAS</option>
+                        <option value="spt">Surat Perintah Tugas</option>
+                        <option value="sku">----</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row"> 
+                <div class="col-md-12">
+                    <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
+                        <option value="">Pilih SURAT EDARAN/PENGUMUMAN</option>
+                        <option value="su">Nama Surat Edaran</option>
+                        <option value="sku">Nama Surat b</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row"> 
+                <div class="col-md-12">
+                    <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
+                        <option value="">Pilih SURAT PENGANTAR</option>
+                        <option value="su">Nama Surat Pengantar</option>
+                        <option value="sks">Nama Surat b</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row"> 
+                <div class="col-md-12">
+                    <select name="state" style="width: 100%; height: 38px" onchange="showCard(this.value)">
+                        <option value="">Pilih SURAT LAINYA</option>
+                        <option value="su">Nama Surat Lainya</option>
+                       
+                        
+                    </select>
+                </div>
+            </div>
+
+
+
         </form>
     </div>
     @endif
 
-    <x-form-suratkeluar.skd id="skd" :detailSuratkeluar="$detailSuratkeluar" />
-    <x-form-suratkeluar.sks id="sks" :detailSuratkeluar="$detailSuratkeluar" />
-    <x-form-suratkeluar.skk id="skk" :detailSuratkeluar="$detailSuratkeluar" />
-    <x-form-suratkeluar.sktm id="sktm" :detailSuratkeluar="$detailSuratkeluar" />
-    <x-form-suratkeluar.skkk id="skkk" :detailSuratkeluar="$detailSuratkeluar" />
+    <x-form-suratkeluar.su id="su" :detailSuratkeluar="$detailSuratkeluar" />
+    <x-form-suratkeluar.su5 id="su5" :detailSuratkeluar="$detailSuratkeluar" />
+    <x-form-suratkeluar.spt id="spt" :detailSuratkeluar="$detailSuratkeluar" />
     <x-form-suratkeluar.sku id="sku" :detailSuratkeluar="$detailSuratkeluar" :warga="$warga" />
 
 </x-app-layout>
@@ -54,24 +91,18 @@
 <script>
     function showCard(selectedValue) {
         // Semua card disembunyikan terlebih dahulu
-        document.getElementById("skd").style.display = "none";
-        document.getElementById("sks").style.display = "none";
-        document.getElementById("skk").style.display = "none";
-        document.getElementById("sktm").style.display = "none";
-        document.getElementById("skkk").style.display = "none";
+        document.getElementById("su").style.display = "none";
+        document.getElementById("su5").style.display = "none";
+        document.getElementById("spt").style.display = "none";
         document.getElementById("sku").style.display = "none";
 
         // Tampilkan card sesuai dengan nilai yang dipilih
-        if (selectedValue === "skd") {
-            document.getElementById("skd").style.display = "block";
-        } else if (selectedValue === "sks") {
-            document.getElementById("sks").style.display = "block";
-        } else if (selectedValue === "skk") {
-            document.getElementById("skk").style.display = "block";
-        } else if (selectedValue === "sktm") {
-            document.getElementById("sktm").style.display = "block";
-        } else if (selectedValue === "skkk") {
-            document.getElementById("skkk").style.display = "block";
+        if (selectedValue === "su") {
+            document.getElementById("su").style.display = "block";
+        } else if (selectedValue === "su5") {
+            document.getElementById("su5").style.display = "block";
+        } else if (selectedValue === "spt") {
+            document.getElementById("spt").style.display = "block";
         } else if (selectedValue === "sku") {
             document.getElementById("sku").style.display = "block";
         }

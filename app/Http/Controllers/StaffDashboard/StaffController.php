@@ -10,11 +10,13 @@ use App\Models\Suratkeluar\DetailSuratkeluar;
 use App\Models\Surat\PengajuanSurat;
 use App\Models\Suratkeluar\PengajuanSuratkeluar;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
 class StaffController extends Controller
@@ -56,10 +58,53 @@ class StaffController extends Controller
 
     public function show(string $id)
     {
-        $detailSurat = DetailSurat::where('id', $id)->first();
-        $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
-        $user = User::where('id', $pengajuanSurat->users_id)->first();
-        return view('staff.pengajuan.show', compact('detailSurat', 'pengajuanSurat', 'user'));
+        // $detailSurat = DetailSurat::where('id', $id)->first();
+        // $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
+        // $user = User::where('id', $pengajuanSurat->users_id)->first();
+        // return view('staff.pengajuan.show', compact('detailSurat', 'pengajuanSurat', 'user'));
+
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $list = DetailSurat::where('id', $id)->first();
+        $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
+        $selesaiStatus = PengajuanSurat::orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
+        $user = User::where('id', $list->users_id)->first();
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+        $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+
+        // SURAT KETERANGAN
+        if ($list->jenis_surat == 'Surat Keterangan Usaha') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Kepemilikan Kendaraan') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Sakit') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Domisili') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Kematian') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Tidak Mampu') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Keterangan Kelahiran') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+            // LAYOUTE SURAT KETERANGAN
+        } else if ($list->jenis_surat == 'Layoute Surat Keterangan') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+
+            // SURAT IZIN / REKOMENDASI
+        } else if ($list->jenis_surat == 'Surat Izin Kepala Desa') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+
+            // SURAT PERNYATAAN
+        } else if ($list->jenis_surat == 'Surat Pernyataan') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Pernyataan b') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        }
     }
 
     public function confirm(Request $request, string $id)
@@ -121,7 +166,7 @@ class StaffController extends Controller
         return view('staff.pengajuan.list', compact('pengajuanSurat'));
     }
 
- public function reject()
+    public function reject()
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
             ->whereIn('status', ['Ditolak'])
@@ -227,7 +272,7 @@ class StaffController extends Controller
     }
 
 
- public function tolak(String $id, Request $request)
+    public function tolak(String $id, Request $request)
     {
         $pengajuanSurat = PengajuanSurat::where('id', $id)->first();
         $pengajuanSurat->keterangan = $request->keterangan;
@@ -238,7 +283,7 @@ class StaffController extends Controller
     }
 
 
-     public function __listRejectDatatable(Request $request)
+    public function __listRejectDatatable(Request $request)
     {
         $query = PengajuanSurat::with(['users', 'detail_surats'])
             ->whereIn('status', ['Ditolak']);

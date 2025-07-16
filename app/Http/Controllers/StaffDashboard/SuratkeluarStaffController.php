@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Suratkeluar\DetailSuratkeluar;
 use App\Models\Suratkeluar\PengajuanSuratkeluar;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yajra\DataTables\Facades\DataTables;
 
 class SuratkeluarStaffController extends Controller
@@ -26,14 +28,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -53,10 +55,32 @@ class SuratkeluarStaffController extends Controller
 
     public function show(string $id)
     {
-        $detailSuratkeluar = DetailSuratkeluar::where('id', $id)->first();
-        $pengajuanSuratkeluar = PengajuanSuratkeluar::where('id', $detailSuratkeluar->pengajuan_suratkeluar_id)->first();
-        $user = User::where('id', $pengajuanSuratkeluar->users_id)->first();
-        return view('staff.pengajuankeluar.showkeluar', compact('detailSuratkeluar', 'pengajuanSuratkeluar', 'user'));
+        // $detailSuratkeluar = DetailSuratkeluar::where('id', $id)->first();
+        // $pengajuanSuratkeluar = PengajuanSuratkeluar::where('id', $detailSuratkeluar->pengajuan_suratkeluar_id)->first();
+        // $user = User::where('id', $pengajuanSuratkeluar->users_id)->first();
+        // return view('staff.pengajuankeluar.show', compact('detailSurat', 'pengajuanSuratkeluar', 'user'));
+
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $listkeluar = DetailSuratkeluar::where('id', $id)->first();
+        $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
+        $selesaiStatus = PengajuanSuratkeluar::orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
+        $user = User::where('id', $listkeluar->users_id)->first();
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $listkeluar->id);
+        $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+
+        if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
+            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
+            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
+            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
+            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        
+        }
     }
 
     public function confirmkeluar(Request $request, string $id)
@@ -82,7 +106,8 @@ class SuratkeluarStaffController extends Controller
     public function dashboard()
     {
         $pskeluar = PengajuanSuratkeluar::get();
-        return view('staff.dashboard', compact('pskeluar'));
+        $pskeluar = PengajuanSuratkeluar::get();
+        return view('staff.dashboard', compact('pskeluar', 'pskeluar'));
     }
 
     public function listkeluar(Request $request)
@@ -92,14 +117,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -117,7 +142,7 @@ class SuratkeluarStaffController extends Controller
         return view('staff.pengajuankeluar.listkeluar', compact('pengajuanSuratkeluar'));
     }
 
- public function rejectkeluar()
+    public function rejectkeluar()
     {
         $pengajuanSuratkeluar = PengajuanSuratkeluar::with(['users', 'detail_suratkeluars'])
             ->whereIn('status', ['Ditolak'])
@@ -128,19 +153,19 @@ class SuratkeluarStaffController extends Controller
     }
 
 
-    public function berkassuratkerluar($id)
+    public function berkassuratkeluar($id)
     {
         // Cari detail surat berdasarkan ID
         $detailSuratkeluar = DetailSuratkeluar::find($id);
 
         // Cek apakah data ditemukan
-        if (!$detailSuratkeluar || !$detailSuratkeluar->berkassuratkerluar) {
-            // Jika data tidak ditemukan atau berkas null, redirect ke route 'staff.pengajuankeluar.list'
-            return redirect()->route('staff.pengajuankeluar.listkeluar')->with('error', 'Data tidak ditemukan atau berkas kosong.');
+        if (!$detailSuratkeluar || !$detailSuratkeluar->berkassuratkeluar) {
+            // Jika data tidak ditemukan atau berkassuratkeluar null, redirect ke route 'staff.pengajuankeluar.listkeluar'
+            return redirect()->route('staff.pengajuankeluar.listkeluar')->with('error', 'Data tidak ditemukan atau berkassuratkeluar kosong.');
         }
 
-        // Unduh berkas menggunakan response()->download()
-        return response()->download(storage_path('app/public/' . $detailSuratkeluar->berkassuratkerluar));
+        // Unduh berkassuratkeluar menggunakan response()->download()
+        return response()->download(storage_path('app/public/' . $detailSuratkeluar->berkassuratkeluar));
     }
 
     public function downloadReportkeluar(Request $request)
@@ -156,14 +181,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
         // dd($query->get());
@@ -185,14 +210,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -209,7 +234,7 @@ class SuratkeluarStaffController extends Controller
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
                         <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL'
-                        data-toggle='tooltip' data-placement='top' title='Unduh Surat Keluar' id='download-button' data-name='$model->name' data-id='$model->id'>
+                        data-toggle='tooltip' data-placement='top' title='Unduh Surat' id='download-button' data-name='$model->name' data-id='$model->id'>
                             <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
                         </a>";
                 }
@@ -223,7 +248,7 @@ class SuratkeluarStaffController extends Controller
     }
 
 
- public function tolakkeluar(String $id, Request $request)
+    public function tolakkeluar(String $id, Request $request)
     {
         $pengajuanSuratkeluar = PengajuanSuratkeluar::where('id', $id)->first();
         $pengajuanSuratkeluar->keterangan = $request->keterangan;
@@ -234,21 +259,21 @@ class SuratkeluarStaffController extends Controller
     }
 
 
-     public function __listRejectDatatablekeluar(Request $request)
+    public function __listRejectDatatablekeluar(Request $request)
     {
         $query = PengajuanSuratkeluar::with(['users', 'detail_suratkeluars'])
             ->whereIn('status', ['Ditolak']);
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -272,9 +297,9 @@ class SuratkeluarStaffController extends Controller
                                 </a>";
                 }
 
-                // Download berkas if available
-                // if ($detailSuratkeluar->berkas) {
-                //     $berkasURL = route('staff.pengajuankeluar.berkas', $detailSuratkeluar->id);
+                // Download berkassuratkeluar if available
+                // if ($detailSuratkeluar->berkassuratkeluar) {
+                //     $berkasURL = route('staff.pengajuankeluar.berkassuratkeluar', $detailSuratkeluar->id);
                 //     $actions .= "<a class='btn btn-icon btn-warning mr-1 mb-1' href='{$berkasURL}'
                 //                 data-toggle='tooltip' data-placement='top' title='Download Berkas'>
                 //                     <i class='fa fa-file' style='font-size: 2vh !important;'></i>
@@ -296,14 +321,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', $request->nik);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', $request->nik);
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -349,9 +374,9 @@ class SuratkeluarStaffController extends Controller
                                 </a>";
                 }
 
-                // Download berkas if available
-                // if ($detailSuratkeluar->berkas) {
-                //     $berkasURL = route('staff.pengajuankeluar.berkas', $detailSuratkeluar->id);
+                // Download berkassuratkeluar if available
+                // if ($detailSuratkeluar->berkassuratkeluar) {
+                //     $berkasURL = route('staff.pengajuankeluar.berkassuratkeluar', $detailSuratkeluar->id);
                 //     $actions .= "<a class='btn btn-icon btn-warning mr-1 mb-1' href='{$berkasURL}'
                 //                 data-toggle='tooltip' data-placement='top' title='Download Berkas'>
                 //                     <i class='fa fa-file' style='font-size: 2vh !important;'></i>

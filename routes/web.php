@@ -134,6 +134,7 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
     Route::put('staff/pengajuankeluar/{id}', [SuratkeluarStaffController::class, 'confirmkeluar'])->name('staff.pengajuankeluar.confirmkeluar');
     Route::get('staff/datatablekeluar.json', [SuratkeluarStaffController::class, '__datatablekeluar'])->name('staff.pengajuankeluar.list_tablekeluar');
     //table lis surat keluar
+    // Route::get('/staff/pengajuankeluar/list-tablekeluar', [SuratkeluarStaffController::class, 'listTablekeluar'])->name('staff.pengajuankeluar.list_tablekeluar');
     Route::get('staff/list-datatablekeluar.json', [SuratkeluarStaffController::class, '__listDatatablekeluar'])->name('staff.pengajuankeluar.listkeluar_datatablekeluar');
     Route::get('staff/list-reject-datatablekeluar.json', [SuratkeluarStaffController::class, '__listRejectDatatablekeluar'])->name('staff.pengajuankeluar.reject_datatablekeluar');
     Route::get('staff/list-downloadkeluar', [SuratkeluarStaffController::class, 'downloadReportkeluar'])->name('staff.pengajuankeluar.listkeluar_downloadkeluar');

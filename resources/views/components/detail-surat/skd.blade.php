@@ -10,9 +10,9 @@
         <td width="20%">No WA </td>
         <td width="1%">:</td>
         <td>- {{ $user->detail_users->phone_number }}
-           <a href="https://wa.me/+62{{ $user->detail_users->phone_number }}?text=Halo,%20{{ $user->name }}." target="_blank">
-               Chat Whatsapp
-           </a>
+            <a href="https://wa.me/+62{{ $user->detail_users->phone_number }}?text=Halo,%20{{ $user->name }}." target="_blank">
+                Chat Whatsapp
+            </a>
         </td>
     </tr>
 </table>
@@ -63,20 +63,20 @@
         <td width="1%">:</td>
         <td>
             @if($detailSurat->berkas)
-                {{-- Tombol Unduh Berkas --}}
-                <a href="{{ route('staff.pengajuan.berkas', ['id' => $detailSurat->id]) }}" target="_blank">
-                    <x-button.primary-button>Unduh Berkas</x-button.primary-button>
-                </a>
-                {{-- Tombol Preview Berkas --}}
-                <button class="btn btn-info ml-2 preview-berkas-btn"
-                        data-toggle="modal"
-                        data-target="#pdfPreviewModal"
-                        data-id="{{ $detailSurat->id }}"
-                        title="Preview Berkas">
-                    <i class="dw dw-eye"></i> Preview Berkas
-                </button>
+            {{-- Tombol Unduh Berkas --}}
+            <a href="{{ route('staff.pengajuan.berkas', ['id' => $detailSurat->id]) }}" target="_blank">
+                <x-button.primary-button>Unduh Berkas</x-button.primary-button>
+            </a>
+            {{-- Tombol Preview Berkas --}}
+            <button class="btn btn-info ml-2 preview-berkas-btn"
+                data-toggle="modal"
+                data-target="#pdfPreviewModal"
+                data-id="{{ $detailSurat->id }}"
+                title="Preview Berkas">
+                <i class="dw dw-eye"></i> Preview Berkas
+            </button>
             @else
-                - Tidak ada berkas -
+            - Tidak ada berkas -
             @endif
         </td>
     </tr>
@@ -143,7 +143,7 @@
         });
 
         // Reset iframe src saat modal ditutup untuk menghentikan pemuatan jika masih berjalan
-        $('#pdfPreviewModal').on('hidden.bs.modal', function () {
+        $('#pdfPreviewModal').on('hidden.bs.modal', function() {
             $('#pdfViewer').attr('src', ''); // Kosongkan src untuk menghentikan loading
             $('#loadingSpinner').hide(); // Pastikan spinner tersembunyi
             $('#pdfViewer').off('load').off('error'); // Hapus event listener untuk menghindari duplikasi

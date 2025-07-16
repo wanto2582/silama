@@ -81,3 +81,4 @@
         <td>{{ $detailSurat->sebab_meninggal ?? '' }}</td>
     </tr>
 </table>
+
