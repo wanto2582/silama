@@ -1,7 +1,7 @@
 <div {{$attributes}} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" id="form-sikd">
         @csrf
-        <x-text-input value="skl" name="jenis_surat" type="text" hidden />
+        <x-text-input value="skl" name="jenis_surat" type="text" hidden required />
 
         <div class="clearfix">
             <h4 class="text-blue h4">Surat Izin Kepala Desa</h4>
@@ -15,14 +15,14 @@
                      <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nik anak : </b> &nbsp; <em class="text-blue">( ketikan angka 000)</em> </x-input-label>
-                            <x-text-input name="nik" type="text" class="form-control" placeholder="000 " />
+                            <x-text-input name="nik" type="text" class="form-control" placeholder="000 " required />
                             <x-input-error class="mt-2" :messages="$errors->get('nik')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama anak : </x-input-label>
-                            <x-text-input name="nama" type="text" class="form-control" />
+                            <x-text-input name="nama" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Anak ke : </b> &nbsp; <em class="text-blue">( Ketikan dalam teks )</em> </x-input-label>
-                            <x-text-input name="anak_ke" type="text" class="form-control" placeholder=" Pertama" />
+                            <x-text-input name="anak_ke" type="text" class="form-control" placeholder=" Pertama" required />
                             <x-input-error class="mt-2" :messages="$errors->get('anak_ke')" />
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Anak ke :  &nbsp; <em class="text-blue">( Ketikan dalam angka )</em> </x-input-label>
-                            <x-text-input name="anak_ke_angka" type="text" class="form-control" placeholder="1 " />
+                            <x-text-input name="anak_ke_angka" type="text" class="form-control" placeholder="1 " required />
                             <x-input-error class="mt-2" :messages="$errors->get('anak_ke_angka')" />
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Jennis kelamin :</label>
-                            <select name="anak_gender" class="form-control">
+                            <select name="anak_gender" class="form-control" required>
                                 <option>Pilih Jenis Kelamin</option>
                                 <option value="Laki - Laki">Laki - laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tgl dilahirkan :  </x-input-label>
-                            <x-text-input name="anak_tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input name="anak_tanggal_lahir" type="date" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('anak_tanggal_lahir')" />
                         </div>
                     </div> 
@@ -66,14 +66,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat dilahirkan :  &nbsp; <em class="text-blue"> ( nama kabupaten ), </em> </x-input-label>
-                            <x-text-input name="anak_tempat_lahir" type="text" class="form-control" placeholder=" Kabupaten Bulukumba" />
+                            <x-text-input name="anak_tempat_lahir" type="text" class="form-control" placeholder=" Kabupaten Bulukumba" required />
                             <x-input-error class="mt-2" :messages="$errors->get('anak_tempat_lahir')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Alamat anak :  &nbsp; <em class="text-blue">(Dusun, Rt . Rw, Desa )</em></x-input-label>
-                            <x-text-input name="anak_alamat" type="text" class="form-control" placeholder=" " />
+                            <x-text-input name="anak_alamat" type="text" class="form-control" placeholder=" " required />
                             <x-input-error class="mt-2" :messages="$errors->get('anak_alamat')" />
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Penolong kelahiran :  &nbsp; <em class="text-blue">( Bidan/Dokter/Dukun bayi )</em> </x-input-label>
-                            <x-text-input name="penolong" type="text" class="form-control" placeholder="Bidan " /> 
+                            <x-text-input name="penolong" type="text" class="form-control" placeholder="Bidan " required /> 
                             <x-input-error class="mt-2" :messages="$errors->get('penolong')" />
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Alamat penolong : </x-input-label>
-                            <x-text-input name="penolong_alamat" type="text" class="form-control" />
+                            <x-text-input name="penolong_alamat" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('penolong_alamat')" />
                         </div>
                     </div>
@@ -109,14 +109,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama ibu : </x-input-label>
-                            <x-text-input name="ibu_nama" type="text" class="form-control" />
+                            <x-text-input name="ibu_nama" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ibu_nama')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama ayah : </x-input-label>
-                            <x-text-input name="ayah_nama" type="text" class="form-control" />
+                            <x-text-input name="ayah_nama" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ayah_nama')" />
                         </div>
                     </div>
@@ -124,49 +124,49 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nik ibu : </x-input-label>
-                            <x-text-input name="ibu_nik" type="text" class="form-control" />
+                            <x-text-input name="ibu_nik" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ibu_nik')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nik ayah : </x-input-label>
-                            <x-text-input name="ayah_nik" type="text" class="form-control" />
+                            <x-text-input name="ayah_nik" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ayah_nik')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat lahir ibu : </x-input-label>
-                            <x-text-input name="ibu_tempat_lahir" type="text" class="form-control" placeholder=" " />
+                            <x-text-input name="ibu_tempat_lahir" type="text" class="form-control" placeholder=" " required />
                             <x-input-error class="mt-2" :messages="$errors->get('ibu_tempat_lahir')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat lahir ayah : </x-input-label>
-                            <x-text-input name="ayah_tempat_lahir" type="text" class="form-control" placeholder=" " />
+                            <x-text-input name="ayah_tempat_lahir" type="text" class="form-control" placeholder=" " required />
                             <x-input-error class="mt-2" :messages="$errors->get('ayah_tempat_lahir')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal lahir ibu : </x-input-label>
-                            <x-text-input name="ibu_tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input name="ibu_tanggal_lahir" type="date" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ibu_tanggal_lahir')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal lahir ayah : </x-input-label>
-                            <x-text-input name="ayah_tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input name="ayah_tanggal_lahir" type="date" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('ayah_tanggal_lahir')" />
                         </div>
                     </div>
                      <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Alamat ibu : </x-input-label>
-                            <x-text-input name="ibu_alamat" type="text" class="form-control" placeholder=" " />
+                            <x-text-input name="ibu_alamat" type="text" class="form-control" placeholder=" " required />
                             <x-input-error class="mt-2" :messages="$errors->get('ibu_alamat')" />
                         </div>
                     </div>
@@ -175,21 +175,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Alamat ayah : </x-input-label>
-                            <x-text-input name="ayah_alamat" type="text" class="form-control" placeholder=" " />
+                            <x-text-input name="ayah_alamat" type="text" class="form-control" placeholder=" " required />
                             <x-input-error class="mt-2" :messages="$errors->get('ayah_alamat')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tujuan pembuatan surat : </x-input-label>
-                            <x-text-input name="tujuan" type="text" class="form-control" />
+                            <x-text-input name="tujuan" type="text" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
                         </div>
                     </div>
                      <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Berkas Persyaratan (.zip / .rar /. PDF) : [[ <a data-toggle="modal" data-target="#passwordModal4" href="#">Lihat Syarat</a> ]]</x-input-label>
-                            <x-text-input name="berkas" type="file" class="form-control" />
+                            <x-text-input name="berkas" type="file" class="form-control" required />
                             <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                         </div>
                     </div>
@@ -202,6 +202,7 @@
                         <x-button.primary-button>Submit</x-button.primary-button>
                     </div>
                 </div>
+                <div id="form-warning" style="display:none;color:red;font-weight:bold;margin-top:10px;">semua kolom wajib diisi, harap perhatikan lebih teliti</div>
             </section>
 
             <div class="modal fade" id="passwordModal4" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
@@ -224,4 +225,34 @@
             </div>
         </div>
     </form>
+    <script>
+    document.getElementById('form-sikd').addEventListener('submit', function(e) {
+        var form = e.target;
+        var valid = true;
+        var warning = document.getElementById('form-warning');
+        warning.style.display = 'none';
+        // Reset border
+        var inputs = form.querySelectorAll('input, select');
+        inputs.forEach(function(input) {
+            input.style.border = '';
+        });
+        inputs.forEach(function(input) {
+            if (input.hasAttribute('required')) {
+                if ((input.type === 'file' && !input.value) || (input.type !== 'file' && !input.value.trim())) {
+                    valid = false;
+                    input.style.border = '2px solid red';
+                }
+                // Untuk select, pastikan bukan default
+                if (input.tagName === 'SELECT' && (input.selectedIndex === 0 || !input.value)) {
+                    valid = false;
+                    input.style.border = '2px solid red';
+                }
+            }
+        });
+        if (!valid) {
+            warning.style.display = 'block';
+            e.preventDefault();
+        }
+    });
+    </script>
 </div>

@@ -1,5 +1,5 @@
 <div {{$attributes}} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form id="skuForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="sku" name="jenis_surat" type="text" hidden />
 
@@ -8,6 +8,9 @@
         </div>
 
         <div class="wizard-content">
+            <div id="formAlert" style="display:none;" class="alert alert-danger text-center mb-3" role="alert">
+                <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti!</strong>
+            </div>
             <h6>Data pemilik usaha :</h6>
             <section>
                 <div class="row">
@@ -200,7 +203,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <x-button.primary-button>Submit</x-button.primary-button>
+                        <x-button.primary-button id="submitBtn">Submit</x-button.primary-button>
                     </div>
                 </div>
             </section>
@@ -227,4 +230,53 @@
 
         </div>
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('skuForm');
+        const alertBox = document.getElementById('formAlert');
+        const requiredSelectors = [
+            'input[name="nama"]',
+            'input[name="nik"]',
+            'select[name="gender"]',
+            'input[name="tempat_lahir"]',
+            'input[name="tanggal_lahir"]',
+            'select[name="agama"]',
+            'input[name="kewarganegaraan"]',
+            'select[name="status_pernikahan"]',
+            'input[name="pekerjaan"]',
+            'select[name="dusun"]',
+            'select[name="rt"]',
+            'select[name="rw"]',
+            'input[name="berkas"]',
+            'input[name="nama_instansi"]',
+            'input[name="mulai_usaha"]',
+            'input[name="alamat_usaha"]',
+            'input[name="tujuan"]'
+        ];
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            requiredSelectors.forEach(function(selector) {
+                const el = form.querySelector(selector);
+                if (el) {
+                    if ((el.tagName === 'SELECT' && (!el.value || el.value.toLowerCase().includes('pilih'))) || (el.tagName !== 'SELECT' && !el.value)) {
+                        valid = false;
+                        el.classList.add('is-invalid');
+                    } else {
+                        el.classList.remove('is-invalid');
+                    }
+                }
+            });
+            if (!valid) {
+                e.preventDefault();
+                alertBox.style.display = 'block';
+                alertBox.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    alertBox.classList.remove('animate__shakeX');
+                }, 1000);
+            } else {
+                alertBox.style.display = 'none';
+            }
+        });
+    });
+    </script>
 </div>

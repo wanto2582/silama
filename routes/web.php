@@ -34,10 +34,11 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verif
 Route::get('/cek/surat/{id}', [FrontController::class, 'cek'])->name('cek.surat');
 Route::get('/download/surat/{id}', [FrontController::class, 'unduh'])->name('unduh.surat');
 Route::get('/preview/surat', [FrontController::class, 'preview'])->name('preview.surat');
-Route::get('/cekkeluar/surat/{id}', [FrontController::class, 'cekkeluar'])->name('cekkeluar.surat');
+Route::get('/cekkeluar/suratkeluar/{id}', [FrontController::class, 'cekkeluar'])->name('cekkeluar.suratkeluar');
 Route::get('/downloadkeluar/suratkeluar/{id}', [FrontController::class, 'unduhkeluar'])->name('unduhkeluar.suratkeluar');
 Route::get('/previewkeluar/suratkeluar', [FrontController::class, 'previewkeluar'])->name('previewkeluar.suratkeluar');
 Route::get('/qr', [FrontController::class, 'qr'])->name('qr');
+Route::get('/qrkeluar', [FrontController::class, 'qrkeluar'])->name('qrkeluar');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -87,7 +88,7 @@ Route::middleware(['auth', 'verified', 'role:kades'])->group(function () {
         'index' => 'kades.pengajuankeluar.index',
         'create' => 'kades.pengajuankeluar.create',
         'store' => 'kades.pengajuankeluar.store',
-        'show' => 'kades.pengajuankeluar.showkeluar',//pengajuankeluar
+        'show' => 'kades.pengajuankeluar.show',//pengajuankeluar
         'edit' => 'kades.pengajuankeluar.edit',
         'update' => 'kades.pengajuankeluar.update',
         'destroy' => 'kades.pengajuankeluar.destroy'
@@ -132,9 +133,9 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
     Route::get('staff/rejectkeluar', [SuratkeluarStaffController::class, 'rejectkeluar'])->name('staff.pengajuankeluar.rejectkeluar');
     Route::get('staff/berkassuratkeluar/{id}', [SuratkeluarStaffController::class, 'berkassuratkeluar'])->name('staff.pengajuankeluar.berkassuratkeluar');
     Route::put('staff/pengajuankeluar/{id}', [SuratkeluarStaffController::class, 'confirmkeluar'])->name('staff.pengajuankeluar.confirmkeluar');
-    Route::get('staff/datatablekeluar.json', [SuratkeluarStaffController::class, '__datatablekeluar'])->name('staff.pengajuankeluar.list_tablekeluar');
+    Route::get('staff/datatablekeluar.json', [SuratkeluarStaffController::class, '__datatablekeluar'])->name('staff.pengajuankeluar.listkeluar_tablekeluar');
     //table lis surat keluar
-    // Route::get('/staff/pengajuankeluar/list-tablekeluar', [SuratkeluarStaffController::class, 'listTablekeluar'])->name('staff.pengajuankeluar.list_tablekeluar');
+    // Route::get('/staff/pengajuankeluar/list-tablekeluar', [SuratkeluarStaffController::class, 'listTablekeluar'])->name('staff.pengajuankeluar.listkeluar_tablekeluar');
     Route::get('staff/list-datatablekeluar.json', [SuratkeluarStaffController::class, '__listDatatablekeluar'])->name('staff.pengajuankeluar.listkeluar_datatablekeluar');
     Route::get('staff/list-reject-datatablekeluar.json', [SuratkeluarStaffController::class, '__listRejectDatatablekeluar'])->name('staff.pengajuankeluar.reject_datatablekeluar');
     Route::get('staff/list-downloadkeluar', [SuratkeluarStaffController::class, 'downloadReportkeluar'])->name('staff.pengajuankeluar.listkeluar_downloadkeluar');
@@ -142,7 +143,7 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
         'index' => 'staff.pengajuankeluar.index',
         'create' => 'staff.pengajuankeluar.create',
         'store' => 'staff.pengajuankeluar.store',
-        'show' => 'staff.pengajuankeluar.showkeluar',
+        'show' => 'staff.pengajuankeluar.show',
         'edit' => 'staff.pengajuankeluar.edit',
         'update' => 'staff.pengajuankeluar.update',
         'destroy' => 'staff.pengajuankeluar.destroy'
@@ -322,6 +323,7 @@ Route::prefix('kades-dashboard')->name('kades.')->group(function () {
 
     // Route untuk preview PDF
     Route::get('/pengajuan/{id}/preview-pdf', [KadesController::class, 'previewPdf'])->name('pengajuan.preview_pdf');
+     Route::get('/pengajuankeluar/{id}/preview-pdf', [KadeskeluarController::class, 'previewPdf'])->name('pengajuankeluar.preview_pdf');
 });
 
 // Anda mungkin juga perlu route unduh.surat di luar grup jika digunakan secara publik
@@ -338,10 +340,28 @@ Route::get('/unduh-surat/{id}', function($id) {
     $selesaiStatus = \App\Models\Surat\PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
     $indeks = array_flip($selesaiStatus);
     $user = \App\Models\User::where('id', $list->users_id)->first();
-    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
+    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
     $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
     return $pdf->download('surat_' . $list->jenis_surat . '_' . $list->id . '.pdf');
 })->name('unduh.surat');
+
+
+Route::get('/unduh-suratkeluar/{id}', function($id) {
+    // Logika untuk mengunduh surat (sama seperti di method previewPdf tapi mungkin return download)
+    $pskeluar = \App\Models\Suratkeluar\PengajuanSuratkeluar::with('detail_suratkeluars')->findOrFail($id);
+    $listkeluar = $pskeluar->detail_suratkeluars->first();
+    if (!$listkeluar) {
+        abort(404, 'Detail Surat tidak ditemukan.');
+    }
+    setlocale(LC_TIME, 'id_ID');
+    \Carbon\Carbon::setLocale('id');
+    $selesaiStatus = \App\Models\Suratkeluar\PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
+    $indeks = array_flip($selesaiStatus);
+    $user = \App\Models\User::where('id', $listkeluar->users_id)->first();
+    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/suratkeluar/' . $listkeluar->id);
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+    return $pdf->download('surat_' . $listkeluar->jenis_surat . '_' . $listkeluar->id . '.pdf');
+})->name('unduh.suratkeluar');
 
 
 

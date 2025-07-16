@@ -56,7 +56,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="#beranda" class="active">Beranda</a></li>
-                   
+
                     <li><a href="#kontak">Kontak Kami</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -81,61 +81,76 @@
                     {{-- <p data-aos="fade-up" data-aos-delay="100">Ajukan permohonan surat dari mana saja<br> --}}
                     </p>
 
-    @php
-    \Carbon\Carbon::setLocale('id');
-    @endphp
+                    @php
+                    \Carbon\Carbon::setLocale('id');
+                    @endphp
 
-    <div class="container text-center">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card-box pd-30 height-100-p">
-                    @if($pskeluar)
-                    @if($pskeluar->status == 'Selesai')
-                    
-                        Bahwa benar dokumen ini terdapat dalam arsip desa Manyampa, Kecamatan Ujung Loe, Kabupaten Bulukumba, Sulawesi Selatan
-                        <br>
-                        {{-- {{ \Carbon\Carbon::parse($pskeluar->updated_at)->translatedFormat('j F Y \p\u\k\u\l H:i') }}  --}}
-                        <br>Dengan data sebagai berikut:
-                   <br>
-                   <hr>
-                    Nama : <strong>{{ $listkeluar->nama }}</strong> <br>
-                    NIK : <strong>{{ $listkeluar->nik }}</strong> <br>
-                    Jenis Surat : <strong>{{ $listkeluar->jenis_surat }}</strong> <br>
-                    <br>
-                    Dipergunakan untuk : <strong>{{ $listkeluar->tujuan }}</strong> <br>
+                    <div class="container text-center">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card-box pd-30 height-100-p">
+                                    @if($pskeluar)
+                                    @if($pskeluar->status == 'Selesai')
 
-                    <hr class="mb-30 mt-30">
-                    <h2 class="mb-30 h4">Tanda Tangan Valid ✅</h2>
-                    <b p style="color: blue;"> Dibuat </b>Pada : <br>{{ \Carbon\Carbon::parse($pskeluar->created_at)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }} <br>
-                    <b p style="color: red;"> Kadaluarsa </b>Pada : <br> {{ \Carbon\Carbon::parse($pskeluar->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
-                    @elseif($pskeluar->status == 'Expired')
-                    <h2 class="mb-30 h4">Dokumen dan Tanda Tangan <b p style="color: red;">Expired</b> ❌</h2>
-                    Tanda tangan dan dokument ini telah kadaluarsa pada  :
-                    {{ \Carbon\Carbon::parse($pskeluar->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
-                    <br><b p style="color: red;">Dan Dokument ini tidak dapat dipergunakan lagi</b>
-                    @else
-                    <h2 class="mb-30 h4">Status Tidak Diketahui ❓</h2>
-                    Status dokumen dan tanda tangan tidak dapat diidentifikasi.
-                    @endif
-                    @else
-                    <h2 class="h4">Data Tidak Ditemukan ❌</h2>
-                    @endif
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-	
+                                    Bahwa benar dokumen ini terdapat dalam arsip desa Manyampa, Kecamatan Ujung Loe, Kabupaten Bulukumba, Sulawesi Selatan
+                                    <br>
+                                    {{-- {{ \Carbon\Carbon::parse($pskeluar->updated_at)->translatedFormat('j F Y \p\u\k\u\l H:i') }} --}}
+                                    <br>Dengan data sebagai berikut:
+                                    <br>
+                                    <hr>
+                                    Nama : <strong>{{ $listkeluar->nama }}</strong> <br>
+                                    NIK : <strong>{{ $listkeluar->nik }}</strong> <br>
+                                    Jenis Surat : <strong>{{ $listkeluar->jenis_surat }}</strong> <br>
+                                    <br>
+                                    Dipergunakan untuk : <strong>{{ $listkeluar->tujuan }}</strong> <br>
+
+                                    <!-- Tombol Preview Dokumen PDF -->
+
+                                    <!-- Preview Dokumen PDF di halaman -->
+
+                                    <hr class="mb-30 mt-30">
+                                    <h2 class="mb-30 h4">Tanda Tangan Valid ✅</h2>
+                                    <b p style="color: blue;"> Dibuat </b>Pada : <br>{{ \Carbon\Carbon::parse($pskeluar->created_at)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }} <br>
+                                    <b p style="color: red;"> Kadaluarsa </b>Pada : <br> {{ \Carbon\Carbon::parse($pskeluar->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
+                                    @elseif($pskeluar->status == 'Expired')
+                                    <h2 class="mb-30 h4">Dokumen dan Tanda Tangan <b p style="color: red;">Expired</b> ❌</h2>
+                                    Tanda tangan dan dokument ini telah kadaluarsa pada :
+                                    {{ \Carbon\Carbon::parse($pskeluar->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
+                                    <br><b p style="color: red;">Dan Dokument ini tidak dapat dipergunakan lagi</b>
+                                    @else
+                                    <h2 class="mb-30 h4">Status Tidak Diketahui ❓</h2>
+                                    Status dokumen dan tanda tangan tidak dapat diidentifikasi.
+                                    @endif
+                                    @else
+                                    <h2 class="h4">Data Tidak Ditemukan ❌</h2>
+                                    @endif
+
+                                    <div class="mb-3 mt-3">
+                                        <button class="btn btn-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
+                                            <i class="bi bi-eye"></i> Preview Dokumen
+                                        </button>
+                                    </div>
+
+                                    <div id="pdf-preview" style="display: none; margin-bottom: 20px;">
+                                        <iframe src="data:application/pdf;base64,{{ $pdfContent }}" width="100%" height="600px" frameborder="0" style="border:1px solid #ccc;"></iframe>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt=""
                         data-aos="zoom-out" data-aos-delay="300">
                 </div>
             </div>
             </div>
             </div>
-            
- 
+
+
         </section><!-- /Hero Section -->
- 
+
         <!-- /Services Section -->
 
         <!-- Contact Section -->
@@ -199,7 +214,7 @@
 
     <footer id="footer" class="footer position-relative light-background">
 
-       
+
         <div class="container copyright text-center mt-4">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">Smart Media Indonesia</strong><span>All Rights
                     Reserved</span></p>
@@ -212,7 +227,7 @@
                     href="https://apk62.com">
             </div>
         </div>
- 
+
     </footer>
 
     <!-- Scroll Top -->

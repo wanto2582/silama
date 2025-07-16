@@ -267,8 +267,7 @@
 
     <x-form-suratkeluar.su id="su" :detailSuratkeluar="$detailSuratkeluar" style="display:none;" /> {{-- SEMBUNYIKAN SECARA DEFAULT --}}
     <x-form-suratkeluar.su5 id="su5" :detailSuratkeluar="$detailSuratkeluar" style="display:none;" /> {{-- SEMBUNYIKAN SECARA DEFAULT --}}
-    <x-form-suratkeluar.spt id="spt" :detailSuratkeluar="$detailSuratkeluar" style="display:none;" /> {{-- SEMBUNYIKAN SECARA DEFAULT --}}
-    <x-form-suratkeluar.sku id="sku" :detailSuratkeluar="$detailSuratkeluar" :warga="$warga" style="display:none;" /> {{-- SEMBUNYIKAN SECARA DEFAULT --}}
+    <x-form-suratkeluar.spt id="spt" :detailSuratkeluar="$detailSuratkeluar" :warga="$warga" style="display:none;" /> {{-- SEMBUNYIKAN SECARA DEFAULT --}}
     {{-- PASTIKAN SEMUA KOMPONEN FORM LAINNYA JUGA DITAMBAHKAN DI SINI DENGAN STYLE="DISPLAY:NONE;" --}}
 
 </x-app-layout>
@@ -279,7 +278,6 @@
         document.getElementById("su").style.display = "none";
         document.getElementById("su5").style.display = "none";
         document.getElementById("spt").style.display = "none";
-        document.getElementById("sku").style.display = "none";
         // TAMBAHKAN SEMUA ID KOMPONEN FORM LAINNYA DI SINI UNTUK DISEMBUNYIKAN
 
         // Tampilkan card sesuai dengan nilai yang dipilih

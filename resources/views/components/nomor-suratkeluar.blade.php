@@ -18,10 +18,6 @@ $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'spt') {
 $nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
-} elseif ($type === 'sktm') {
-$nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
-} elseif ($type === 'skk') {
-$nomorSuratkeluar = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } else {
 $nomorSuratkeluar = $index . '/ ' . $prefix . ' / ' . $romanMonth . ' / ' . $currentYear;
 }

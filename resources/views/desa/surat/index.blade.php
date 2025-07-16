@@ -101,32 +101,56 @@
 
 <script>
     function showCard(selectedValue) {
-        // DAFTAR SEMUA ID CARD YANG MUNGKIN
-        const allCardIds = [
-            "skd", "sks", "skk", "sktm", "skkk", "sku", "skl", // SURAT KETERANGAN
-            "lsk", // SURAT KETERANGAN LAINNYA
-            "sptn", // SURAT PERNYATAAN
-            "spa", "spb", // SURAT PENGANTAR
-            "sra", "sikd" // SURAT IZIN/REKOMENDASI
-        ];
+        // Semua card SURAT KETERANGAN disembunyikan terlebih dahulu
+        document.getElementById("skd").style.display = "none";
+        document.getElementById("sks").style.display = "none";
+        document.getElementById("skk").style.display = "none";
+        document.getElementById("sktm").style.display = "none";
+        document.getElementById("skkk").style.display = "none";
+        document.getElementById("sku").style.display = "none";
+        document.getElementById("skl").style.display = "none";
+        // Semua card LAYOUTE SURAT KETERANGN disembunyikan terlebih dahulu
+        document.getElementById("lsk").style.display = "none";
+        // Semua card SURAT IZIN / REKOMENDASI disembunyikan terlebih dahulu
+        document.getElementById("sikd").style.display = "none";
+        document.getElementById("spb").style.display = "none";
 
-        // SEMBUNYIKAN SEMUA CARD TERLEBIH DAHULU
-        allCardIds.forEach(id => {
-            const cardElement = document.getElementById(id);
-            if (cardElement) {
-                cardElement.style.display = "none";
-            }
-        });
+        // Semua card SURAT PERNYATAAN disembunyikan terlebih dahulu
+        document.getElementById("sptn").style.display = "none";
+        document.getElementById("spb").style.display = "none";
+       
 
-        // TAMPILKAN CARD YANG SESUAI DENGAN NILAI YANG DIPILIH
-        if (selectedValue && document.getElementById(selectedValue)) {
-            document.getElementById(selectedValue).style.display = "block";
+
+        // Tampilkan card SURAT KETERANGAN sesuai dengan nilai yang dipilih
+        if (selectedValue === "skd") {
+            document.getElementById("skd").style.display = "block";
+        } else if (selectedValue === "sks") {
+            document.getElementById("sks").style.display = "block";
+        } else if (selectedValue === "skk") {
+            document.getElementById("skk").style.display = "block";
+        } else if (selectedValue === "sktm") {
+            document.getElementById("sktm").style.display = "block";
+        } else if (selectedValue === "skkk") {
+            document.getElementById("skkk").style.display = "block";
+        } else if (selectedValue === "sku") {
+            document.getElementById("sku").style.display = "block";
+        } else if (selectedValue === "skl") {
+            document.getElementById("skl").style.display = "block";
+         // Tampilkan card LAYOTE SURAK KETERANGAN sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "lsk") {
+            document.getElementById("lsk").style.display = "block";
+        // Tampilkan card SURAT PERNYATAAN sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "sptn") {
+            document.getElementById("sptn").style.display = "block";
+        } else if (selectedValue === "spb") {
+            document.getElementById("spb").style.display = "block";
+        // Tampilkan card SURAT IZIN / REKOMENDASI sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "sikd") {
+            document.getElementById("sikd").style.display = "block";
+        } else if (selectedValue === "spb") {
+            document.getElementById("spb").style.display = "block";
+
+ 
         }
-    }
-
-    // PENTING: SEMBUNYIKAN SEMUA CARD SAAT HALAMAN PERTAMA KALI DIMUAT
-    // AGAR HANYA DROPDOWN YANG TERLIHAT.
-    document.addEventListener('DOMContentLoaded', (event) => {
-        showCard(''); // PANGGIL DENGAN NILAI KOSONG UNTUK MENYEMBUNYIKAN SEMUA
-    });
-</script>
+        } 
+    </script>

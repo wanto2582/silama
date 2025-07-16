@@ -1,5 +1,20 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <style>
+        .alert-required {
+            display: none;
+            background: linear-gradient(90deg, #ff6a00, #ee0979);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(238,9,121,0.15);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+    </style>
+    <div id="alertRequired" class="alert-required">Semua kolom wajib diisi, harap perhatikan lebih teliti.</div>
+    <form id="formSktm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="sktm" name="jenis_surat" type="text" hidden />
 
@@ -152,7 +167,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <x-button.primary-button>Submit</x-button.primary-button>
+                        <x-button.primary-button id="submitBtn">Submit</x-button.primary-button>
                     </div>
                 </div>
 
@@ -178,4 +193,34 @@
 
         </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('formSktm');
+            const alertBox = document.getElementById('alertRequired');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                let valid = true;
+                // Ambil semua input dan select yang visible di dalam form
+                const fields = form.querySelectorAll('input:not([type=hidden]):not([type=submit]):not([type=button]), select');
+                fields.forEach(function(field) {
+                    // Untuk file, cek jika required dan tidak ada file
+                    if (field.type === 'file') {
+                        if (!field.value) valid = false;
+                    } else if (field.tagName === 'SELECT') {
+                        if (field.value === '' || field.value.toLowerCase().includes('pilih')) valid = false;
+                    } else {
+                        if (!field.value.trim()) valid = false;
+                    }
+                });
+                if (!valid) {
+                    e.preventDefault();
+                    alertBox.style.display = 'block';
+                    setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 3500);
+                }
+            });
+        });
+    </script>
 </div>

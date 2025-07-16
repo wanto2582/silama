@@ -18,66 +18,73 @@
 <br>
 <table class="table table-bordered">
     <tr>
-        <td width="30%">Dasar  Surat</td>
+        <td width="30%">Nama Pengaju </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->paragraf_1 ?? '' !!}</td>
+        <td>{{ $detailSuratkeluar->nama ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Tgl Surat </td>
+        <td width="30%">NIK </td>
         <td width="1%">:</td>
         <td>{{ $detailSuratkeluar->nik ?? '' }}</td>
     </tr>
-     <tr>
-        <td width="30%">Nama (Yg ditugaskan) </td>
+    <tr>
+        <td width="30%">Tempat, Tanggal Lahir </td>
         <td width="1%">:</td>
-        <td>{{ $detailSuratkeluar->yth ?? '' }}</td>
+        <td>{{ $detailSuratkeluar->tempat_lahir .', '. \Carbon\Carbon::parse($detailSuratkeluar->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
     </tr>
     <tr>
-        <td width="30%">NIP </td>
+        <td width="30%">Jenis Kelamin </td>
         <td width="1%">:</td>
-        <td>{{ $detailSuratkeluar->nip ?? '' }}</td>
+        <td>{{ $detailSuratkeluar->gender ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Pangkat/Golongan </td>
+        <td width="30%">Agama </td>
         <td width="1%">:</td>
-        <td>{{ $detailSuratkeluar->pangkat_golongan ?? '' }}</td>
+        <td>{{ $detailSuratkeluar->agama ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Jabatan </td>
+        <td width="30%">Warganegara </td>
         <td width="1%">:</td>
-        <td>{{ $detailSuratkeluar->jabatan ?? '' }}</td>
+        <td>{{ $detailSuratkeluar->kewarganegaraan ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Untuk </td>
+        <td width="30%">Alamat </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->perihal ?? '' !!}</td>
+        <td>{{'Dusun '. $detailSuratkeluar->dusun .', RT.'. $detailSuratkeluar->rt .', RW.'. $detailSuratkeluar->rw ?? ''}}</td>
     </tr>
     <tr>
-        <td width="30%">Tempat </td>
+        <td width="30%">Keperluan </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->tempat ?? '' !!}</td>
+        <td>{{$detailSuratkeluar->tujuan ?? ''}}</td>
     </tr>
     <tr>
-        <td width="30%">Lama Perjalanan </td>
+        <td width="30%">Berkas </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->lama_perjalanan ?? '' !!}</td>
+        <td><a href="{{ route('staff.pengajuan.berkassuratkeluar', ['id' => $detailSuratkeluar->id]) }}"><x-button.primary-button>Unduh Berkas</x-button.primary-button></a></td>
     </tr>
-     <tr>
-        <td width="30%">Tgl Berangkat </td>
+</table>
+<p>Data Usaha :</p>
+<table class="table table-bordered">
+    <tr>
+        <td width="30%">Nama Usaha </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->tgl_berangkat ?? '' !!}</td>
-    </tr>
-     <tr>
-        <td width="30%">Tgl Kembali </td>
-        <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->tgl_pulang ?? '' !!}</td>
+        <td>{{ $detailSuratkeluar->nama_instansi ?? '' }}</td>
     </tr>
     <tr>
-        <td width="30%">Tembusan </td>
+        <td width="30%">Mulai Usaha </td>
         <td width="1%">:</td>
-        <td>{!!  $detailSuratkeluar->tembusan ?? '' !!}</td>
+        <td>{{ \Carbon\Carbon::parse($detailSuratkeluar->mulai_usaha)->isoFormat('D MMMM YYYY') ?? '' }}</td>
     </tr>
-    
+    <tr>
+        <td width="30%">Alamat Usaha </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSuratkeluar->alamat_usaha}}</td>
+    </tr>
+    <tr>
+        <td width="30%">Tujuan </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSuratkeluar->tujuan}}</td>
+    </tr>
 </table>
 <!-- Pastikan MODAL ini ada di file Blade Anda. Jika sudah ada, JANGAN tambahkan lagi. -->
 <div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -104,5 +111,5 @@
     </div>
 </div>
 
-
+ 
 

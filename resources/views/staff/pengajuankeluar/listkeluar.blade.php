@@ -20,8 +20,9 @@
                                     <select name="jenis_surat" id="jenis_surat" class="form-control" style="width: 100%; height: 38px">
                                         <option value="">Pilih Jenis Surat</option>
                                         <option value="Surat Undangan">Surat Undangan (SU)</option>
-                                        <option value="Surat Keterangan Sakit">Surat Keterangan Sakit (SKS)</option>
-                                        
+                                        <option value="Surat Undangan 5">Surat Undangan 1-5 (SU5)</option>
+                                        <option value="Surat Perintah Tugas">Surat Perintah Tugas (SPT)</option>
+
                                     </select>
                                 </div>
                             </div>

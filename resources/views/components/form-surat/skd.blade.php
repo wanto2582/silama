@@ -1,5 +1,5 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" id="skdForm">
         @csrf
         <x-text-input value="skd" name="jenis_surat" type="text" hidden />
 
@@ -177,4 +177,36 @@
 
         </div>
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('skdForm').addEventListener('submit', function(e) {
+            let requiredFields = [
+                'nama', 'nik', 'gender', 'tempat_lahir', 'tanggal_lahir', 'agama',
+                'kewarganegaraan', 'pekerjaan', 'status_pernikahan', 'dusun', 'rt', 'rw', 'tujuan', 'berkas'
+            ];
+            let form = e.target;
+            let valid = true;
+            let firstEmpty = null;
+            requiredFields.forEach(function(name) {
+                let el = form.querySelector('[name="' + name + '"]');
+                if (el) {
+                    if ((el.type === 'select-one' && (!el.value || el.selectedIndex === 0)) ||
+                        (el.type === 'file' && el.files.length === 0) ||
+                        (!el.value)) {
+                        valid = false;
+                        if (!firstEmpty) firstEmpty = el;
+                        el.classList.add('is-invalid');
+                    } else {
+                        el.classList.remove('is-invalid');
+                    }
+                }
+            });
+            if (!valid) {
+                e.preventDefault();
+                alert('Semua form wajib diisi!');
+                if (firstEmpty) firstEmpty.focus();
+            }
+        });
+    });
+    </script>
 </div>

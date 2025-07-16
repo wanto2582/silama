@@ -1,5 +1,9 @@
 <div {{$attributes}} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <!-- Alert untuk validasi -->
+    <div id="formAlert" class="alert alert-danger d-none" role="alert" style="font-weight:bold;">
+        Semua kolom wajib diisi, harap perhatikan lebih teliti.
+    </div>
+    <form id="sklForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="skl" name="jenis_surat" type="text" hidden />
 
@@ -224,4 +228,37 @@
             </div>
         </div>
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('sklForm');
+        const alertBox = document.getElementById('formAlert');
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            // Ambil semua input dan select yang visible
+            const inputs = form.querySelectorAll('input:not([type=hidden]):not([type=submit]), select');
+            inputs.forEach(function(input) {
+                if (input.offsetParent !== null && !input.value.trim()) {
+                    valid = false;
+                    input.classList.add('is-invalid');
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            if (!valid) {
+                e.preventDefault();
+                alertBox.classList.remove('d-none');
+                alertBox.classList.add('show');
+                alertBox.style.animation = 'shake 0.3s';
+                setTimeout(() => { alertBox.style.animation = ''; }, 400);
+            } else {
+                alertBox.classList.add('d-none');
+                alertBox.classList.remove('show');
+            }
+        });
+    });
+    // Animasi shake
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-8px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-8px); } 100% { transform: translateX(0); } }`;
+    document.head.appendChild(style);
+    </script>
 </div>

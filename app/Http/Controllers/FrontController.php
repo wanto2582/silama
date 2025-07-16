@@ -48,19 +48,25 @@ class FrontController extends Controller
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $user = User::where('id', $listkeluar->users_id)->first();
         $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
-        // dd($list);
 
         if (\Carbon\Carbon::parse($pskeluar->created_at)->addMonth(1)->isPast()) {
-            $listkeluar->berkassuratkeluar = null;
+            $listkeluar->berkas = null;
             $listkeluar->save();
 
             $pskeluar->status = 'Expired';
             $pskeluar->save();
         }
 
-        return view('front.cekkeluar', compact('listkeluar', 'user', 'pskeluar'));
-    }
+        // Tambahan untuk generate base64 PDF
+        $qrCodes = \QrCode::size(120)->generate(url('/cekkeluar/suratkeluar/' . $listkeluar->id));
+        $selesaiStatus = PengajuanSuratkeluar::orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
 
+        $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'portrait');
+        $pdfContent = base64_encode($pdf->output());
+
+        return view('front.cekkeluar', compact('listkeluar', 'user', 'pskeluar', 'pdfContent'));
+    }
 
     public function unduh($id)
     {
@@ -72,7 +78,7 @@ class FrontController extends Controller
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $list->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
         $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
         if ($list->jenis_surat == 'Surat Keterangan Usaha') {
             return $pdf->stream('Surat Keterangan Usaha - ' . $list->nama . '.pdf');
@@ -106,33 +112,14 @@ class FrontController extends Controller
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/suratkeluar/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
-        if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
-            return $pdf->stream('Surat Keterangan Usaha - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
-            return $pdf->stream('Surat Perintah Tugas - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kematian') {
-            return $pdf->stream('Surat Keterangan Kematian - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kepemilikan Kendaraan') {
-            return $pdf->stream('Surat Keterangan Kepemilikan Kendaraan - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Keterangan Tidak Mampu') {
-            return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Keterangan Kelahiran') {
-            return $pdf->stream('Surat Keterangan Kelahiran - ' . $listkeluar->nama . '.pdf');
-            //SURAT UNDANGAN
-        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
+        if ($listkeluar->jenis_surat == 'Surat Undangan') {
             return $pdf->stream('Surat Undangan - ' . $listkeluar->nama . '.pdf');
         } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
             return $pdf->stream('Surat Undangan 5 - ' . $listkeluar->nama . '.pdf');
-            //surat izin / rekomendasi
-        } else if ($listkeluar->jenis_surat == 'Surat Izin Kepala Desa') {
-            return $pdf->stream('Surat Izin Kepala Desa - ' . $listkeluar->nama . '.pdf');
-            // SURAT PERNYATAAN
-        } else if ($listkeluar->jenis_surat == 'Surat Pernyataan a') {
-            return $pdf->stream('Surat Pernyataan a - ' . $listkeluar->nama . '.pdf');
-        } else if ($listkeluar->jenis_surat == 'Surat Pernyataan b') {
-            return $pdf->stream('Surat Pernyataan b - ' . $listkeluar->nama . '.pdf');
+        } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
+            return $pdf->stream('Surat Perintah Tugas - ' . $listkeluar->nama . '.pdf');
         }
     }
 

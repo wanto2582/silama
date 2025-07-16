@@ -1,5 +1,5 @@
 <div {{$attributes}} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form id="skkForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="skk" name="jenis_surat" type="text" hidden />
 
@@ -8,6 +8,13 @@
         </div>
 
         <div class="wizard-content">
+            <div id="formAlert" style="display:none;" class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill mr-2" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.964 0L.165 13.233c-.457.778.091 1.767.982 1.767h13.707c.89 0 1.438-.99.982-1.767L8.982 1.566zm-.982.934c.246-.41.84-.41 1.086 0l6.853 11.667c.246.418-.06.833-.543.833H1.604c-.483 0-.789-.415-.543-.833L8 2.5z"/>
+                  <path d="M7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm.93-7.481a.5.5 0 0 1 .938 0l.007.058.345 4.5a.5.5 0 0 1-.495.523h-.007a.5.5 0 0 1-.495-.523l.345-4.5.007-.058z"/>
+                </svg>
+                <span>Semua kolom wajib diisi, harap perhatikan lebih teliti.</span>
+            </div>
             <h6>Data orang meninggal :</h6>
             <section>
                 <div class="row">
@@ -15,7 +22,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama : </x-input-label>
-                            <x-text-input value="{{ old('nama') }}" name="nama" type="text" class="form-control" />
+                            <x-text-input value="{{ old('nama') }}" name="nama" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                     </div>
@@ -23,7 +30,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Bin/Binti : </x-input-label>
-                            <x-text-input value="{{ old('bin') }}" name="bin" type="text" class="form-control" />
+                            <x-text-input value="{{ old('bin') }}" name="bin" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('bin')" />
                         </div>
                     </div>
@@ -31,7 +38,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>NIK : </x-input-label>
-                            <x-text-input value="{{ old('nik') }}" name="nik" type="text" class="form-control" />
+                            <x-text-input value="{{ old('nik') }}" name="nik" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nik')" />
                         </div>
                     </div>
@@ -39,7 +46,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Jenis Kelamin :</label>
-                            <select name="gender" class="form-control">
+                            <select name="gender" class="form-control required-field">
                                 <option>Pilih Jenis Kelamin</option>
                                 <option value="Laki - Laki">Laki - laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -50,7 +57,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat Lahir : </x-input-label>
-                            <x-text-input value="{{ old('tempat_lahir') }}" name="tempat_lahir" type="text" class="form-control" />
+                            <x-text-input value="{{ old('tempat_lahir') }}" name="tempat_lahir" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tempat_lahir')" />
                         </div>
                     </div>
@@ -58,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal Lahir : </x-input-label>
-                            <x-text-input value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" type="date" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tanggal_lahir')" />
                         </div>
                     </div>
@@ -66,7 +73,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Kewarganegaraan : </x-input-label>
-                            <x-text-input value="{{ old('kewarganegaraan') }}" name="kewarganegaraan" type="text" class="form-control" />
+                            <x-text-input value="{{ old('kewarganegaraan') }}" name="kewarganegaraan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('kewarganegaraan')" />
                         </div>
                     </div>
@@ -74,7 +81,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Agama : </x-input-label>
-                            <select name="agama" class="form-control">
+                            <select name="agama" class="form-control required-field">
                                 <option>Pilih Jenis Kelamin</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Kristen">Kristen</option>
@@ -89,7 +96,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Status Pernikahan :</label>
-                            <select name="status_pernikahan" class="form-control">
+                            <select name="status_pernikahan" class="form-control required-field">
                                 <option>Pilih Status Pernikahan</option>
                                 <option value="Belum Menikah">Belum Menikah</option>
                                 <option value="Menikah">Menikah</option>
@@ -101,7 +108,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Pekerjaan : </x-input-label>
-                            <x-text-input value="{{ old('pekerjaan') }}" name="pekerjaan" type="text" class="form-control" />
+                            <x-text-input value="{{ old('pekerjaan') }}" name="pekerjaan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
                         </div>
                     </div>
@@ -109,7 +116,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Dusun</label>
-                            <select name="dusun" class="form-control">
+                            <select name="dusun" class="form-control required-field">
                                 <option>Pilih Dusun</option>
                                 <option value="Alaraya">Alaraya</option>
                                 <option value="Tanah Eja">Tanah Eja</option>
@@ -123,7 +130,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RT</label>
-                            <select name="rt" class="form-control">
+                            <select name="rt" class="form-control required-field">
                                 <option>RT</option>
                                 @for ($i = 1; $i <= 30; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -135,7 +142,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RW</label>
-                            <select name="rw" class="form-control">
+                            <select name="rw" class="form-control required-field">
                                 <option>RW</option>
                                 @for ($i = 1; $i <= 15; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -147,7 +154,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal1" href="#">Lihat Syarat</a> ]]</x-input-label>
-                            <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control" />
+                            <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                         </div>
                     </div>
@@ -162,7 +169,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal Meninggal : </x-input-label>
-                            <x-text-input value="{{ old('tanggal_meninggal') }}" name="tanggal_meninggal" type="date" class="form-control" />
+                            <x-text-input value="{{ old('tanggal_meninggal') }}" name="tanggal_meninggal" type="date" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tanggal_meninggal')" />
                         </div>
                     </div>
@@ -170,7 +177,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Jam : </x-input-label>
-                            <x-text-input value="{{ old('jam_meninggal') }}" name="jam_meninggal" type="time" class="form-control" />
+                            <x-text-input value="{{ old('jam_meninggal') }}" name="jam_meninggal" type="time" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('jam_meninggal')" />
                         </div>
                     </div>
@@ -178,7 +185,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat Meninggal : </x-input-label>
-                            <x-text-input value="{{ old('tempat_meninggal') }}" name="tempat_meninggal" type="text" class="form-control" />
+                            <x-text-input value="{{ old('tempat_meninggal') }}" name="tempat_meninggal" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tempat_meninggal')" />
                         </div>
                     </div>
@@ -186,7 +193,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Sebab Meninggal : </x-input-label>
-                            <x-text-input value="{{ old('sebab_meninggal') }}" name="sebab_meninggal" type="text" class="form-control" />
+                            <x-text-input value="{{ old('sebab_meninggal') }}" name="sebab_meninggal" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('sebab_meninggal')" />
                         </div>
                     </div>
@@ -219,4 +226,32 @@
 
         </div>
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('skkForm');
+        const alertBox = document.getElementById('formAlert');
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            // Check all required fields
+            form.querySelectorAll('.required-field').forEach(function(input) {
+                if ((input.type === 'file' && !input.value) || (input.tagName === 'SELECT' && (!input.value || input.selectedIndex === 0)) || (input.type !== 'file' && input.type !== 'hidden' && !input.value.trim())) {
+                    valid = false;
+                    input.classList.add('is-invalid');
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            if (!valid) {
+                e.preventDefault();
+                alertBox.style.display = 'flex';
+                alertBox.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    alertBox.classList.remove('animate__shakeX');
+                }, 1000);
+            } else {
+                alertBox.style.display = 'none';
+            }
+        });
+    });
+    </script>
 </div>

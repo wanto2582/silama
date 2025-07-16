@@ -9,7 +9,7 @@ use App\Models\Suratkeluar\DetailSuratkeluar;
 use App\Models\Suratkeluar\PengajuanSuratkeluar;
 use App\Models\SuratKematian;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdfsuratkeluar;
 use Carbon\Carbon;
 // use Spatie\LaravelPdf\Facades\Pdf;
 use Illuminate\Http\Request;
@@ -445,8 +445,8 @@ class SuratkeluarController extends Controller
         Carbon::setLocale('id');
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $user = User::where('id', $listkeluar->users_id)->first();
-        $pdf = Pdf::loadView('desa.suratkeluar.pdf', compact('listkeluar', 'user'))->setPaper('Legal', 'potrait');
-        return $pdf->download('suratkeluar.pdf');
+        $pdfsuratkeluar = Pdfsuratkeluar::loadView('desa.suratkeluar.pdfsuratkeluar', compact('listkeluar', 'user'))->setPaper('Legal', 'potrait');
+        return $pdfsuratkeluar->download('suratkeluar.pdfsuratkeluar');
 
         // return view('desa.suratkeluar.pdf', compact('user'));
     }

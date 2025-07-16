@@ -1,10 +1,13 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form id="sksForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="sks" name="jenis_surat" type="text" hidden />
 
         <div class="clearfix">
             <h4 class="text-blue h4">Surat Keterangan Sakit</h4>
+        </div>
+        <div id="formAlert" style="display:none;" class="alert alert-danger border-danger text-center font-weight-bold py-2 mb-3 rounded shadow">
+            <i class="fa fa-exclamation-triangle mr-2"></i> Semua kolom wajib diisi, harap perhatikan lebih teliti
         </div>
         <div class="wizard-content">
             <section>
@@ -188,3 +191,41 @@
         </div>
     </form>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('sksForm');
+    const alertBox = document.getElementById('formAlert');
+    form.addEventListener('submit', function(e) {
+        let valid = true;
+        // Semua input dan select yang tidak hidden
+        const inputs = form.querySelectorAll('input:not([type=hidden]):not([type=file]), select');
+        inputs.forEach(function(input) {
+            if (input.value.trim() === '' || input.value === 'Pilih Jenis Kelamin' || input.value === 'Pilih Agama' || input.value === 'Pilih Dusun' || input.value === 'RT' || input.value === 'RW' || input.value === 'Pilih Status Pernikahan') {
+                valid = false;
+                input.classList.add('border-danger');
+            } else {
+                input.classList.remove('border-danger');
+            }
+        });
+        // File input khusus
+        const fileInput = form.querySelector('input[type=file]');
+        if (fileInput && !fileInput.value) {
+            valid = false;
+            fileInput.classList.add('border-danger');
+        } else if (fileInput) {
+            fileInput.classList.remove('border-danger');
+        }
+        if (!valid) {
+            e.preventDefault();
+            alertBox.style.display = 'block';
+            alertBox.classList.add('animate__animated', 'animate__shakeX');
+            setTimeout(() => {
+                alertBox.classList.remove('animate__shakeX');
+            }, 1000);
+        } else {
+            alertBox.style.display = 'none';
+        }
+    });
+});
+</script>
+<!-- Untuk tampilan lebih menarik, pastikan sudah include animate.css dan font-awesome di layout utama -->

@@ -43,6 +43,35 @@ class KadeskeluarController extends Controller
         return view('kades.pengajuankeluar.index', compact('pengajuanSuratkeluar'));
     }
 
+    public function previewPdf(string $pengajuankeluarId)
+    {
+        // Cari PengajuanSurat berdasarkan $pengajuanId
+        $pskeluar = PengajuanSuratkeluar::with('detail_suratkeluars')->findOrFail($pengajuankeluarId);
+
+        // Ambil detail surat yang terkait. Asumsi hanya ada satu detail_surat per pengajuan.
+        // Jika ada multiple detail_surat, Anda perlu logika lebih lanjut untuk memilih yang mana.
+        $listkeluar = $pskeluar->detail_suratkeluars->first();
+
+        if (!$listkeluar) {
+            abort(404, 'Detail Surat tidak ditemukan.');
+        }
+
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+
+        $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
+        $user = User::where('id', $listkeluar->users_id)->first();
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/suratkeluar/' . $listkeluar->id);
+
+        // Load view 'front.unduh' dengan data dan generate PDF
+        $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+
+        // Mengembalikan PDF sebagai response
+        return $pdf->stream('preview_surat_' . $listkeluar->id . '.pdf');
+    }
+
+
     public function show(string $id)
     {
         setlocale(LC_TIME, 'id_ID');
@@ -52,17 +81,15 @@ class KadeskeluarController extends Controller
         $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
 
-        if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
-        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        if ($listkeluar->jenis_surat == 'Surat Undangan') {
+            return view('kades.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+            return view('kades.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+            return view('kades.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         
         }
 
@@ -128,7 +155,7 @@ class KadeskeluarController extends Controller
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'user', 'qrCodes'))->setPaper('Legal', 'portrait');
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/temp/bubla.pdf', $content);
@@ -184,7 +211,7 @@ class KadeskeluarController extends Controller
         $data = DataTables::of($query)->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $download_btn = '';
-                $URL = route('kades.pengajuankeluar.showkeluar', $model->id);
+                $URL = route('kades.pengajuankeluar.show', $model->id);
 
                 // Check if the status of the model is 'Selesai' (Completed)
                 if ($model->status == 'Dikonfirmasi') {
@@ -204,52 +231,36 @@ class KadeskeluarController extends Controller
         return $data;
     }
 
-    public function __listDatatablekeluar(Request $request)
+   public function __listDatatablekeluar(Request $request)
     {
         $query = PengajuanSuratkeluar::with(['users', 'detail_suratkeluars'])
             ->whereIn('status', ['Selesai', 'Expired']);
 
-        // Apply filters if provided
-        if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
-            });
-        }
-
-        if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
-                $qkeluar->where('jenis_surat', $request->jenis_surat);
-            });
-        }
+        // ... (bagian filter) ...
 
         $data = DataTables::of($query)->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $detailSuratkeluar = $model->detail_suratkeluars->first();
                 $actions = '';
-                $URL = route('unduhkeluar.suratkeluar', ['id' => $model->id]);
-                // View button
-                // $viewURL = route('staff.pengajuan.show', $detailSuratkeluar->id);
-                // $actions .= "<a class='btn btn-icon btn-primary mr-1 mb-1' href='{$viewURL}'
-                //             data-toggle='tooltip' data-placement='top' title='Lihat Detail'>
-                //                 <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
-                //             </a>";
 
-                // Download button for completed letters
+                // Tombol Download
                 if ($model->status == 'Selesai') {
-                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1' href='$URL' target='_blank'
-                                data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                    $downloadURL = route('unduh.suratkeluar', ['id' => $model->id]);
+                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1' href='{$downloadURL}' target='_blank'
+                                  data-toggle='tooltip' data-placement='top' title='Download Surat'>
                                     <i class='dw dw-download' style='font-size: 2vh !important;'></i>
                                 </a>";
-                }
 
-                // Download berkas if available
-                // if ($detailSuratkeluar->berkas) {
-                //     $berkasURL = route('staff.pengajuan.berkas', $detailSuratkeluar->id);
-                //     $actions .= "<a class='btn btn-icon btn-warning mr-1 mb-1' href='{$berkasURL}'
-                //                 data-toggle='tooltip' data-placement='top' title='Download Berkas'>
-                //                     <i class='fa fa-file' style='font-size: 2vh !important;'></i>
-                //                 </a>";
-                // }
+                    // **Tambahkan Tombol Preview di sini**
+                    // Gunakan data-id untuk mengambil ID di JavaScript
+                    // $previewURL = route('kades.pengajuankeluar.preview_pdf', ['id' => $model->id]);
+                    // $actions .= "<button class='btn btn-icon btn-primary mr-1 mb-1 preview-btn'
+                    //               data-toggle='modal' data-target='#pdfPreviewModal'
+                    //               data-id='{$model->id}' data-name='{$detailSuratkeluar->jenis_surat}'
+                    //               title='Preview Surat'>
+                    //                 <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
+                    //             </button>";
+                }
 
                 return $actions;
             })

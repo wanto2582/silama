@@ -1,5 +1,5 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
+    <form id="lskForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
         @csrf
         <x-text-input value="lsk" name="jenis_surat" type="text" hidden />
 
@@ -168,9 +168,10 @@
                 </div>
 
                 <div class="row">
+                   
                     <div class="col-md-6">
-                        <x-button.primary-button>Submit</x-button.primary-button>
-                    </div>
+                        <x-button.primary-button type="submit">Submit</x-button.primary-button>
+                    
                 </div>
 
             </section>
@@ -190,6 +191,33 @@
                             - Kartu Keluarga
                         </div>
                     </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('lskForm');
+            form.addEventListener('submit', function(e) {
+                var requiredFields = [
+                    'nama_surat', 'nama', 'nik', 'gender', 'tempat_lahir', 'tanggal_lahir',
+                    'agama', 'kewarganegaraan', 'pekerjaan', 'status_pernikahan', 'dusun',
+                    'rt', 'rw', 'paragraf_1', 'tujuan', 'berkas'
+                ];
+                var isValid = true;
+                requiredFields.forEach(function(name) {
+                    var field = form.querySelector('[name="' + name + '"]');
+                    if (field) {
+                        if ((field.type === 'select-one' && (!field.value || field.value === 'Pilih Jenis Kelamin' || field.value === 'Pilih Agama' || field.value === 'Pilih Status Pernikahan' || field.value === 'Pilih Dusun' || field.value === 'RT' || field.value === 'RW')) ||
+                            (field.type === 'file' && field.files.length === 0) ||
+                            (!field.value || field.value.trim() === '')) {
+                            isValid = false;
+                        }
+                    }
+                });
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('semua form wajib di isi, harap perhatikan lebih teliti');
+                }
+            });
+        });
+        </script>
                 </div>
             </div>
 

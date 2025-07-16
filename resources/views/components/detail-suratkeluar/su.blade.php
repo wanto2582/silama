@@ -75,47 +75,27 @@
     
 </table>
 
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '.preview-berkas-btn', function() {
-            var detailSuratkeluarId = $(this).data('id');
-            // Pastikan route ini sesuai dengan route yang Anda buat di web.php
-            // Contoh: 'staff.pengajuan.berkas' atau 'kades.pengajuan.berkas'
-            var berkassuratkeluarUrl = "{{ route('staff.pengajuankeluar.berkassuratkeluar', ':id') }}";
-            berkassuratkeluarUrl = berkassuratkeluarUrl.replace(':id', detailSuratkeluarId);
+<div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="pdfModalTitle">Preview Dokumen</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="loadingSpinner" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p>Memuat dokumen...</p>
+                </div>
+                <!-- Iframe untuk menampilkan PDF -->
+                <iframe id="pdfViewer" src="app/public/{{ $detailSuratkeluar->berkassuratkeluar }}" frameborder="0" width="100%" height="600px"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-            console.log('staff.berkassuratkeluar', ':id', berkassuratkeluarUrl); // DEBUGGING: Cek URL di console
-
-            // Tampilkan spinner loading
-            $('#loadingSpinner').show();
-            $('#pdfViewer').hide().attr('src', ''); // Sembunyikan dan kosongkan src iframe sebelum memuat yang baru
-
-            // Set judul modal
-            $('#pdfModalTitle').text('Preview Berkas Pendukung');
-
-            // Set src iframe
-            $('#pdfViewer').attr('src', berkassuratkeluarUrl);
-
-            // Sembunyikan spinner dan tampilkan iframe setelah iframe selesai memuat
-            $('#pdfViewer').on('load', function() {
-                console.log('Iframe berhasil memuat konten.'); // DEBUGGING: Konfirmasi load event
-                $('#loadingSpinner').hide();
-                $(this).show();
-            }).on('error', function() { // Menambahkan event error untuk debugging
-                console.error('Gagal memuat konten iframe. Cek URL dan respons server.'); // DEBUGGING: Error loading
-                $('#loadingSpinner').hide();
-                // Opsional: Tampilkan pesan error di modal
-                // $('#pdfViewer').after('<p class="text-danger">Gagal memuat berkas. Pastikan file ada dan formatnya benar.</p>');
-            });
-        });
-
-        // Reset iframe src saat modal ditutup untuk menghentikan pemuatan jika masih berjalan
-        $('#pdfPreviewModal').on('hidden.bs.modal', function() {
-            $('#pdfViewer').attr('src', ''); // Kosongkan src untuk menghentikan loading
-            $('#loadingSpinner').hide(); // Pastikan spinner tersembunyi
-            $('#pdfViewer').off('load').off('error'); // Hapus event listener untuk menghindari duplikasi
-        });
-    });
-</script>
-@endpush

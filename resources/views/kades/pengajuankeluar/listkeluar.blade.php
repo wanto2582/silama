@@ -3,16 +3,16 @@
     <!-- Simple Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Daftar surat keluar sudah dikonfirmasi</h4>
+            <h4 class="text-blue h4">Daftar surat sudah dikonfirmasi</h4>
         </div>
+
         <div class="card-body">
             <table id="contentTable" class="table table-striped table-hover table-responsive " style="width: 100%;">
                 <thead>
                     <tr>
                         <th class="table-plus">#</th>
-                        <th>Nama Surat</th>
-                        <th>Tgl Surat</th>
-                        <th>Tujuan</th>
+                        <th>Nama</th>
+                        <th>NIK</th>
                         <th>Jenis Surat</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -23,6 +23,7 @@
             </table>
         </div>
     </div>
+    
     <!-- Simple Datatable End -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -98,11 +99,6 @@
                         defaultContent: '-'
                     },
                     {
-                        data: 'detail_suratkeluars.perihal',
-                        name: 'detail_suratkeluars.perihal',
-                        defaultContent: '-'
-                    },
-                    {
                         data: 'detail_suratkeluars.jenis_surat',
                         name: 'detail_suratkeluars.jenis_surat',
                         defaultContent: '-',
@@ -139,10 +135,15 @@
                         }
                     },
                     {
-                        data: 'action',
+                        data: null,
                         name: 'action',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, row) {
+                            // ...existing code...
+                            var actionBtn = row.action ? row.action : '';
+                            return actionBtn;
+                        }
                     }
                 ]
             });

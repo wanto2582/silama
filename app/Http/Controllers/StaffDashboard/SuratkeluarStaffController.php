@@ -28,14 +28,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -46,7 +46,7 @@ class SuratkeluarStaffController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $pengajuanSuratkeluar,
-                'html' => view('staff.pengajuankeluar.partials.pengajuan-tablekeluar', compact('pengajuanSuratkeluar'))->render()
+                'html' => view('staff.pengajuankeluar.partials.pengajuankeluar-tablekeluar', compact('pengajuanSuratkeluar'))->render()
             ]);
         }
 
@@ -68,22 +68,20 @@ class SuratkeluarStaffController extends Controller
         $selesaiStatus = PengajuanSuratkeluar::orderBy('created_at', 'asc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/suratkeluar/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
 
-        if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
-        } else if ($listkeluar->jenis_surat == 'Surat Undangan') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+        if ($listkeluar->jenis_surat == 'Surat Undangan') {
+            return view('staff.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         } else if ($listkeluar->jenis_surat == 'Surat Undangan 5') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+            return view('staff.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
         } else if ($listkeluar->jenis_surat == 'Surat Perintah Tugas') {
-            return view('kades.pengajuankeluar.showkeluar', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
-        
+            return view('staff.pengajuankeluar.show', ['pdfContent' => $pdf->output(), 'pskeluar' => $pskeluar, 'listkeluar' => $listkeluar]);
+
         }
     }
 
-    public function confirmkeluar(Request $request, string $id)
+     public function confirmkeluar(Request $request, string $id)
     {
         $detailSuratkeluar = DetailSuratkeluar::where('id', $id)->first();
 
@@ -117,14 +115,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -181,14 +179,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
         // dd($query->get());
@@ -210,14 +208,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -227,7 +225,7 @@ class SuratkeluarStaffController extends Controller
         $data = DataTables::of($query)->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $download_btn = '';
-                $URL = route('staff.pengajuankeluar.showkeluar', $model->id);
+                $URL = route('staff.pengajuankeluar.show', $model->id);
 
                 // Check if the status of the model is 'Selesai' (Completed)
                 if ($model->status == 'Diproses') {
@@ -266,14 +264,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', 'like', '%' . $request->nik . '%');
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', 'like', '%' . $request->nik . '%');
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
 
@@ -321,14 +319,14 @@ class SuratkeluarStaffController extends Controller
 
         // Apply filters if provided
         if ($request->has('nik') && !empty($request->nik)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('nik', $request->nik);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('nik', $request->nik);
             });
         }
 
         if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
-            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
-                $q->where('jenis_surat', $request->jenis_surat);
+            $query->whereHas('detail_suratkeluars', function ($qkeluar) use ($request) {
+                $qkeluar->where('jenis_surat', $request->jenis_surat);
             });
         }
 
