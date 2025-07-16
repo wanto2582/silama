@@ -72,7 +72,7 @@ class FrontController extends Controller
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $list->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
         $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
         if ($list->jenis_surat == 'Surat Keterangan Usaha') {
             return $pdf->stream('Surat Keterangan Usaha - ' . $list->nama . '.pdf');
@@ -106,7 +106,7 @@ class FrontController extends Controller
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
         if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
             return $pdf->stream('Surat Keterangan Usaha - ' . $listkeluar->nama . '.pdf');

@@ -338,7 +338,7 @@ Route::get('/unduh-surat/{id}', function($id) {
     $selesaiStatus = \App\Models\Surat\PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
     $indeks = array_flip($selesaiStatus);
     $user = \App\Models\User::where('id', $list->users_id)->first();
-    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+    $qrCodes = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
     $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
     return $pdf->download('surat_' . $list->jenis_surat . '_' . $list->id . '.pdf');
 })->name('unduh.surat');

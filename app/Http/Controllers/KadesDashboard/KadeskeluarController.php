@@ -52,7 +52,7 @@ class KadeskeluarController extends Controller
         $selesaiStatus = PengajuanSuratkeluar::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
 
         if ($listkeluar->jenis_surat == 'Surat Keterangan Usaha') {
@@ -128,7 +128,7 @@ class KadeskeluarController extends Controller
         $listkeluar = DetailSuratkeluar::where('id', $id)->first();
         $pskeluar = PengajuanSuratkeluar::where('id', $listkeluar->pengajuan_suratkeluar_id)->first();
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/surat/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/surat/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'user', 'qrCodes'))->setPaper('Legal', 'portrait');
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/temp/bubla.pdf', $content);

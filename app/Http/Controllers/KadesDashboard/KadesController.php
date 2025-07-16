@@ -64,7 +64,7 @@ class KadesController extends Controller
         $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $list->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
 
         // Load view 'front.unduh' dengan data dan generate PDF
         $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
@@ -82,7 +82,7 @@ class KadesController extends Controller
         $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'desc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $list->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
         $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
 
         // SURAT KETERANGAN
@@ -182,7 +182,7 @@ class KadesController extends Controller
         $list = DetailSurat::where('id', $id)->first();
         $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
         $user = User::where('id', $list->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cek/surat/' . $list->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
         $pdf = Pdf::loadView('front.unduh', compact('list', 'user', 'qrCodes'))->setPaper('Legal', 'portrait');
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/temp/bubla.pdf', $content);
