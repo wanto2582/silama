@@ -64,7 +64,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="{{ route('login') }}">MASUK</a>
+            <a class="btn-getstarted" href="{{ route('login') }}">LOGIN</a>
             <!-- <a class="btn-getstarted" href="{{ route('register') }}">DAFTAR</a> -->
 
         </div>
