@@ -77,102 +77,75 @@
             </div>
             <div class="container text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 data-aos="fade-up">Cek <span>Dokumen</span></h1>
+                    {{-- <p data-aos="fade-up" data-aos-delay="100">Ajukan permohonan surat dari mana saja<br> --}}
+                    </p>
 
-                    <div class="container text-center" style="max-width: 700px; margin-top: 30px;">
-                        <div class="card shadow p-4" style="border-radius: 18px;">
-                            <div class="mb-4">
-                                <img src="{{asset('vendors/images/logo-pemkab.png')}}" alt="Logo Pemkab" style="height: 80px;">
-                                <h3 class="mt-3 mb-1" style="font-weight: bold; color: #1a237e;">HASIL CEK DOKUMEN</h3>
-                                <h4 style="font-size: 17px; color: #0000000;"><b>
-                                Naskah ini dikelola dengan Aplikasi Sistem Layanan dan Administrasi serta Kearsipan Desa Manyampa yang Dinamis Terintegrasi</b></h4>
-                            </div>
-                            @php
-                                \Carbon\Carbon::setLocale('id');
-                            @endphp
-                            @if($ps)
-                                @if($ps->status == 'Selesai')
-                                    <div class="alert alert-success mb-3" style="font-size: 17px;">
-                                        <b>✅ Dokumen Valid</b>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6 mb-2">
-                                            <div class="p-3 border rounded bg-light h-100">
-                                                <h5 class="mb-2" style="color:#1a237e;"><i class="bi bi-person-badge"></i> Data Dokumen</h5>
-                                                <ul class="list-unstyled mb-0" style="font-size: 16px;">
-                                                    <li><b>__:</b> {{ $list->nama }}</li>
-                                                    <li><b>__:</b> {{ $list->nik }}</li>
-                                                    <li><b>__:</b> {{ $list->jenis_surat }}</li>
-                                                    <li><b>__:</b> {{ $list->tujuan }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <div class="p-3 border rounded bg-light h-100">
-                                                <h5 class="mb-2" style="color:#1a237e;"><i class="bi bi-pen"></i> Tanda Tangan</h5>
-                                                <ul class="list-unstyled mb-0" style="font-size: 16px;">
-                                                    <li><b>Ditandatangani oleh:</b> <span style="color:#1a237e">Abbas Madda</span></li>
-                                                    <li><b>Jabatan:</b> <span style="color:#1a237e">Kepala Desa</span></li>
-                                                    <li><b>Unit Kerja:</b> <span style="color:#1a237e">Desa Manyampa</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6 mb-2">
-                                            <div class="p-3 border rounded bg-light h-100">
-                                                <h5 class="mb-2" style="color:#1a237e;"><i class="bi bi-calendar-check"></i> Waktu Tanda Tangan</h5>
-                                                <div style="font-size: 16px;">
-                                                    <b>Ditandatangani pada:</b> {{ \Carbon\Carbon::parse($ps->created_at)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <div class="p-3 border rounded bg-light h-100">
-                                                <h5 class="mb-2" style="color:red;"><i class="bi bi-exclamation-triangle"></i> Kadaluarsa</h5>
-                                                <div style="font-size: 16px;">
-                                                    <b style="color:red">Kadaluarsa pada:</b>
-                                                    <span style="color:red">{{ \Carbon\Carbon::parse($ps->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 text-center">
-                                        <button class="btn btn-outline-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
-                                            <i class="bi bi-eye"></i> Lihat File Digital
+                    @php
+                    \Carbon\Carbon::setLocale('id');
+                    @endphp
+
+                    <div class="container text-center">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card-box pd-30 height-100-p">
+                                    @if($ps)
+                                    @if($ps->status == 'Selesai')
+
+                                    Bahwa benar dokumen ini terdapat dalam arsip desa Manyampa, Kecamatan Ujung Loe, Kabupaten Bulukumba, Sulawesi Selatan
+                                    <br>
+                                    {{-- {{ \Carbon\Carbon::parse($ps->updated_at)->translatedFormat('j F Y \p\u\k\u\l H:i') }} --}}
+                                    <br>Dengan data sebagai berikut:
+                                    <br>
+                                    <hr>
+                                    Nama : <strong>{{ $list->nama }}</strong> <br>
+                                    NIK : <strong>{{ $list->nik }}</strong> <br>
+                                    Jenis Surat : <strong>{{ $list->jenis_surat }}</strong> <br>
+                                    <br>
+                                    Dipergunakan untuk : <strong>{{ $list->tujuan }}</strong> <br>
+
+                                    <!-- Tombol Preview Dokumen PDF -->
+
+                                    <!-- Preview Dokumen PDF di halaman -->
+
+                                    <hr class="mb-30 mt-30">
+                                    <h2 class="mb-30 h4">Tanda Tangan Valid ✅</h2>
+                                    <b p style="color: blue;"> Dibuat </b>Pada : <br>{{ \Carbon\Carbon::parse($ps->created_at)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }} <br>
+                                    <b p style="color: red;"> Kadaluarsa </b>Pada : <br> {{ \Carbon\Carbon::parse($ps->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
+                                    @elseif($ps->status == 'Expired')
+                                    <h2 class="mb-30 h4">Dokumen dan Tanda Tangan <b p style="color: red;">Expired</b> ❌</h2>
+                                    Tanda tangan dan dokument ini telah kadaluarsa pada :
+                                    {{ \Carbon\Carbon::parse($ps->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}
+                                    <br><b p style="color: red;">Dan Dokument ini tidak dapat dipergunakan lagi</b>
+                                    @else
+                                    <h2 class="mb-30 h4">Status Tidak Diketahui ❓</h2>
+                                    Status dokumen dan tanda tangan tidak dapat diidentifikasi.
+                                    @endif
+                                    @else
+                                    <h2 class="h4">Data Tidak Ditemukan ❌</h2>
+                                    @endif
+
+                                    <div class="mb-3 mt-3">
+                                        <button class="btn btn-primary" type="button" onclick="document.getElementById('pdf-preview').style.display = (document.getElementById('pdf-preview').style.display === 'none' ? 'block' : 'none')">
+                                            <i class="bi bi-eye"></i> Lihat Dokumen
                                         </button>
                                     </div>
+
                                     <div id="pdf-preview" style="display: none; margin-bottom: 20px;">
                                         <iframe src="data:application/pdf;base64,{{ $pdfContent }}" width="100%" height="600px" frameborder="0" style="border:1px solid #ccc;"></iframe>
                                     </div>
-                                @elseif($ps->status == 'Expired')
-                                    <div class="alert alert-danger mb-3" style="font-size: 17px;">
-                                        <b>❌ Dokumen Expired</b>
-                                    </div>
-                                    <div class="p-3 border rounded bg-light text-start mb-3" style="font-size: 16px;">
-                                        <span>Tanda tangan dan dokumen ini telah kadaluarsa pada:</span><br>
-                                        <span style="color:red">{{ \Carbon\Carbon::parse($ps->created_at)->copy()->addMonths(1)->translatedFormat('l, j F Y \p\u\k\u\l H:i') }}</span>
-                                        <br><b style="color: red;">Dokumen ini tidak dapat dipergunakan lagi.</b>
-                                    </div>
-                                @else
-                                    <div class="alert alert-warning mb-3" style="font-size: 17px;">
-                                        <b>❓ Status Tidak Diketahui</b>
-                                    </div>
-                                    <div class="p-3 border rounded bg-light text-start mb-3" style="font-size: 16px;">
-                                        Status dokumen dan tanda tangan tidak dapat diidentifikasi.
-                                    </div>
-                                @endif
-                            @else
-                                <div class="alert alert-danger mb-3" style="font-size: 17px;">
-                                    <b>❌ Data Tidak Ditemukan</b>
+
+
+
                                 </div>
-                            @endif
-                            <div class="mt-4 text-center" style="font-size: 13px; color: #888;">
-                                © 2025. <a href="https://smartmediaindonesia.com/" target="_blank">Smart Media Indonesia</a> | <a href="https://smartmediaindonesia.com/" target="_blank">Desa Manyampa</a>
                             </div>
                         </div>
                     </div>
-                    <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/hero-services-img.webp" class="img-fluid hero-img" alt=""
+                        data-aos="zoom-out" data-aos-delay="300">
                 </div>
+            </div>
+            </div>
             </div>
 
 
