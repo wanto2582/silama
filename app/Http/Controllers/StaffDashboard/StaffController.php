@@ -104,6 +104,13 @@ class StaffController extends Controller
             return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
         } else if ($list->jenis_surat == 'Surat Pernyataan b') {
             return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+         // SURAT PENGANTAR
+        } else if ($list->jenis_surat == 'Surat Pengantar') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+
+
         }
     }
 
@@ -258,9 +265,14 @@ class StaffController extends Controller
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
                         <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL'
-                        data-toggle='tooltip' data-placement='top' title='Unduh Surat' id='download-button' data-name='$model->name' data-id='$model->id'>
-                            <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
+                        data-toggle='tooltip' data-placement='top' title='Lihat Surat' id='download-button' style='width:32px;height:22px;padding:0; data-name='$model->name' data-id='$model->id'>
+                            <i class='dw dw-eye' style='font-size:1.2rem;'></i>
                         </a>";
+
+                        // <a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='$URL' target='_blank'
+                        //         data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                        //             <i class='dw dw-download' style='font-size:1.2rem;'></i>
+                        //         </a>
                 }
 
 
@@ -392,9 +404,9 @@ class StaffController extends Controller
                 // Download button for completed letters
                 if ($model->status == 'Selesai') {
                     $URL = route('unduh.surat', ['id' => $model->id]);
-                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1' href='$URL' target='_blank'
+                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='$URL' target='_blank'
                                 data-toggle='tooltip' data-placement='top' title='Download Surat'>
-                                    <i class='dw dw-download' style='font-size: 2vh !important;'></i>
+                                    <i class='dw dw-download' style='font-size:1.2rem;'></i>
                                 </a>";
                 }
 

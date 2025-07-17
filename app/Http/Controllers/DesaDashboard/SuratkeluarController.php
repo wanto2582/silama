@@ -567,10 +567,10 @@ class SuratkeluarController extends Controller
                 if ($model->status == 'Selesai') {
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
-                        <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL' target='_blank'
-                        data-toggle='tooltip' data-placement='top' title='Unduh Surat' id='download-button' data-name='$model->name' data-id='$model->id'>
-                            <i class='icon-copy bi bi-download' style='font-size: 2vh !important;'></i>
-                        </a>";
+                        <a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='$URL' target='_blank'
+                                data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                                    <i class='dw dw-download' style='font-size:1.rem;'></i>
+                                </a>";
                 }
 
 

@@ -388,6 +388,34 @@ class SuratController extends Controller
             ]);
         }
 
+         if ($request->jenis_surat == 'speng') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Pengantar', 
+                'kode_surat' => 'speng',
+                'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+            ]);
+        }
+
+
         Alert::success('Sukses!', 'Surat Berhasil Dibuat');
         return redirect()->route('desa.surat.riwayat');
     }
@@ -713,6 +741,31 @@ class SuratController extends Controller
             ]);
         }
 
+        if ($request->jenis_surat == 'speng') {
+            DetailSurat::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Pengantar',
+                'kode_surat' => 'speng',
+                'berkas' => $request->hasFile('berkas') ? $request->file('berkas')->store('assets/berkas', 'public') : $detailSurat->berkas,
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+            ]);
+        }
+
 
         Alert::success('Sukses!', 'Surat Berhasil DiEdit');
         return redirect()->route('desa.surat.riwayat');
@@ -873,10 +926,10 @@ class SuratController extends Controller
                 if ($model->status == 'Selesai') {
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
-                        <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL' target='_blank'
-                        data-toggle='tooltip' data-placement='top' title='Unduh Surat' id='download-button' data-name='$model->name' data-id='$model->id'>
-                            <i class='icon-copy bi bi-download' style='font-size: 2vh !important;'></i>
-                        </a>";
+                        <a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:22px;padding:0;' href='$URL' target='_blank'
+                                data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                                    <i class='dw dw-download' style='font-size:1.rem;'></i>
+                                </a>";
                 }
 
 

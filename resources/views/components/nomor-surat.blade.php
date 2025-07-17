@@ -37,6 +37,8 @@ $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 } elseif ($type === 'spb') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 // SURAT PENGANTAR
+} elseif ($type === 'speng') {
+$nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 
 
 } else {

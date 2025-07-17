@@ -116,6 +116,11 @@ class KadesController extends Controller
         } else if ($list->jenis_surat == 'Surat Pernyataan b') {
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
 
+        // SURAT PENGANTAR
+        } else if ($list->jenis_surat == 'Surat Pengantar') {
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
+
         }
 
         // return view('kades.pengajuan.show', ['pdfContent' => $pdf->output()]);
@@ -281,20 +286,25 @@ class KadesController extends Controller
                 $detailSurat = $model->detail_surats->first();
                 $actions = '';
                 $URL = route('unduh.surat', ['id' => $model->id]);
+                $viewURL = route('cek.surat', $detailSurat->id);
+                $actions .= "<span class='d-flex align-items-center justify-content-center'>";
+
                 // View button
-                // $viewURL = route('staff.pengajuan.show', $detailSurat->id);
-                // $actions .= "<a class='btn btn-icon btn-primary mr-1 mb-1' href='{$viewURL}'
-                //             data-toggle='tooltip' data-placement='top' title='Lihat Detail'>
-                //                 <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
-                //             </a>";
+                $actions .= "<a class='btn btn-icon btn-primary mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='{$viewURL}' target='_blank'
+                            data-toggle='tooltip' data-placement='top' title='Lihat Detail'>
+                                <i class='dw dw-eye' style='font-size:1.2rem;'></i>
+                            </a>";
 
                 // Download button for completed letters
                 if ($model->status == 'Selesai') {
-                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1' href='$URL' target='_blank'
+                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='$URL' target='_blank'
                                 data-toggle='tooltip' data-placement='top' title='Download Surat'>
-                                    <i class='dw dw-download' style='font-size: 2vh !important;'></i>
+                                    <i class='dw dw-download' style='font-size:1.2rem;'></i>
                                 </a>";
+                                
                 }
+
+                $actions .= "</div>";
 
                 // Download berkas if available
                 // if ($detailSurat->berkas) {

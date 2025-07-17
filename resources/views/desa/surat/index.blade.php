@@ -63,8 +63,9 @@
                             <option value="sptn">SURAT PERNYATAAN (SPTN)</option>
                         </optgroup>
                         <optgroup label="SURAT PENGANTAR">
-                            <option value="spa">.....</option>
-                            <option value="spb">.....</option>
+                            <option value="speng">Surat Pengantar</option>
+                            <option value="spa">......</option>
+                            <option value="spb">.....</option> 
                         </optgroup>
                         <optgroup label="SURAT IZIN / REKOMENDASI">
                             <option value="sra">.....</option> {{-- ASUMSI NILAI BARU UNTUK REKOMEN A --}}
@@ -92,10 +93,9 @@
     <x-form-surat.spb id="spb" :detailSurat="$detailSurat" style="display: none;" />
     {{-- SURAT PERNYATAAN --}}
     <x-form-surat.sptn id="sptn" :detailSurat="$detailSurat" style="display: none;" />
-    {{-- TAMBAHAN UNTUK SURAT PENGANTAR A (SPA) JIKA BELUM ADA KOMPONEN X-FORM-SURAT UNTUKNYA --}}
-    {{-- <x-form-surat.spa id="spa" :detailSurat="$detailSurat" style="display: none;" /> --}}
-    {{-- TAMBAHAN UNTUK SURAT REKOMENDASI A (SRA) JIKA BELUM ADA KOMPONEN X-FORM-SURAT UNTUKNYA --}}
-    {{-- <x-form-surat.sra id="sra" :detailSurat="$detailSurat" style="display: none;" /> --}}
+    {{-- SURAT PENGANTAR --}}
+    <x-form-surat.spa id="spa" :detailSurat="$detailSurat" style="display: none;" />
+    <x-form-surat.speng id="speng" :detailSurat="$detailSurat" style="display: none;" />
 
 </x-app-layout>
 
@@ -118,9 +118,12 @@
         // Semua card SURAT PERNYATAAN disembunyikan terlebih dahulu
         document.getElementById("sptn").style.display = "none";
         document.getElementById("spb").style.display = "none";
-       
+         // Semua card SURAT PENGANTAR disembunyikan terlebih dahulu
+        document.getElementById("spa").style.display = "none";
+        document.getElementById("speng").style.display = "none";
 
 
+ 
         // Tampilkan card SURAT KETERANGAN sesuai dengan nilai yang dipilih
         if (selectedValue === "skd") {
             document.getElementById("skd").style.display = "block";
@@ -149,6 +152,12 @@
             document.getElementById("sikd").style.display = "block";
         } else if (selectedValue === "spb") {
             document.getElementById("spb").style.display = "block";
+            // Tampilkan card SURAT PENGANTAR sesuai dengan nilai yang dipilih
+        } else if (selectedValue === "spa") {
+            document.getElementById("spa").style.display = "block";
+            } else if (selectedValue === "speng") {
+            document.getElementById("speng").style.display = "block";
+
 
  
         }

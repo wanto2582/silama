@@ -236,31 +236,52 @@ class KadeskeluarController extends Controller
         $query = PengajuanSuratkeluar::with(['users', 'detail_suratkeluars'])
             ->whereIn('status', ['Selesai', 'Expired']);
 
-        // ... (bagian filter) ...
+        // Apply filters if provided
+        if ($request->has('nik') && !empty($request->nik)) {
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('nik', 'like', '%' . $request->nik . '%');
+            });
+        }
+
+        if ($request->has('jenis_surat') && !empty($request->jenis_surat)) {
+            $query->whereHas('detail_suratkeluars', function ($q) use ($request) {
+                $q->where('jenis_surat', $request->jenis_surat);
+            });
+        }
 
         $data = DataTables::of($query)->addIndexColumn()
             ->addColumn('action', function ($model) {
                 $detailSuratkeluar = $model->detail_suratkeluars->first();
                 $actions = '';
+                $URL = route('unduh.surat', ['id' => $model->id]);
+                $viewURL = route('cekkeluar.suratkeluar', $detailSuratkeluar->id);
+                $actions .= "<span class='d-flex align-items-center justify-content-center'>";
 
-                // Tombol Download
+                // View button
+                $actions .= "<a class='btn btn-icon btn-primary mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='{$viewURL}' target='_blank'
+                            data-toggle='tooltip' data-placement='top' title='Lihat Detail'>
+                                <i class='dw dw-eye' style='font-size:1.2rem;'></i>
+                            </a>";
+
+                // Download button for completed letters
                 if ($model->status == 'Selesai') {
-                    $downloadURL = route('unduh.suratkeluar', ['id' => $model->id]);
-                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1' href='{$downloadURL}' target='_blank'
-                                  data-toggle='tooltip' data-placement='top' title='Download Surat'>
-                                    <i class='dw dw-download' style='font-size: 2vh !important;'></i>
+                    $actions .= "<a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:32px;padding:0;' href='$URL' target='_blank'
+                                data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                                    <i class='dw dw-download' style='font-size:1.2rem;'></i>
                                 </a>";
-
-                    // **Tambahkan Tombol Preview di sini**
-                    // Gunakan data-id untuk mengambil ID di JavaScript
-                    // $previewURL = route('kades.pengajuankeluar.preview_pdf', ['id' => $model->id]);
-                    // $actions .= "<button class='btn btn-icon btn-primary mr-1 mb-1 preview-btn'
-                    //               data-toggle='modal' data-target='#pdfPreviewModal'
-                    //               data-id='{$model->id}' data-name='{$detailSuratkeluar->jenis_surat}'
-                    //               title='Preview Surat'>
-                    //                 <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
-                    //             </button>";
+                                
                 }
+
+                $actions .= "</div>";
+
+                // Download berkas if available
+                // if ($detailSurat->berkas) {
+                //     $berkasURL = route('staff.pengajuan.berkas', $detailSurat->id);
+                //     $actions .= "<a class='btn btn-icon btn-warning mr-1 mb-1' href='{$berkasURL}'
+                //                 data-toggle='tooltip' data-placement='top' title='Download Berkas'>
+                //                     <i class='fa fa-file' style='font-size: 2vh !important;'></i>
+                //                 </a>";
+                // }
 
                 return $actions;
             })

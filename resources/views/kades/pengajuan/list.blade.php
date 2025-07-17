@@ -6,7 +6,7 @@
             <h4 class="text-blue h4">Daftar surat sudah dikonfirmasi</h4>
         </div>
         <div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="pdfModalTitle">Preview Dokumen Surat Layanan</h4>
@@ -46,44 +46,7 @@
         </div>
     </div>
     
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        // Tangani klik tombol preview
-        $(document).on('click', '.preview-btn', function() {
-            var pengajuanId = $(this).data('id');
-            var jenisSurat = $(this).data('name');
-            var pdfUrl = "{{ route('kades.pengajuan.preview_pdf', ':id') }}";
-            pdfUrl = pdfUrl.replace(':id', pengajuanId);
 
-            // Tampilkan spinner loading
-            $('#loadingSpinner').show();
-            $('#pdfViewer').hide(); // Sembunyikan iframe saat loading
-
-            // Set judul modal
-            $('#pdfModalTitle').text('Preview Dokumen Surat ' + jenisSurat);
-
-            // Set src iframe
-            $('#pdfViewer').attr('src', pdfUrl);
-
-            // Sembunyikan spinner dan tampilkan iframe setelah iframe selesai memuat
-            // Ini mungkin tidak bekerja sempurna di semua browser/skenario,
-            // tapi ini adalah pendekatan umum.
-            $('#pdfViewer').on('load', function() {
-                $('#loadingSpinner').hide();
-                $(this).show();
-            });
-        });
-
-        // Reset iframe src saat modal ditutup untuk menghentikan pemuatan jika masih berjalan
-        $('#pdfPreviewModal').on('hidden.bs.modal', function () {
-            $('#pdfViewer').attr('src', ''); // Clear src to stop loading
-            $('#loadingSpinner').hide(); // Pastikan spinner tersembunyi
-        });
-    });
-</script>
-@endpush
-    <!-- Simple Datatable End -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         var url = {
@@ -200,7 +163,7 @@
                         searchable: false,
                         render: function(data, type, row) {
                             // Tombol preview
-                            var previewBtn = '<a href="#" class="btn btn-icon btn-primary mr-1 mb-1 preview-btn" data-toggle="modal" data-target="#pdfPreviewModal" data-id="'+row.id+'" data-name="'+(row.detail_surats ? row.detail_surats.jenis_surat : '-')+'" title="Preview Surat"><i class="dw dw-eye" style="font-size: 2vh !important;"></i></a>';
+                            var previewBtn = '';
                             // Tombol download dari backend (jika ada)
                             var actionBtn = row.action ? row.action : '';
                             return previewBtn + actionBtn;

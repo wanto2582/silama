@@ -23,6 +23,9 @@
     <x-template-surat.sptn :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 @elseif($list->kode_surat == 'spb')
     <x-template-surat.spb :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
+    {{-- SURAT PERNYATAAN --}}
+@elseif($list->kode_surat == 'speng')
+    <x-template-surat.speng :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
 
      
 @endif
