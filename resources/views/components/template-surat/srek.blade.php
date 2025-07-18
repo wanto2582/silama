@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SURAT KETERANGAN KEPEMILIKAN KENDARAAN</title>
+    <title>SURAT PENGANTAR</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -91,14 +91,14 @@
         }
 
         .ttd {
-            margin-top: 20px;
+            margin-top: -40px;
         }
 
-        .ttd-kiri,
+         .ttd-kiri,
         .ttd-kanan {
             width: 50%;
             /* Bagi ruang secara merata antara tanda tangan */
-            float: left;
+            float: right;
             text-align: left;
         }
 
@@ -188,21 +188,23 @@
     </div>
     <hr class="line" />
     <div class="container">
-        <h3 class="judul">SURAT KETERANGAN KEPEMILIKAN KENDARAAN</h3>
-        <x-nomor-surat type="skkk" :index="$indeks[$ps->id]+1" />
-        <p style="padding: 0 50px 0 50px; text-align: justify;">Yang bertanda tangan dibawah ini Kepala Desa Manyampa, Kecamatan Ujung Loe, Kabupaten Bulukumba menerangkan bahwa :</p>
+        <h3 class="judul">{{$list->nama_surat ?? ''}}</h3>
+        <x-nomor-surat type="srek" :index="$indeks[$ps->id]+1" />
+        <p style="padding: 0 50px 0 50px; text-align: justify;">Yang bertanda tangan dibawah ini Kepala Desa Manyampa, Kecamatan Ujung Loe, 
+            Kabupaten Bulukumba menyatakan dengan sesungguhnya bahwa :</p>
+
         <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
             <tr>
                 <td style="text-align: left; width: 30%;">Nama</td>
                 <td style="text-align: left; padding-left: 10px;">: {{$list->nama ?? ''}}</td>
             </tr>
             <tr>
-                <td style="text-align: left;">NIK</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->nik ?? ''}}</td>
-            </tr>
-            <tr>
                 <td style="text-align: left;">Tempat Tanggal Lahir</td>
                 <td style="text-align: left; padding-left: 10px;">: {{$list->tempat_lahir.', '.\Carbon\Carbon::parse($list->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">NIK</td>
+                <td style="text-align: left; padding-left: 10px;">: {{$list->nik ?? ''}}</td>
             </tr>
             <tr>
                 <td style="text-align: left;">Jenis Kelamin</td>
@@ -217,10 +219,6 @@
                 <td style="text-align: left; padding-left: 10px;">: {{$list->agama ?? ''}}</td>
             </tr>
             <tr>
-                <td style="text-align: left;">Status Pernikahan</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->status_pernikahan ?? ''}}</td>
-            </tr>
-            <tr>
                 <td style="text-align: left;">Pekerjaan</td>
                 <td style="text-align: left; padding-left: 10px;">: {{$list->pekerjaan ?? ''}}</td>
             </tr>
@@ -229,55 +227,30 @@
                 <td style="text-align: left; padding-left: 10px;">: {{'RT.'. $list->rt .', RW.'. $list->rw .', Dusun '. $list->dusun ?? ''}}, Desa Manyampa</td>
             </tr>
         </table>
+
+       <div class="ttdkanan" style="padding: 0 50px 0 50px; margin-top: 0px;
+        /* text-indent:40px; */
+        line-height:1.5em; 
+        text-align: justify; border-collapse: collapse;" >
+        {!! $list->paragraf_1 ?? '' !!}
+        </div>
+        <div class="ttdkanan" style="padding: 0 50px 0 50px; margin-top: -20px;
+        /* text-indent:40px; */
+        line-height:1.5em; 
+        text-align: justify; border-collapse: collapse;" >
+        {!! $list->paragraf_2 ?? '' !!}
+        </div>
+
         <p style="padding: 0 50px 0 50px; text-align: justify;">
-            Berdasarkan keterangan yang bersangkutan, benar memilik kendaraan berupa :
+            Surat Pernyataan ini dibuat untuk keperluan {{$list->keperluan ?? ''}}.
         </p>
-        <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
-            <tr>
-                <td style="text-align: left; width: 30%;">Merk / Type</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->merk_type ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Tahun Pembuatan</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->tahun_pembuatan ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Warna</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->warna ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Nomor Mesin</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->nomor_mesin ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Nomor Rangka</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->nomor_rangka ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Nomor BPKB</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->nomor_bpkb ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Nomor Polisi</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->nomor_polisi ?? ''}}</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Atas Nama</td>
-                <td style="text-align: left; padding-left: 10px;">: {{$list->atas_nama ?? ''}}</td>
-            </tr>
-           
-        </table>
-         <p style="padding: 0 50px 0 50px; text-align: justify;">
-            Surat Keterangn ini dipergunakan untuk keperlua : <b>{{$list->tujuan ?? ''}}</b>
-        </p>
-        <p style="padding: 0 50px 0 50px; text-align: justify;">
-            Demikian surat keterangan ini dibuat dengan sebenarnya dan diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.
+            
+        <p style="padding: 0 50px 0 50px; text-align: justify; margin buttom: -40px;">
+            Demikian surat pernyataan ini dibuat dengan sebenarnya dan diberikan kepada yang bersangkutan untuk dipergunakan sebagaimana mestinya.
         </p>
 
-       <div class="ttd">
-            <div class="ttd-kiri" style="text-align: center">
-
-            </div>
+        <div class="ttd">
+            
             <div class="ttd-kanan" style="text-align: center">
                 <br>
                 <br>

@@ -50,31 +50,32 @@
                     <select name="pilih_surat" id="pilih_surat" class="form-control custom-select-lg shadow-sm rounded" style="width: 100%; height: 45px;" onchange="showCard(this.value)">
                         <option value="">-- PILIH SURAT YANG INGIN DIBUAT --</option>
                         <optgroup label="SURAT KETERANGAN">
-                            <option value="skd">SURAT KETERANGAN DOMISILI (SKD)</option>
-                            <option value="sks">SURAT KETERANGAN SAKIT (SKS)</option>
-                            <option value="skk">SURAT KETERANGAN KEMATIAN (SKK)</option>
-                            <option value="sktm">SURAT KETERANGAN TIDAK MAMPU (SKTM)</option>
-                            <option value="skkk">SURAT KETERANGAN KEPEMILIKAN KENDARAAN (SKKK)</option>
-                            <option value="sku">SURAT KETERANGAN USAHA (SKU)</option>
-                            <option value="skl">SURAT KETERANGAN KELAHIRAN (SKL)</option>
-                            <option value="lsk">SURAT KETERANGAN LAINNYA (LSK)</option>
+                            <option value="skd">Surat Keterangan Domisili</option>
+                            <option value="sks">Surat Keterangan Sakit</option>
+                            <option value="skk">Surat Keterangan Kematian</option>
+                            <option value="sktm">Surat Keterangan Tidak Mampu</option>
+                            <option value="skkk">Surat Keterangan Kepemilikan Kendaraan</option>
+                            <option value="sku">Surat Keterangan Usaha</option>
+                            <option value="skl">Surat Keterangan Kelahiran</option>
+                            <option value="lsk">Surat Keterangan Lainya</option>
                         </optgroup>
                         <optgroup label="SURAT PERNYATAAN">
-                            <option value="sptn">SURAT PERNYATAAN (SPTN)</option>
+                            <option value="sptn">Surat Pernyataan</option>
                         </optgroup>
                         <optgroup label="SURAT PENGANTAR">
                             <option value="speng">Surat Pengantar</option>
-                            <option value="spa">......</option>
-                            <option value="spb">.....</option> 
                         </optgroup>
                         <optgroup label="SURAT IZIN / REKOMENDASI">
-                            <option value="sra">.....</option> {{-- ASUMSI NILAI BARU UNTUK REKOMEN A --}}
-                            <option value="sikd">SURAT IZIN KEPALA DESA (SIKD)</option>
+                            <option value="srek">Surat Rekomendasi</option>
+                            <option value="sikd">Surat Izin Kepala Desa</option>
                         </optgroup>
                     </select>
                 </div>
             </div>
         </form>
+        
+        
+
     </div>
     @endif
 
@@ -91,6 +92,7 @@
     {{-- SURAT IZIN / REKOMENDASI --}}
     <x-form-surat.sikd id="sikd" :detailSurat="$detailSurat" style="display: none;" />
     <x-form-surat.spb id="spb" :detailSurat="$detailSurat" style="display: none;" />
+    <x-form-surat.srek id="srek" :detailSurat="$detailSurat" style="display: none;" />
     {{-- SURAT PERNYATAAN --}}
     <x-form-surat.sptn id="sptn" :detailSurat="$detailSurat" style="display: none;" />
     {{-- SURAT PENGANTAR --}}
@@ -101,7 +103,7 @@
 
 <script>
     function showCard(selectedValue) {
-        // Semua card SURAT KETERANGAN disembunyikan terlebih dahulu
+        // SURAT KETERANGAN disembunyikan terlebih dahulu
         document.getElementById("skd").style.display = "none";
         document.getElementById("sks").style.display = "none";
         document.getElementById("skk").style.display = "none";
@@ -109,22 +111,23 @@
         document.getElementById("skkk").style.display = "none";
         document.getElementById("sku").style.display = "none";
         document.getElementById("skl").style.display = "none";
-        // Semua card LAYOUTE SURAT KETERANGN disembunyikan terlebih dahulu
+        // LAYOUTE SURAT KETERANGN disembunyikan terlebih dahulu
         document.getElementById("lsk").style.display = "none";
-        // Semua card SURAT IZIN / REKOMENDASI disembunyikan terlebih dahulu
+        // SURAT IZIN / REKOMENDASI disembunyikan terlebih dahulu
         document.getElementById("sikd").style.display = "none";
         document.getElementById("spb").style.display = "none";
+        document.getElementById("srek").style.display = "none";
 
-        // Semua card SURAT PERNYATAAN disembunyikan terlebih dahulu
+        // SURAT PERNYATAAN disembunyikan terlebih dahulu
         document.getElementById("sptn").style.display = "none";
         document.getElementById("spb").style.display = "none";
-         // Semua card SURAT PENGANTAR disembunyikan terlebih dahulu
+         // SURAT PENGANTAR disembunyikan terlebih dahulu
         document.getElementById("spa").style.display = "none";
         document.getElementById("speng").style.display = "none";
 
 
  
-        // Tampilkan card SURAT KETERANGAN sesuai dengan nilai yang dipilih
+        // SURAT KETERANGAN sesuai dengan nilai yang dipilih
         if (selectedValue === "skd") {
             document.getElementById("skd").style.display = "block";
         } else if (selectedValue === "sks") {
@@ -139,20 +142,22 @@
             document.getElementById("sku").style.display = "block";
         } else if (selectedValue === "skl") {
             document.getElementById("skl").style.display = "block";
-         // Tampilkan card LAYOTE SURAK KETERANGAN sesuai dengan nilai yang dipilih
+         // SURAK KETERANGAN sesuai dengan nilai yang dipilih
         } else if (selectedValue === "lsk") {
             document.getElementById("lsk").style.display = "block";
-        // Tampilkan card SURAT PERNYATAAN sesuai dengan nilai yang dipilih
+        // SURAT PERNYATAAN sesuai dengan nilai yang dipilih
         } else if (selectedValue === "sptn") {
             document.getElementById("sptn").style.display = "block";
         } else if (selectedValue === "spb") {
             document.getElementById("spb").style.display = "block";
-        // Tampilkan card SURAT IZIN / REKOMENDASI sesuai dengan nilai yang dipilih
+        // SURAT IZIN / REKOMENDASI sesuai dengan nilai yang dipilih
         } else if (selectedValue === "sikd") {
             document.getElementById("sikd").style.display = "block";
+             } else if (selectedValue === "srek") {
+            document.getElementById("srek").style.display = "block";
         } else if (selectedValue === "spb") {
             document.getElementById("spb").style.display = "block";
-            // Tampilkan card SURAT PENGANTAR sesuai dengan nilai yang dipilih
+            // SURAT PENGANTAR sesuai dengan nilai yang dipilih
         } else if (selectedValue === "spa") {
             document.getElementById("spa").style.display = "block";
             } else if (selectedValue === "speng") {

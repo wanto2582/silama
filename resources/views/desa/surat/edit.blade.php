@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-slot name="title">Buat Surat Baru</x-slot>
+    <x-slot name="title">Edit Surat
+        
+    </x-slot>
 
     @if($detailSurat?->kode_surat == 'skd')
     @include('desa.edit.skd')

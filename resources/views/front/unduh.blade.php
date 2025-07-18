@@ -18,6 +18,8 @@
     {{-- SURAT IZIN/REKOMENDASI --}}
 @elseif($list->kode_surat == 'sikd')
     <x-template-surat.sikd :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
+@elseif($list->kode_surat == 'srek')
+    <x-template-surat.srek :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>
     {{-- SURAT PERNYATAAN --}}
 @elseif($list->kode_surat == 'sptn')
     <x-template-surat.sptn :list="$list" :ps="$ps" :user="$user" :qrCodes="$qrCodes" :indeks="$indeks"/>

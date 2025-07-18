@@ -31,6 +31,8 @@ $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 // SURAT IZIN/REKOMENDASI
 } elseif ($type === 'sikd') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
+} elseif ($type === 'srek') {
+$nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;
 // SURAT PERNYATAAN
 } elseif ($type === 'sptn') {
 $nomorSurat = $index . ' / DM / ' . $romanMonth . ' / ' . $currentYear;

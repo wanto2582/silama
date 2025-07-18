@@ -80,6 +80,8 @@ class FrontController extends Controller
         $user = User::where('id', $list->users_id)->first();
         $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cek/surat/' . $list->id);
         $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
+        
+        // SURAT KETERANGAN
         if ($list->jenis_surat == 'Surat Keterangan Usaha') {
             return $pdf->stream('Surat Keterangan Usaha - ' . $list->nama . '.pdf');
         } else if ($list->jenis_surat == 'Surat Keterangan Domisili') {
@@ -94,10 +96,20 @@ class FrontController extends Controller
             return $pdf->stream('Surat Keterangan Tidak Mampu - ' . $list->nama . '.pdf');
         } else if ($list->jenis_surat == 'Surat Keterangan Kelahiran') {
             return $pdf->stream('Surat Keterangan Kelahiran - ' . $list->nama . '.pdf');
+        // SURAT PERNYATAAN
         } else if ($list->jenis_surat == 'Surat Pernyataan a') {
             return $pdf->stream('Surat Pernyataan a - ' . $list->nama . '.pdf');
         } else if ($list->jenis_surat == 'Surat Pernyataan b') {
             return $pdf->stream('Surat Pernyataan b - ' . $list->nama . '.pdf');
+        // SURAT IZIN / REKOMENDASI
+        } else if ($list->jenis_surat == 'Surat Rekomendasi') {
+            return $pdf->stream('Surat Rekomendasi - ' . $list->nama . '.pdf');
+            // SURAT IZIN / PENGANTAR
+        } else if ($list->jenis_surat == 'Surat Pengantar') {
+            return $pdf->stream('Surat Pengantar - ' . $list->nama . '.pdf');
+        
+
+
         }
     }
 
