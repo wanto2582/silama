@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="title">DASHBOARD</x-slot>
     <div class="pd-ltr-10">
-        <div class="card-box pd-20 height-100-p mb-30 shadow-lg rounded-lg border-bottom-0"> {{-- MENAMBAHKAN SHADOW DAN ROUNDED --}}
+        <div class="card-box pd-20 height-100-p mb-10 shadow-lg rounded-lg border-bottom-0"> {{-- MENAMBAHKAN SHADOW DAN ROUNDED --}}
             <div class="row align-items-center">
                 <div class="col-md-4 text-center"> {{-- RATA TENGAH UNTUK GAMBAR --}}
                     <img src="{{asset('vendors/images/banner-img.png')}}" alt="Selamat Datang" class="img-fluid rounded-lg shadow-sm" style="max-height: 200px; object-fit: cover;" /> {{-- UKURAN DAN GAYA GAMBAR --}}
@@ -19,16 +19,16 @@
         </div>
 
         {{-- BAGIAN BUKU AGENDA SURAT --}}
-        <div class="card-box pd-20 height-100-p mb-30 shadow-lg rounded-lg">
+        <div class="card-box pd-10 height-100-p mb-10 shadow-lg rounded-lg">
             <div class="d-flex flex-wrap align-items-center mb-4 border-bottom pb-3">
             <i class="icon-copy dw dw-agenda mr-3 text-blue" style="font-size: 2.5rem;"></i>
             <div class="widget-data">
-                <div class="h4 mb-0 text-primary">BUKU AGENDA SURAT</div>
+                <div class="h5 mb-0 text-primary">BUKU AGENDA SURAT</div>
                 <div class="weight-600 font-14 text-muted">DAFTAR SURAT MASUK, SURAT KELUAR, SURAT PENGANTAR, DAN LAINNYA</div>
             </div>
             </div>
             <div class="row">
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-primary text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -39,7 +39,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-info text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -50,7 +50,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-warning text-dark p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -61,7 +61,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-success text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -76,16 +76,16 @@
         </div>
 
         {{-- BAGIAN SURAT LAYANAN MASYARAKAT --}}
-        <div class="card-box pd-20 height-100-p mb-30 shadow-lg rounded-lg">
+        <div class="card-box pd-20 height-100-p mb-10 shadow-lg rounded-lg">
             <div class="d-flex flex-wrap align-items-center mb-4 border-bottom pb-3">
             <i class="icon-copy dw dw-mail mr-3 text-blue" style="font-size: 2.5rem;"></i>
             <div class="widget-data">
-                <div class="h4 mb-0 text-primary">SURAT LAYANAN MASYARAKAT</div>
+                <div class="h5 mb-0 text-primary">SURAT LAYANAN MASYARAKAT</div>
                 <div class="weight-600 font-14 text-muted">SURAT PERMOHONAN, KETERANGAN, PERNYATAAN, REKOMENDASI DAN LAINNYA</div>
             </div>
             </div>
             <div class="row">
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-primary text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -96,7 +96,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-info text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -107,7 +107,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-warning text-dark p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
@@ -118,7 +118,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-30">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-20">
                 <div class="card-box height-100-p widget-style1 bg-success text-white p-3 rounded-lg shadow-sm dashboard-card">
                 <div class="dashboard-flex-mobile">
                     <div class="dashboard-icon-angka">
