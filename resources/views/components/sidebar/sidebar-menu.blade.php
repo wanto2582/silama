@@ -48,13 +48,13 @@
     /* GAYA UNTUK ITEM MENU AKTIF */
     .sidebar-menu ul li a.active {
         background-color: #007bff; /* WARNA LATAR BELAKANG AKTIF */
-        color: white; /* TEKS PUTIH UNTUK LATAR BELAKANG AKTIF */
+        color: rgb(239, 209, 11); /* TEKS PUTIH UNTUK LATAR BELAKANG AKTIF */
         box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* BAYANGAN UNTUK ITEM AKTIF */
         transform: translateY(-2px); /* EFEK NAIK SEDIKIT */
     }
     .sidebar-menu ul li a.active .micon,
     .sidebar-menu ul li a.active .mtext {
-        color: white !important; /* MEMASTIKAN IKON DAN TEKS TETAP PUTIH */
+        color: rgb(228, 192, 14) !important; /* MEMASTIKAN IKON DAN TEKS TETAP PUTIH */
     }
     .sidebar-menu ul li a.active:before {
         background-color: transparent; /* HILANGKAN EFEK HOVER PADA ACTIVE */
@@ -63,8 +63,8 @@
     /* GAYA UNTUK IKON */
     .sidebar-menu .micon {
         font-size: 1.5rem; /* UKURAN IKON LEBIH BESAR */
-        margin-right: 12px; /* JARAK ANTARA IKON DAN TEKS */
-        color: #6c757d; /* WARNA IKON DEFAULT */
+        margin-right: 5px; /* JARAK ANTARA IKON DAN TEKS */
+        color: #e8b213; /* WARNA IKON DEFAULT */
         transition: color 0.3s ease;
     }
     .sidebar-menu ul li a:hover .micon {
@@ -79,9 +79,9 @@
 
     /* GAYA UNTUK DROPDOWN TOGGLE (MENU UTAMA DENGAN SUBMENU) */
     .sidebar-menu .dropdown > a.dropdown-toggle {
-        background-color: #f0f2f5; /* LATAR BELAKANG SEDIKIT LEBIH GELAP DARI DEFAULT */
-        color: #343a40; /* TEKS LEBIH GELAP */
-        font-weight: 700;
+        background-color: #17a2b8; /* LATAR BELAKANG SEDIKIT LEBIH GELAP DARI DEFAULT */
+        color: #f1f2f4; /* TEKS LEBIH GELAP */
+        font-weight: 700; 
     }
     .sidebar-menu .dropdown > a.dropdown-toggle:hover {
         background-color: #e2e6ea;
@@ -89,17 +89,17 @@
     }
     .sidebar-menu .dropdown > a.dropdown-toggle.active {
         background-color: #007bff;
-        color: white;
+        color: rgb(12, 168, 195);
         box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
     }
     .sidebar-menu .dropdown > a.dropdown-toggle.active .micon,
     .sidebar-menu .dropdown > a.dropdown-toggle.active .mtext {
-        color: white !important;
+        color: rgb(235, 198, 32) !important;
     }
 
     /* GAYA UNTUK SUBMENU */
     .sidebar-menu .submenu {
-        padding-left: 25px; /* INDENTASI SUBMENU */
+        padding-left: 5px; /* INDENTASI SUBMENU */
         background-color: #f8f9fa; /* LATAR BELAKANG SUBMENU */
         border-left: 3px solid #dee2e6; /* GARIS PANDU SUBMENU */
         margin-top: 5px;
@@ -109,7 +109,7 @@
     }
 
     .sidebar-menu .submenu li a {
-        padding: 8px 10px; /* PADDING LEBIH KECIL UNTUK SUBMENU ITEM */
+        padding: 5px 5px; /* PADDING LEBIH KECIL UNTUK SUBMENU ITEM */
         font-size: 0.8rem; /* UKURAN FONT SUBMENU DIKECILKAN */
         font-weight: 500;
         color: #6c757d;
@@ -119,7 +119,7 @@
         color: #007bff;
     }
     .sidebar-menu .submenu li a.active {
-        background-color: #e0f2ff; /* LATAR BELAKANG AKTIF SUBMENU ITEM */
+        background-color: #121313; /* LATAR BELAKANG AKTIF SUBMENU ITEM */
         color: #007bff;
         font-weight: 600;
     }
@@ -128,8 +128,8 @@
     }
     .sidebar-menu .submenu li a .micon { /* IKON SUBMENU */
         font-size: 1.2rem;
-        margin-right: 8px;
-        color: #6c757d;
+        margin-right: 5px;
+        color: #ead111;
     }
     .sidebar-menu .submenu li a:hover .micon,
     .sidebar-menu .submenu li a.active .micon {
@@ -248,9 +248,9 @@
             <ul class="submenu">
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa/peraturan-desa.index') ? 'active' : ''}}" link="{{route('desa.peraturan-desa.index')}}" icon="micon bi bi-file-earmark-text" title="Peraturan Desa" /> {{-- MENAMBAHKAN IKON --}}
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.peraturan-kades.index') ? 'active' : ''}}" link="{{route('desa.peraturan-kades.index')}}" icon="micon bi bi-file-earmark-text" title="Peraturan Kades" /> {{-- MENAMBAHKAN IKON --}}
-                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.peraturan-berkades.index') ? 'active' : ''}}" link="{{route('desa.peraturan-berkades.index')}}" icon="micon bi bi-file-earmark-text" title="Peraturan Bersama Kades" /> {{-- MENAMBAHKAN IKON --}}
-                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.keputusan-kades.index') ? 'active' : ''}}" link="{{route('desa.keputusan-kades.index')}}" icon="micon bi bi-file-earmark-text" title="Keputusan Kepala Desa" /> {{-- MENAMBAHKAN IKON --}}
-                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.lembar-desa.index') ? 'active' : ''}}" link="{{route('desa.lembar-desa.index')}}" icon="micon bi bi-file-earmark-text" title="Lembaran & Berita Desa" /> {{-- MENAMBAHKAN IKON --}}
+                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.peraturan-berkades.index') ? 'active' : ''}}" link="{{route('desa.peraturan-berkades.index')}}" icon="micon bi bi-file-earmark-text" title="Prtrn Bersama Kades" /> {{-- MENAMBAHKAN IKON --}}
+                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.keputusan-kades.index') ? 'active' : ''}}" link="{{route('desa.keputusan-kades.index')}}" icon="micon bi bi-file-earmark-text" title="Keputusan Kades" /> {{-- MENAMBAHKAN IKON --}}
+                <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.lembar-desa.index') ? 'active' : ''}}" link="{{route('desa.lembar-desa.index')}}" icon="micon bi bi-file-earmark-text" title="Lembaran & Berita" /> {{-- MENAMBAHKAN IKON --}}
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.notulen-musdes.index') ? 'active' : ''}}" link="{{route('desa.notulen-musdes.index')}}" icon="micon bi bi-file-earmark-text" title="Notulen Musdes" /> {{-- MENAMBAHKAN IKON --}}
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.aparatur-pemdes.index') ? 'active' : ''}}" link="{{route('desa.aparatur-pemdes.index')}}" icon="micon bi bi-file-earmark-text" title="Aparatur Pemdes" /> {{-- MENAMBAHKAN IKON --}}
                 <x-menu.sidebar-menu-item class="no-arrow {{request()->is('desa.tanah-kasdesa.index') ? 'active' : ''}}" link="{{route('desa.tanah-kasdesa.index')}}" icon="micon bi bi-file-earmark-text" title="Tanah Kas Desa" /> {{-- MENAMBAHKAN IKON --}}
