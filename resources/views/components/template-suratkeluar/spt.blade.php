@@ -340,7 +340,7 @@
                 @if ($pskeluar->status == "Selesai")
                 <div class="qr-container">
                     <img style="width: 20px; margin-top: -25px;" src="logo.png" class="lego" alt="">
-                    <img class="object-a" style="margin-top: -25px;" src="data:image/png;base64, {!! base64_encode(QrCode::size(80)->generate('https://silama.apk62.com/cekkeluar/surat/'.$listkeluar->id)) !!} ">
+                    <img class="object-a" style="margin-top: -25px;" src="data:image/png;base64, {!! base64_encode(QrCode::size(80)->generate('https://silama.apk62.com/cekkeluar/suratkeluar/'.$listkeluar->id)) !!} ">
                 </div>
                 @endif
                 <br>
