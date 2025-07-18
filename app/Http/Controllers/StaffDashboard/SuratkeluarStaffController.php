@@ -68,7 +68,7 @@ class SuratkeluarStaffController extends Controller
         $selesaiStatus = PengajuanSuratkeluar::orderBy('created_at', 'asc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
         $user = User::where('id', $listkeluar->users_id)->first();
-        $qrCodes = QrCode::size(120)->generate('http://127.0.0.1:8000/cekkeluar/suratkeluar/' . $listkeluar->id);
+        $qrCodes = QrCode::size(120)->generate('https://silama.apk62.com/cekkeluar/suratkeluar/' . $listkeluar->id);
         $pdf = Pdf::loadView('front.unduhkeluar', compact('listkeluar', 'pskeluar', 'user', 'qrCodes', 'indeks'))->setPaper('Legal', 'potrait');
 
         if ($listkeluar->jenis_surat == 'Surat Undangan') {

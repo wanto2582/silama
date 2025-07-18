@@ -203,7 +203,25 @@
                         orderable: false,
                         searchable: false,
                         className: 'text-center',
-                        width: '15%'
+                        width: '15%',
+                        render: function(data, type, row) {
+                            let buttons = data; // Aksi dari server
+                            if (row.status === 'Diproses') {
+                                // Nomor WhatsApp tujuan (ganti dengan nomor admin/staff yang sesuai)
+                                const waNumber = '6281287070092';
+                                const letterType = data['detail_surats.jenis_surat'];
+
+                                // Pesan WhatsApp yang akan dikirim
+                                const message = `Yth. Sekdes Manyampa ,\n\nDengan hormat, saya memberitahukan bahwa ada pengajuan yang "Menunggu Konfirmasi". Mohon untuk dapat segera ditindaklanjuti.\n\nTerima kasih.`;
+
+                                // Buat URL WhatsApp
+                                const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+                                // Tambahkan tombol notifikasi WhatsApp ke dalam daftar aksi
+                                buttons += ` <a href="${waLink}" target="_blank" class="btn btn-warning btn-sm" title="Kirim notifikasi ke Staf via WhatsApp">kirim WA</a>`;
+                            }
+                            return buttons;
+                        }
                     },
                 ],
                 // MENAMBAHKAN PENGURUTAN DEFAULT AGAR DATA TERBARU BERADA DI ATAS
