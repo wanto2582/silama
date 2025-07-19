@@ -25,6 +25,8 @@ use App\Http\Controllers\DesaDashboard\TanahKasdesaController;
 use App\Http\Controllers\DesaDashboard\WargaController;
 use App\Models\AparaturPemdes;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController; // Pastikan Anda mengimpor controller
+Route::get('/preview-surat/{filename}', [PdfController::class, 'showPublicPdf'])->name('public.pdf.show');
 
 Route::get('/', function () {
     return view('welcome');

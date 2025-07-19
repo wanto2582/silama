@@ -441,7 +441,36 @@ class SuratController extends Controller
                 'paragraf_2' => $request->paragraf_2,
             ]);
         }
-
+        if ($request->jenis_surat == 'si') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Izin', 
+                'kode_surat' => 'si',
+                'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'jenis_kegiatan' => $request->jenis_kegiatan,
+                'lokasi_kegiatan' => $request->lokasi_kegiatan,
+                'waktu_kegiatan' => $request->waktu_kegiatan,
+                'jenis_hiburan' => $request->jenis_hiburan,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+            ]);
+        }
 
 
         Alert::success('Sukses!', 'Surat Berhasil Dibuat');
@@ -815,6 +844,34 @@ class SuratController extends Controller
                 'nama_surat' => $request->nama_surat,
                 'paragraf_1' => $request->paragraf_1,
                 'paragraf_2' => $request->paragraf_2,
+            ]);
+        }
+        if ($request->jenis_surat == 'si') {
+            DetailSurat::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kewarganegaraan' => $request->kewarganegaraan,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
+                'status_pernikahan' => $request->status_pernikahan,
+                'tujuan' => $request->tujuan,
+                'alamat' => $request->alamat,
+                'jenis_surat' => 'Surat Izin',
+                'kode_surat' => 'si',
+                'berkas' => $request->hasFile('berkas') ? $request->file('berkas')->store('assets/berkas', 'public') : $detailSurat->berkas,
+                'dusun' => $request->dusun,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'nama_surat' => $request->nama_surat,
+                'paragraf_1' => $request->paragraf_1,
+                'paragraf_2' => $request->paragraf_2,
+                'jenis_kegiatan' => $request->jenis_kegiatan,
+                'lokasi_kegiatan' => $request->lokasi_kegiatan,
+                'waktu_kegiatan' => $request->waktu_kegiatan,
+                'jenis_hiburan' => $request->jenis_hiburan,
             ]);
         }
 

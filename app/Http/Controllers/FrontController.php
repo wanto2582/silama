@@ -104,6 +104,8 @@ class FrontController extends Controller
         // SURAT IZIN / REKOMENDASI
         } else if ($list->jenis_surat == 'Surat Rekomendasi') {
             return $pdf->stream('Surat Rekomendasi - ' . $list->nama . '.pdf');
+         } else if ($list->jenis_surat == 'Surat Izin') {
+            return $pdf->stream('Surat Izin - ' . $list->nama . '.pdf');
             // SURAT IZIN / PENGANTAR
         } else if ($list->jenis_surat == 'Surat Pengantar') {
             return $pdf->stream('Surat Pengantar - ' . $list->nama . '.pdf');

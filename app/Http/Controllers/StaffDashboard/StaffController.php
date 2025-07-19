@@ -99,6 +99,8 @@ class StaffController extends Controller
             return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
         } else if ($list->jenis_surat == 'Surat Rekomendasi') {
             return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+         } else if ($list->jenis_surat == 'Surat Izin') {
+            return view('staff.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
 
 
             // SURAT PERNYATAAN

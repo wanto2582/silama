@@ -46,7 +46,7 @@
         <form>
             <div class="form-group row align-items-center">
                 <label for="pilih_surat" class="col-md-3 col-form-label font-weight-bold text-uppercase">PILIH JENIS SURAT:</label>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <select name="pilih_surat" id="pilih_surat" class="form-control custom-select-lg shadow-sm rounded" style="width: 100%; height: 45px;" onchange="showCard(this.value)">
                         <option value="">-- PILIH SURAT YANG INGIN DIBUAT --</option>
                         <optgroup label="SURAT KETERANGAN">
@@ -67,6 +67,7 @@
                         </optgroup>
                         <optgroup label="SURAT IZIN / REKOMENDASI">
                             <option value="srek">Surat Rekomendasi</option>
+                            <option value="si">Surat Izin</option>
                             <option value="sikd">Surat Izin Kepala Desa</option>
                         </optgroup>
                     </select>
@@ -95,6 +96,7 @@
     <x-form-surat.sikd id="sikd" :detailSurat="$detailSurat" style="display: none;" />
     <x-form-surat.spb id="spb" :detailSurat="$detailSurat" style="display: none;" />
     <x-form-surat.srek id="srek" :detailSurat="$detailSurat" style="display: none;" />
+    <x-form-surat.si id="si" :detailSurat="$detailSurat" style="display: none;" />
     {{-- SURAT PERNYATAAN --}}
     <x-form-surat.sptn id="sptn" :detailSurat="$detailSurat" style="display: none;" />
     {{-- SURAT PENGANTAR --}}
@@ -119,6 +121,7 @@
         document.getElementById("sikd").style.display = "none";
         document.getElementById("spb").style.display = "none";
         document.getElementById("srek").style.display = "none";
+        document.getElementById("si").style.display = "none";
 
         // SURAT PERNYATAAN disembunyikan terlebih dahulu
         document.getElementById("sptn").style.display = "none";
@@ -155,8 +158,10 @@
         // SURAT IZIN / REKOMENDASI sesuai dengan nilai yang dipilih
         } else if (selectedValue === "sikd") {
             document.getElementById("sikd").style.display = "block";
-             } else if (selectedValue === "srek") {
+        } else if (selectedValue === "srek") {
             document.getElementById("srek").style.display = "block";
+        } else if (selectedValue === "si") {
+            document.getElementById("si").style.display = "block";
         } else if (selectedValue === "spb") {
             document.getElementById("spb").style.display = "block";
             // SURAT PENGANTAR sesuai dengan nilai yang dipilih

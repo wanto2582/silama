@@ -76,7 +76,11 @@ class DetailSurat extends Model
             'ayah_nik',
             'ayah_tempat_lahir',
             'ayah_tanggal_lahir',
-            'ayah_alamat', 
+            'ayah_alamat',
+            'jenis_kegiatan',
+            'lokasi_kegiatan',
+            'waktu_kegiatan',
+            'jenis_hiburan', 
         ];
 
     public function users(){

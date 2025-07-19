@@ -110,6 +110,9 @@ class KadesController extends Controller
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
         } else if ($list->jenis_surat == 'Surat Rekomendasi') {
             return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if ($list->jenis_surat == 'Surat Izin') {
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+
 
 
         // SURAT PERNYATAAN
