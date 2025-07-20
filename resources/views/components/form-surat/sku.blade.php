@@ -33,21 +33,7 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-md-6">
-                        <div class="form-group">
-                            <x-input-label>NIK : </x-input-label>
-                            <select class="custom-select2 form-control required-field" name="nik" id="nik-select">
-                                <option value="">Pilih NIK</option>
-                                @foreach($warga as $value)
-                                @if($value && $value->nik)
-                                <option value="{{ $value->nik }}">{{ $value->nik }} - {{ $value->nama }}</option>
-                                @endif
-                                @endforeach
-                            </select>
-                            <x-input-error class="mt-2" :messages="$errors->get('nik')" />
-                        </div>
-                    </div> -->
-
+                    
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Jenis Kelamin :</label>
@@ -238,7 +224,7 @@
             <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
             <div class="pdf-viewer">
                 {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
-                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="800px" />
+                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="1200px" />
                 <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
             </div>
         </div>

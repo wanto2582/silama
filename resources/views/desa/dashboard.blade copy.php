@@ -18,7 +18,6 @@
             </div>
         </div>
 
-    
         {{-- BAGIAN BUKU AGENDA SURAT --}}
         <div class="card-box pd-10 height-100-p mb-10 shadow-lg rounded-lg">
             <div class="d-flex flex-wrap align-items-center mb-4 border-bottom pb-3">
@@ -222,45 +221,6 @@
                 font-size: 0.7rem !important;
             }
             }
-           /* Untuk kontainer induk custom-card-row */
-.custom-card-row {
-    margin-left: -5px; /* Mengurangi padding default dari .row atau gap */
-    margin-right: -5px; /* Mengurangi padding default dari .row atau gap */
-}
-
-/* Untuk setiap kolom card-box */
-.custom-card-col {
-    flex: 0 0 auto; /* Hindari pertumbuhan atau penyusutan */
-    width: 12.5%;   /* 100% / 8 = 12.5% */
-    padding-left: 5px; /* Sesuaikan dengan margin-left/right di parent */
-    padding-right: 5px; /* Sesuaikan dengan margin-left/right di parent */
-    box-sizing: border-box; /* Pastikan padding tidak menambah lebar total */
-}
-
-/* Penyesuaian Responsif */
-@media (max-width: 1199.98px) { /* Untuk layar laptop dan tablet besar (lg) */
-    .custom-card-col {
-        width: 25%; /* 4 item per baris */
-    }
-}
-
-@media (max-width: 991.98px) { /* Untuk tablet (md) */
-    .custom-card-col {
-        width: 33.333%; /* 3 item per baris */
-    }
-}
-
-@media (max-width: 767.98px) { /* Untuk mobile (sm) */
-    .custom-card-col {
-        width: 50%; /* 2 item per baris */
-    }
-}
-
-@media (max-width: 575.98px) { /* Untuk mobile kecil (xs) */
-    .custom-card-col {
-        width: 50%; /* INI YANG DIUBAH: 2 item per baris untuk mobile */
-    }
-}
         </style>
         </div>
     </div>
