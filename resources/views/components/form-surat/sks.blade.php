@@ -1,21 +1,25 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form id="sksForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
-        @csrf
-        <x-text-input value="sks" name="jenis_surat" type="text" hidden />
+    {{-- Container utama untuk membagi dua bagian --}}
+    <div class="split-container">
+        {{-- Bagian Kiri: Form --}}
+        <div class="split-left">
+            <form id="sksForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
+                @csrf
+                <x-text-input value="sks" name="jenis_surat" type="text" hidden />
 
-        <div class="clearfix">
-            <h4 class="text-blue h4">Surat Keterangan Sakit</h4>
-        </div>
-        <div id="formAlert" style="display:none;" class="alert alert-danger border-danger text-center font-weight-bold py-2 mb-3 rounded shadow">
-            <i class="fa fa-exclamation-triangle mr-2"></i> Semua kolom wajib diisi, harap perhatikan lebih teliti
-        </div>
-        <div class="wizard-content">
-            <section>
+                <div class="clearfix">
+                    <h4 class="text-blue h4">SURAT KETERANGAN SAKIT</h4>
+                </div>
+                <div class="wizard-content">
+                    <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
+                        <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
+                    </div>
+                <section>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama : </x-input-label>
-                            <x-text-input name="nama" type="text" class="form-control" />
+                            <x-text-input name="nama" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                     </div>
@@ -23,7 +27,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>NIK : </x-input-label>
-                            <x-text-input name="nik" type="text" class="form-control" />
+                            <x-text-input name="nik" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nik')" />
                         </div>
                     </div>
@@ -31,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Jenis Kelamin :</label>
-                            <select name="gender" class="form-control">
+                            <select name="gender" class="form-control required-field">
                                 <option>Pilih Jenis Kelamin</option>
                                 <option value="Laki - Laki">Laki - laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -42,7 +46,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat Lahir : </x-input-label>
-                            <x-text-input name="tempat_lahir" type="text" class="form-control" />
+                            <x-text-input name="tempat_lahir" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tempat_lahir')" />
                         </div>
                     </div>
@@ -50,7 +54,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal Lahir : </x-input-label>
-                            <x-text-input name="tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input name="tanggal_lahir" type="date" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tanggal_lahir')" />
                         </div>
                     </div>
@@ -58,7 +62,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Agama : </x-input-label>
-                            <select name="agama" class="form-control">
+                            <select name="agama" class="form-control required-field">
                                 <option>Pilih Agama</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Kristen">Kristen</option>
@@ -73,7 +77,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Kewarganegaraan : </x-input-label>
-                            <x-text-input name="kewarganegaraan" type="text" class="form-control" />
+                            <x-text-input name="kewarganegaraan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('kewarganegaraan')" />
                         </div>
                     </div>
@@ -81,7 +85,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Pekerjaan : </x-input-label>
-                            <x-text-input name="pekerjaan" type="text" class="form-control" />
+                            <x-text-input name="pekerjaan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
                         </div>
                     </div>
@@ -89,7 +93,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Status Pernikahan :</label>
-                            <select name="status_pernikahan" class="form-control">
+                            <select name="status_pernikahan" class="form-control required-field">
                                 <option>Pilih Status Pernikahan</option>
                                 <option value="Belum Menikah">Belum Menikah</option>
                                 <option value="Menikah">Menikah</option>
@@ -101,7 +105,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Dusun</label>
-                            <select name="dusun" class="form-control">
+                            <select name="dusun" class="form-control required-field">
                                 <option>Pilih Dusun</option>
                                 <option value="Alaraya">Alaraya</option>
                                 <option value="Tanah Eja">Tanah Eja</option>
@@ -115,7 +119,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RT</label>
-                            <select name="rt" class="form-control">
+                            <select name="rt" class="form-control required-field">
                                 <option>RT</option>
                                 @for ($i = 1; $i <= 30; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -127,7 +131,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RW</label>
-                            <select name="rw" class="form-control">
+                            <select name="rw" class="form-control required-field">
                                 <option>RW</option>
                                 @for ($i = 1; $i <= 15; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -139,7 +143,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Sakit yg diderita : </x-input-label>
-                            <x-text-input name="paragraf_1" type="text" class="form-control" />
+                            <x-text-input name="paragraf_1" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('paragraf_1')" />
                         </div>
                     </div>
@@ -147,7 +151,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Keperluan : </x-input-label>
-                            <x-text-input name="tujuan" type="text" class="form-control" />
+                            <x-text-input name="tujuan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
                         </div>
                     </div>
@@ -155,7 +159,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal7" href="#">Lihat Syarat</a> ]]</x-input-label>
-                            <x-text-input name="berkas" type="file" class="form-control" />
+                            <x-text-input name="berkas" type="file" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                         </div>
                     </div>
@@ -190,42 +194,124 @@
 
         </div>
     </form>
+        </div>
+        {{-- Bagian Kanan: Tampilan PDF --}}
+        <div class="split-right">
+            <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
+            <div class="pdf-viewer">
+                {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
+                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="1200px" />
+                <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .required-field.is-invalid,
+    .required-field.is-invalid:focus,
+    .required-field.is-invalid:active {
+        border: 2px solid #dc3545 !important;
+        background-color: #ffe6e6 !important;
+    }
+    .alert-danger {
+        background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+    }
+    /* CSS baru untuk layout dua kolom */
+    .split-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .split-left {
+        flex: 1;
+        min-width: 400px;
+        padding-right: 15px;
+        border-right: 1px solid #eee;
+    }
+    .split-right {
+        flex: 1;
+        min-width: 400px;
+        padding-left: 15px;
+    }
+    .pdf-viewer {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .split-left .col-md-6 {
+        width: 100%;
+    }
+    .split-left .col-md-4,
+    .split-left .col-md-1 {
+        width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .split-container {
+            flex-direction: column;
+        }
+        .split-left,
+        .split-right {
+            min-width: unset;
+            width: 100%;
+            padding: 0;
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+        .split-right {
+            border-bottom: none;
+        }
+        .split-left {
+            padding-bottom: 20px;
+        }
+    }
+</style>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('sksForm');
-    const alertBox = document.getElementById('formAlert');
-    form.addEventListener('submit', function(e) {
-        let valid = true;
-        // Semua input dan select yang tidak hidden
-        const inputs = form.querySelectorAll('input:not([type=hidden]):not([type=file]), select');
-        inputs.forEach(function(input) {
-            if (input.value.trim() === '' || input.value === 'Pilih Jenis Kelamin' || input.value === 'Pilih Agama' || input.value === 'Pilih Dusun' || input.value === 'RT' || input.value === 'RW' || input.value === 'Pilih Status Pernikahan') {
-                valid = false;
-                input.classList.add('border-danger');
-            } else {
-                input.classList.remove('border-danger');
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('sksForm');
+        const alertBox = document.getElementById('formAlert');
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            alertBox.style.display = 'none';
+            const requiredFields = form.querySelectorAll('.required-field');
+            requiredFields.forEach(function(field) {
+                let value = field.value;
+                if (field.tagName === 'SELECT') {
+                    if (value === '' || value.toLowerCase().includes('pilih')) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                } else if (field.type === 'file') {
+                    if (!field.value) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                } else {
+                    if (!value || value.trim() === '') {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                }
+            });
+
+            if (!valid) {
+                alertBox.style.display = 'block';
+                e.preventDefault();
+                form.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         });
-        // File input khusus
-        const fileInput = form.querySelector('input[type=file]');
-        if (fileInput && !fileInput.value) {
-            valid = false;
-            fileInput.classList.add('border-danger');
-        } else if (fileInput) {
-            fileInput.classList.remove('border-danger');
-        }
-        if (!valid) {
-            e.preventDefault();
-            alertBox.style.display = 'block';
-            alertBox.classList.add('animate__animated', 'animate__shakeX');
-            setTimeout(() => {
-                alertBox.classList.remove('animate__shakeX');
-            }, 1000);
-        } else {
-            alertBox.style.display = 'none';
-        }
     });
-});
 </script>
-<!-- Untuk tampilan lebih menarik, pastikan sudah include animate.css dan font-awesome di layout utama -->

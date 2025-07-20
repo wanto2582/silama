@@ -1,16 +1,20 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form id="spengForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
-        @csrf
-        <x-text-input value="srek" name="jenis_surat" type="text" hidden />
+    {{-- Container utama untuk membagi dua bagian --}}
+    <div class="split-container">
+        {{-- Bagian Kiri: Form --}}
+        <div class="split-left">
+            <form id="srekForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
+                @csrf
+                <x-text-input value="srek" name="jenis_surat" type="text" hidden />
 
-        <div class="clearfix">
-            <h4 class="text-blue h4">SURAT REKOMENDASI</h4>
-        </div>
-        <div class="wizard-content">
-            <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
-                <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
-            </div>
-            <section>
+                <div class="clearfix">
+                    <h4 class="text-blue h4">SURAT REKOMENDASI</h4>
+                </div>
+                <div class="wizard-content">
+                    <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
+                        <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
+                    </div>
+                <section>
                 <div class="row">
 
                     <div class="col-md-6">
@@ -203,9 +207,24 @@
             </div>
 
         </div>
-</form>
+    </form>
+        </div>
+        {{-- Bagian Kanan: Tampilan PDF --}}
+        <div class="split-right">
+            <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
+            <div class="pdf-viewer">
+                {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
+                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="800px" />
+                <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
-    .required-field.is-invalid, .required-field.is-invalid:focus, .required-field.is-invalid:active {
+    .required-field.is-invalid,
+    .required-field.is-invalid:focus,
+    .required-field.is-invalid:active {
         border: 2px solid #dc3545 !important;
         background-color: #ffe6e6 !important;
     }
@@ -214,49 +233,99 @@
         color: #fff;
         border: none;
         font-weight: bold;
-        box-shadow: 0 2px 8px rgba(220,53,69,0.15);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+    }
+    /* CSS baru untuk layout dua kolom */
+    .split-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .split-left {
+        flex: 1;
+        min-width: 400px;
+        padding-right: 15px;
+        border-right: 1px solid #eee;
+    }
+    .split-right {
+        flex: 1;
+        min-width: 400px;
+        padding-left: 15px;
+    }
+    .pdf-viewer {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .split-left .col-md-6 {
+        width: 100%;
+    }
+    .split-left .col-md-4,
+    .split-left .col-md-1 {
+        width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .split-container {
+            flex-direction: column;
+        }
+        .split-left,
+        .split-right {
+            min-width: unset;
+            width: 100%;
+            padding: 0;
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+        .split-right {
+            border-bottom: none;
+        }
+        .split-left {
+            padding-bottom: 20px;
+        }
     }
 </style>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('spengForm');
-    const alertBox = document.getElementById('formAlert');
-    form.addEventListener('submit', function(e) {
-        let valid = true;
-        alertBox.style.display = 'none';
-        const requiredFields = form.querySelectorAll('.required-field');
-        requiredFields.forEach(function(field) {
-            let value = field.value;
-            // For select, check if value is default option
-            if (field.tagName === 'SELECT') {
-                if (value === '' || value.toLowerCase().includes('pilih')) {
-                    field.classList.add('is-invalid');
-                    valid = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('srekForm');
+        const alertBox = document.getElementById('formAlert');
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            alertBox.style.display = 'none';
+            const requiredFields = form.querySelectorAll('.required-field');
+            requiredFields.forEach(function(field) {
+                let value = field.value;
+                if (field.tagName === 'SELECT') {
+                    if (value === '' || value.toLowerCase().includes('pilih')) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                } else if (field.type === 'file') {
+                    if (!field.value) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
                 } else {
-                    field.classList.remove('is-invalid');
+                    if (!value || value.trim() === '') {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
                 }
-            } else if (field.type === 'file') {
-                if (!field.value) {
-                    field.classList.add('is-invalid');
-                    valid = false;
-                } else {
-                    field.classList.remove('is-invalid');
-                }
-            } else {
-                if (!value || value.trim() === '') {
-                    field.classList.add('is-invalid');
-                    valid = false;
-                } else {
-                    field.classList.remove('is-invalid');
-                }
+            });
+
+            if (!valid) {
+                alertBox.style.display = 'block';
+                e.preventDefault();
+                form.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         });
-        if (!valid) {
-            alertBox.style.display = 'block';
-            e.preventDefault();
-            form.scrollIntoView({behavior: 'smooth'});
-        }
     });
-});
 </script>
-</div>

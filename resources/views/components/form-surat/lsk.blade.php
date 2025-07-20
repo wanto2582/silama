@@ -1,26 +1,33 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form id="lskForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data">
-        @csrf
-        <x-text-input value="lsk" name="jenis_surat" type="text" hidden />
+    {{-- Container utama untuk membagi dua bagian --}}
+    <div class="split-container">
+        {{-- Bagian Kiri: Form --}}
+        <div class="split-left">
+            <form id="lskForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
+                @csrf
+                <x-text-input value="lsk" name="jenis_surat" type="text" hidden />
 
-        <div class="clearfix">
-            <h4 class="text-blue h4">SURAT KETERANGAN LAINYA</h4>
-        </div>
-        <div class="wizard-content">
-            <section>
+                <div class="clearfix">
+                    <h4 class="text-blue h4">SURAT KETERANGAN LAINYA</h4>
+                </div>
+                <div class="wizard-content">
+                    <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
+                        <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
+                    </div>
+                   <section>
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <x-input-label>Nama Surat : <em class="text-blue">( Tulis dengan huruf kapital )</em></x-input-label>
-                            <x-text-input name="nama_surat" type="text" class="form-control" placeholder="SURAT KETERANGAN ...." />
+                            <x-text-input name="nama_surat" type="text" class="form-control required-field" placeholder="SURAT KETERANGAN ...." />
                             <x-input-error class="mt-2" :messages="$errors->get('nama_surat')" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama : </x-input-label>
-                            <x-text-input name="nama" type="text" class="form-control" />
+                            <x-text-input name="nama" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                     </div>
@@ -28,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>NIK : </x-input-label>
-                            <x-text-input name="nik" type="text" class="form-control" />
+                            <x-text-input name="nik" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('nik')" />
                         </div>
                     </div>
@@ -36,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Jenis Kelamin :</label>
-                            <select name="gender" class="form-control">
+                            <select name="gender" class="form-control required-field">
                                 <option>Pilih Jenis Kelamin</option>
                                 <option value="Laki - Laki">Laki - laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -47,7 +54,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tempat Lahir : </x-input-label>
-                            <x-text-input name="tempat_lahir" type="text" class="form-control" />
+                            <x-text-input name="tempat_lahir" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tempat_lahir')" />
                         </div>
                     </div>
@@ -55,7 +62,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Tanggal Lahir : </x-input-label>
-                            <x-text-input name="tanggal_lahir" type="date" class="form-control" />
+                            <x-text-input name="tanggal_lahir" type="date" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tanggal_lahir')" />
                         </div>
                     </div>
@@ -63,7 +70,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Agama : </x-input-label>
-                            <select name="agama" class="form-control">
+                            <select name="agama" class="form-control required-field">
                                 <option>Pilih Agama</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Kristen">Kristen</option>
@@ -78,7 +85,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Kewarganegaraan : </x-input-label>
-                            <x-text-input name="kewarganegaraan" type="text" class="form-control" />
+                            <x-text-input name="kewarganegaraan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('kewarganegaraan')" />
                         </div>
                     </div>
@@ -86,7 +93,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Pekerjaan : </x-input-label>
-                            <x-text-input name="pekerjaan" type="text" class="form-control" />
+                            <x-text-input name="pekerjaan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
                         </div>
                     </div>
@@ -94,7 +101,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Status Pernikahan :</label>
-                            <select name="status_pernikahan" class="form-control">
+                            <select name="status_pernikahan" class="form-control required-field">
                                 <option>Pilih Status Pernikahan</option>
                                 <option value="Belum Menikah">Belum Menikah</option>
                                 <option value="Menikah">Menikah</option>
@@ -106,7 +113,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Dusun</label>
-                            <select name="dusun" class="form-control">
+                            <select name="dusun" class="form-control required-field">
                                 <option>Pilih Dusun</option>
                                 <option value="Alaraya">Alaraya</option>
                                 <option value="Tanah Eja">Tanah Eja</option>
@@ -120,7 +127,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RT</label>
-                            <select name="rt" class="form-control">
+                            <select name="rt" class="form-control required-field">
                                 <option>RT</option>
                                 @for ($i = 1; $i <= 30; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -132,7 +139,7 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>RW</label>
-                            <select name="rw" class="form-control">
+                            <select name="rw" class="form-control required-field">
                                 <option>RW</option>
                                 @for ($i = 1; $i <= 15; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
@@ -144,7 +151,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Isi Surat Keterangan : </x-input-label>
-                            <textarea name="paragraf_1" type="textarea" class="ckeditor form-control" >
+                            <textarea name="paragraf_1" type="textarea" class="ckeditor form-control required-field" >
                             </textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('paragraf_1')" />
                         </div>
@@ -153,7 +160,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Keperluan : </x-input-label>
-                            <x-text-input name="tujuan" type="text" class="form-control" />
+                            <x-text-input name="tujuan" type="text" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
                         </div>
                     </div>
@@ -161,7 +168,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal3" href="#">Lihat Syarat</a> ]]</x-input-label>
-                            <x-text-input name="berkas" type="file" class="form-control" />
+                            <x-text-input name="berkas" type="file" class="form-control required-field" />
                             <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                         </div>
                     </div>
@@ -191,36 +198,128 @@
                             - Kartu Keluarga
                         </div>
                     </div>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var form = document.getElementById('lskForm');
-            form.addEventListener('submit', function(e) {
-                var requiredFields = [
-                    'nama_surat', 'nama', 'nik', 'gender', 'tempat_lahir', 'tanggal_lahir',
-                    'agama', 'kewarganegaraan', 'pekerjaan', 'status_pernikahan', 'dusun',
-                    'rt', 'rw', 'paragraf_1', 'tujuan', 'berkas'
-                ];
-                var isValid = true;
-                requiredFields.forEach(function(name) {
-                    var field = form.querySelector('[name="' + name + '"]');
-                    if (field) {
-                        if ((field.type === 'select-one' && (!field.value || field.value === 'Pilih Jenis Kelamin' || field.value === 'Pilih Agama' || field.value === 'Pilih Status Pernikahan' || field.value === 'Pilih Dusun' || field.value === 'RT' || field.value === 'RW')) ||
-                            (field.type === 'file' && field.files.length === 0) ||
-                            (!field.value || field.value.trim() === '')) {
-                            isValid = false;
-                        }
-                    }
-                });
-                if (!isValid) {
-                    e.preventDefault();
-                    alert('semua form wajib di isi, harap perhatikan lebih teliti');
-                }
-            });
-        });
-        </script>
                 </div>
             </div>
-
         </div>
     </form>
+        </div>
+        {{-- Bagian Kanan: Tampilan PDF --}}
+        <div class="split-right">
+            <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
+            <div class="pdf-viewer">
+                {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
+                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="800px" />
+                <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .required-field.is-invalid,
+    .required-field.is-invalid:focus,
+    .required-field.is-invalid:active {
+        border: 2px solid #dc3545 !important;
+        background-color: #ffe6e6 !important;
+    }
+    .alert-danger {
+        background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+    }
+    /* CSS baru untuk layout dua kolom */
+    .split-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .split-left {
+        flex: 1;
+        min-width: 400px;
+        padding-right: 15px;
+        border-right: 1px solid #eee;
+    }
+    .split-right {
+        flex: 1;
+        min-width: 400px;
+        padding-left: 15px;
+    }
+    .pdf-viewer {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .split-left .col-md-6 {
+        width: 100%;
+    }
+    .split-left .col-md-4,
+    .split-left .col-md-1 {
+        width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .split-container {
+            flex-direction: column;
+        }
+        .split-left,
+        .split-right {
+            min-width: unset;
+            width: 100%;
+            padding: 0;
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+        .split-right {
+            border-bottom: none;
+        }
+        .split-left {
+            padding-bottom: 20px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('lskForm');
+        const alertBox = document.getElementById('formAlert');
+        form.addEventListener('submit', function(e) {
+            let valid = true;
+            alertBox.style.display = 'none';
+            const requiredFields = form.querySelectorAll('.required-field');
+            requiredFields.forEach(function(field) {
+                let value = field.value;
+                if (field.tagName === 'SELECT') {
+                    if (value === '' || value.toLowerCase().includes('pilih')) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                } else if (field.type === 'file') {
+                    if (!field.value) {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                } else {
+                    if (!value || value.trim() === '') {
+                        field.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                }
+            });
+
+            if (!valid) {
+                alertBox.style.display = 'block';
+                e.preventDefault();
+                form.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>

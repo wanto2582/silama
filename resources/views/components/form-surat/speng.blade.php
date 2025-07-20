@@ -1,19 +1,23 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
-    <form id="spengForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
-        @csrf
-        <x-text-input value="speng" name="jenis_surat" type="text" hidden />
+    {{-- Container utama untuk membagi dua bagian --}}
+    <div class="split-container">
+        {{-- Bagian Kiri: Form --}}
+        <div class="split-left">
+            <form id="spengForm" method="POST" action="{{ route('desa.surat.store') }}" enctype="multipart/form-data" novalidate>
+                @csrf
+                <x-text-input value="speng" name="jenis_surat" type="text" hidden />
 
-        <div class="clearfix">
-            <h4 class="text-blue h4">SURAT PENGANTAR</h4>
-        </div>
-        <div class="wizard-content">
-            <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
-                <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
-            </div>
-            <section>
+                <div class="clearfix">
+                    <h4 class="text-blue h4">SURAT PENGANTAR</h4>
+                </div>
+                <div class="wizard-content">
+                    <div id="formAlert" style="display:none;" class="alert alert-danger mb-3" role="alert">
+                        <strong>Semua kolom wajib diisi, harap perhatikan lebih teliti.</strong>
+                    </div>
+                    <section>
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <x-input-label>Nama Surat : <em class="text-blue">( tulis dengan huruf kapital )</em></x-input-label>
                             <x-text-input name="nama_surat" type="text" class="form-control required-field" placeholder="SURAT PENGANTAR ...." />
@@ -204,8 +208,22 @@
 
         </div>
 </form>
+        </div>
+        {{-- Bagian Kanan: Tampilan PDF --}}
+        <div class="split-right">
+            <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
+            <div class="pdf-viewer">
+                {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
+                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="1200px" />
+                <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
-    .required-field.is-invalid, .required-field.is-invalid:focus, .required-field.is-invalid:active {
+    .required-field.is-invalid,
+    .required-field.is-invalid:focus,
+    .required-field.is-invalid:active {
         border: 2px solid #dc3545 !important;
         background-color: #ffe6e6 !important;
     }
@@ -214,7 +232,55 @@
         color: #fff;
         border: none;
         font-weight: bold;
-        box-shadow: 0 2px 8px rgba(220,53,69,0.15);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+    }
+    /* CSS baru untuk layout dua kolom */
+    .split-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .split-left {
+        flex: 1;
+        min-width: 400px;
+        padding-right: 15px;
+        border-right: 1px solid #eee;
+    }
+    .split-right {
+        flex: 1;
+        min-width: 400px;
+        padding-left: 15px;
+    }
+    .pdf-viewer {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .split-left .col-md-6 {
+        width: 100%;
+    }
+    .split-left .col-md-4,
+    .split-left .col-md-1 {
+        width: 100%;
+    }
+    @media (max-width: 1024px) {
+        .split-container {
+            flex-direction: column;
+        }
+        .split-left,
+        .split-right {
+            min-width: unset;
+            width: 100%;
+            padding: 0;
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+        .split-right {
+            border-bottom: none;
+        }
+        .split-left {
+            padding-bottom: 20px;
+        }
     }
 </style>
 <script>
