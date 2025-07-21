@@ -218,7 +218,7 @@ class KadeskeluarController extends Controller
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
                         <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL'
-                        data-toggle='tooltip' data-placement='top' title='Unduh Surat' id='download-button' data-name='$model->name' data-id='$model->id'>
+                        data-toggle='tooltip' data-placement='top' title='Lihat Surat' id='download-button' style='width:32px;height:25px;padding:0; data-name='$model->name' data-id='$model->id'>
                             <i class='dw dw-eye' style='font-size: 2vh !important;'></i>
                         </a>";
                 }

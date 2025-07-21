@@ -122,7 +122,7 @@
                                     case 'Ditolak':
                                         return '<span class="badge badge-danger">Ditolak</span>';
                                     case 'Dikonfirmasi':
-                                        return '<span class="badge badge-primary">Ttd</span>';
+                                        return '<span class="badge badge-primary">Menunggu-TTD</span>';
                                     case 'Selesai':
                                         return '<span class="badge badge-success">Selesai</span>';
                                     case 'Expired':

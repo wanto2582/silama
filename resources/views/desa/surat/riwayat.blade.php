@@ -42,6 +42,7 @@
                              download
                         </button>
                     </div>
+                    
                 </div>
             </form>
             <hr class="my-4">
@@ -185,9 +186,9 @@
                                             return '<span class="badge badge-danger text-uppercase">DITOLAK</span>';
                                         }
                                     case 'Dikonfirmasi':
-                                        return '<span class="badge badge-primary text-uppercase">TTD</span>';
+                                        return '<span class="badge badge-primary text-normal" title="Sudah dikonfirmasi Sekdes">Menunggu-TTD-Kades</span>';
                                     case 'Selesai':
-                                        return '<span class="badge badge-success text-uppercase">SELESAI</span>';
+                                        return '<span class="badge badge-success text-uppercase" title="Surat selesai ditandatangani">SELESAI</span>';
                                     case 'Expired':
                                         return '<span class="badge badge-danger text-uppercase">EXPIRED</span>';
                                     default:
@@ -212,7 +213,7 @@
                                 const letterType = data['detail_surats.jenis_surat'];
 
                                 // Pesan WhatsApp yang akan dikirim
-                                const message = `Yth. Sekdes Manyampa ,\n\nDengan hormat, saya memberitahukan bahwa ada pengajuan yang "Menunggu Konfirmasi". Mohon untuk dapat segera ditindaklanjuti.\n\nTerima kasih.`;
+                                const message = `Yth. Sekdes Manyampa ,\n\nDengan hormat, \n Bahwa ada pengajuan yang "Menunggu Konfirmasi". \n Mohon untuk dapat segera ditindaklanjuti.\n\nTerima kasih.`;
 
                                 // Buat URL WhatsApp
                                 const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;

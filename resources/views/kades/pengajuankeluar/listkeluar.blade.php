@@ -122,7 +122,7 @@
                                             return '<span class="badge badge-danger">Ditolak</span>';
                                         }
                                     case 'Dikonfirmasi':
-                                        return '<span class="badge badge-primary">Ttd</span>';
+                                        return '<span class="badge badge-primary">Menunggu-TTD</span>';
                                     case 'Selesai':
                                         return '<span class="badge badge-success">Selesai</span>';
                                     case 'Expired':
@@ -135,19 +135,37 @@
                         }
                     },
                     {
-                        data: null,
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, row) {
-                            // ...existing code...
-                            var actionBtn = row.action ? row.action : '';
-                            return actionBtn;
-                        }
-                    }
+                       data: null,
+    name: 'action',
+    orderable: false,
+    searchable: false,
+    render: function(data, type, row) {
+        // Assume row.phoneNumber and row.messageContent exist in your data
+        // If not, replace them with static values or other data points from 'row'
+        var phoneNumber = row.phone_number || '628187070092'; // Default if not found in row
+        var messageContent = encodeURIComponent('Halo, Surat sudah saya tandatangani silahkan serahkan ke pihak yang bersangkutan. Terimakasih');
+
+        // Construct the WhatsApp URL
+        var whatsappLink = `https://wa.me/${phoneNumber}?text=${messageContent}`;
+
+        // Tombol WhatsApp
+        var whatsappBtn = `<a href="${whatsappLink}" target="_blank" class="btn btn-warning btn-sm me-1" title="Kirim Pesan WhatsApp">
+                               <i class="fab fa-whatsapp"></i> WhatsApp
+                           </a>`;
+
+        // Tombol preview
+        var previewBtn = ''; // You can add your preview button logic here if needed
+
+        // Tombol download dari backend (jika ada)
+        var actionBtn = row.action ? row.action : ''; // Assuming row.action contains another button or HTML
+
+        // Gabungkan semua tombol
+        return previewBtn + actionBtn + whatsappBtn;
+    }
+}
                 ]
             });
-
+ 
         }
     </script>
 </x-app-layout>

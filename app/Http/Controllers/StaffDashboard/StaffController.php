@@ -269,7 +269,7 @@ class StaffController extends Controller
                     // If status is 'Selesai', generate the download button HTML
                     $download_btn = "
                         <a class='btn btn-icon btn-primary mr-1 mb-1' href='$URL'
-                        data-toggle='tooltip' data-placement='top' title='Lihat Surat' id='download-button' style='width:32px;height:22px;padding:0; data-name='$model->name' data-id='$model->id'>
+                        data-toggle='tooltip' data-placement='top' title='Lihat Surat' id='download-button' style='width:32px;height:25px;padding:0; data-name='$model->name' data-id='$model->id'>
                             <i class='dw dw-eye' style='font-size:1.2rem;'></i>
                         </a>";
 

@@ -204,7 +204,7 @@
                                             return '<span class="badge badge-danger">Ditolak</span>';
                                         }
                                     case 'Dikonfirmasi':
-                                        return '<span class="badge badge-primary">Ttd</span>';
+                                        return '<span class="badge badge-primary">Menunggu-TTD-Kades</span>';
                                     case 'Selesai':
                                         return '<span class="badge badge-success">Selesai</span>';
                                     case 'Expired':
@@ -217,11 +217,31 @@
                         }
                     },
                     {
-                        data: 'action',
+                       data: 'action',
                         name: 'action',
                         orderable: false,
-                        searchable: false
-                    }
+                        searchable: false,
+                        className: 'text-center',
+                        width: '15%',
+                        render: function(data, type, row) {
+                            let buttons = data; // Aksi dari server
+                            if (row.status === 'Dikonfirmasi') {
+                                // Nomor WhatsApp tujuan (ganti dengan nomor admin/staff yang sesuai)
+                                const waNumber = '6281287070092';
+                                const letterType = data['detail_surats.jenis_surat'];
+
+                                // Pesan WhatsApp yang akan dikirim
+                                const message = `Yth. Kepala Desa Manyampa ,\n\nDengan hormat, \nBahwa ada pengajuan yang "Menunggu Tanda Tangan".\n Mohon untuk dapat segera ditindaklanjuti.\n\nTerima kasih.`;
+
+                                // Buat URL WhatsApp
+                                const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+                                // Tambahkan tombol notifikasi WhatsApp ke dalam daftar aksi
+                                buttons += ` <a href="${waLink}" target="_blank" class="btn btn-warning btn-sm" title="Kirim notifikasi ke Kades via WhatsApp">kirim WA</a>`;
+                            }
+                            return buttons;
+                        }
+                    },
                 ]
             });
 
