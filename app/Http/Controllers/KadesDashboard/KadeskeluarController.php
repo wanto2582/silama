@@ -253,7 +253,7 @@ class KadeskeluarController extends Controller
             ->addColumn('action', function ($model) {
                 $detailSuratkeluar = $model->detail_suratkeluars->first();
                 $actions = '';
-                $URL = route('unduh.surat', ['id' => $model->id]);
+                $URL = route('unduhkeluar.suratkeluar', ['id' => $model->id]);
                 $viewURL = route('cekkeluar.suratkeluar', $detailSuratkeluar->id);
                 $actions .= "<span class='d-flex align-items-center justify-content-center'>";
 
