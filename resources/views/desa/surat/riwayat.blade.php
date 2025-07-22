@@ -47,7 +47,7 @@
             </form>
             <hr class="my-4">
             <div class="table-responsive">
-                <table id="contentTable" class="display table table-striped table-hover" style="width:100%">
+                <table id="contentTable" class="display table table-striped table-hover table-responsive" style="width:100%">
                     <thead>
                         <tr>
                             <th class="table-plus text-uppercase font-weight-bold">#</th>

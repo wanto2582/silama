@@ -19,7 +19,7 @@
         </div>
 
 {{-- BAGIAN SURAT LAYANAN MASYARAKAT --}}
-<div class="card-box pd-10 height-100-p mb-20 shadow-lg rounded-lg" style="background: #f0f2f5;">
+<div class="card-box pd-10 height-100-p mb-20 shadow-lg rounded-lg" style="background: #ffffff;">
     <div class="d-flex flex-wrap align-items-center mb-4 border-bottom pb-3">
         <i class="icon-copy dw dw-mail mr-3 text-blue" style="font-size: 2rem;"></i>
         <div class="widget-data">
@@ -41,12 +41,12 @@
         </div>
     </div>
     <div class="col-6 col-md-6 col-lg-3 col-xl-3 mb-30"> <a href="{{route('kades.pengajuan.index')}}">
-        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #c8e6c9;">
+        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #ffe0b2;">
             <div class="d-flex flex-column align-items-center" style="gap: 2px;">
                 {{-- Icon dan Angka dalam satu baris untuk mobile, kembali vertikal untuk desktop --}}
                 <div class="d-flex flex-row flex-md-column align-items-center mb-1" style="gap: 5px;">
                    
-                    <i class="icon-copy bi bi-envelope-plus" style="font-size: 1.5rem; color: #388e3c;"></i>
+                    <i class="icon-copy bi bi-envelope-plus" style="font-size: 1.5rem; color: #f57c00;"></i>
                     
                     <div class="h5 mb-0" style="font-size: 1.1rem;">{{count($ps->where('status', 'Dikonfirmasi'))}}</div>
                 </div>
@@ -55,16 +55,16 @@
         </div>
     </div></a>
     <div class="col-6 col-md-6 col-lg-3 col-xl-3 mb-30"> <a href="{{route('kades.pengajuan.list')}}">
-        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #ffe0b2;">
+        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #c8e6c9;">
             <div class="d-flex flex-column align-items-center" style="gap: 2px;">
                 {{-- Icon dan Angka dalam satu baris untuk mobile, kembali vertikal untuk desktop --}}
                 <div class="d-flex flex-row flex-md-column align-items-center mb-1" style="gap: 5px;">
                    
-                    <i class="icon-copy bi bi-envelope-dash" style="font-size: 1.5rem; color: #f57c00;"></i>
+                    <i class="icon-copy bi bi-envelope-dash" style="font-size: 1.5rem; color: #388e3c;"></i>
                    
                     <div class="h5 mb-0" style="font-size: 1.1rem;">{{count($ps->whereIn('status', ['Selesai']))}}</div>
                 </div>
-                <div class="weight-600 font-12 mt-0" style="font-size: 0.8rem;">Suudah tanda tangan</div>
+                <div class="weight-600 font-12 mt-0" style="font-size: 0.8rem;">Sudah tanda tangan</div>
             </div>
         </div>
     </div> </a>
@@ -85,7 +85,7 @@
 </div></div>
 
 {{-- BAGIAN BUKU AGENDA SURAT --}}
-<div class="card-box pd-10 height-100-p mb-30 shadow-lg rounded-lg" style="background: #f0f2f5;">
+<div class="card-box pd-10 height-100-p mb-30 shadow-lg rounded-lg" style="background: #ffffff;">
     <div class="d-flex flex-wrap align-items-center mb-4 border-bottom pb-3">
         <i class="icon-copy dw dw-agenda mr-3 text-blue" style="font-size: 2rem;"></i>
         <div class="widget-data">
@@ -107,12 +107,12 @@
         </div>
     </div>
     <div class="col-6 col-md-6 col-lg-3 col-xl-3 mb-30"> <a href="{{route('kades.pengajuankeluar.index')}}">
-        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #c8e6c9;">
+        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #ffe0b2;">
             <div class="d-flex flex-column align-items-center" style="gap: 2px;">
                 {{-- Icon dan Angka dalam satu baris untuk mobile, kembali vertikal untuk desktop --}}
                 <div class="d-flex flex-row flex-md-column align-items-center mb-1" style="gap: 5px;">
                    
-                    <i class="icon-copy bi bi-envelope-plus" style="font-size: 1.5rem; color: #388e3c;"></i>
+                    <i class="icon-copy bi bi-envelope-plus" style="font-size: 1.5rem; color: #f57c00;"></i>
                     
                     <div class="h5 mb-0" style="font-size: 1.1rem;">{{count($pskeluar->where('status', 'Dikonfirmasi'))}}</div>
                 </div>
@@ -121,12 +121,12 @@
         </div>
     </div></a>
     <div class="col-6 col-md-6 col-lg-3 col-xl-3 mb-30"> <a href="{{route('kades.pengajuankeluar.listkeluar')}}">
-        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #ffe0b2;">
+        <div class="card-box height-100-p widget-style1 py-2 px-1" style="background: #c8e6c9;">
             <div class="d-flex flex-column align-items-center" style="gap: 2px;">
                 {{-- Icon dan Angka dalam satu baris untuk mobile, kembali vertikal untuk desktop --}}
                 <div class="d-flex flex-row flex-md-column align-items-center mb-1" style="gap: 5px;">
                    
-                    <i class="icon-copy bi bi-envelope-dash" style="font-size: 1.5rem; color: #f57c00;"></i>
+                    <i class="icon-copy bi bi-envelope-dash" style="font-size: 1.5rem; color: #388e3c;"></i>
                     
                     <div class="h5 mb-0" style="font-size: 1.1rem;">{{count($pskeluar->whereIn('status', ['Selesai']))}}</div>
                 </div>

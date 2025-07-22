@@ -56,7 +56,7 @@
             </form>
             <!-- End Filter Form -->
 
-            <table id="contentTable" class="table table-striped table-hover table-responsive " style="width: 100%;">
+            <table id="contentTable" class="display table table-striped table-hover table-responsive" style="width:100%">
                 <thead>
                     <tr>
                         <th class="table-plus">#</th>
