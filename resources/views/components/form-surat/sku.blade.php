@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Dusun</label>
                             <select name="dusun" class="form-control required-field">
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>RT</label>
                             <select name="rt" class="form-control required-field">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>RW</label>
                             <select name="rw" class="form-control required-field">
@@ -140,22 +140,10 @@
                                     @endfor
                             </select>
                         </div>
-                    </div>
+                    </div>               
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal4" href="#">Lihat Syarat</a> ]]</x-input-label>
-                            <x-text-input name="berkas" type="file" class="form-control required-field" />
-                            <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
-                        </div>
-                    </div>
 
-                </div>
-            </section>
-
-            <h6>Keterangan usaha :</h6>
-            <section>
-                <div class="row">
+             
                     <div class="col-md-6">
                         <div class="form-group">
                             <x-input-label>Nama Usaha : </x-input-label>
@@ -187,13 +175,20 @@
                             <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
                         </div>
                     </div>
-                </div>
-
+               
+                 <div class="col-md-6">
+                        <div class="form-group">
+                            <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal4" href="#">Lihat Syarat</a> ]]</x-input-label>
+                            <x-text-input name="berkas" type="file" class="form-control required-field" />
+                            <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
+                        </div>
+                    </div>
                 <div class="row">
                     <div class="col-md-6">
                         <x-button.primary-button id="submitBtn">Submit</x-button.primary-button>
                     </div>
                 </div>
+                
             </section>
 
             <div class="modal fade" id="passwordModal4" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
@@ -224,7 +219,7 @@
             <h4 class="text-blue h5 mb-3">Ini adalah tampilan dokumen yang akan anda buat</h5>
             <div class="pdf-viewer">
                 {{-- Placeholder untuk PDF. Anda mungkin perlu mengganti 'path/to/your/document.pdf' dengan URL dinamis. --}}
-                <embed src="{{ route('public.pdf.show', ['filename' => 'surat_izin.pdf']) }}" type="application/pdf" width="100%" height="1200px" />
+                <embed src="{{ route('public.pdf.show', ['filename' => 'sku.pdf']) }}" type="application/pdf" width="100%" height="800px" />
                 <p class="text-muted mt-2">Perhatikan setiap detail isi form agar hasilnya sesuai struktur yang sudah ditentukan</p>
             </div>
         </div>

@@ -322,6 +322,71 @@
                             </div>
                         </div>
                     </div><!-- End Card Surat Pengantar -->
+                     {{-- @foreach ($jenisSurat as $item) --}}
+                    <div class="col-lg-2 col-md-3 col-sm-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card shadow-lg border-0 rounded-lg h-100">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon mb-3">
+                                    <i class="bi bi-file-earmark-text"
+                                        style="font-size: 2.5rem; color: #2c3e50;"></i>
+                                </div>
+                                <h5 class="card-title mb-3">SKKK
+                                    {{-- {{ $item->nama_surat }} --}}
+                                </h5>
+                                <p class="card-text">Keterangan Kepemilikan Kendaraan
+                                    {{-- {{ $item->deskripsi }} --}}
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End Card Surat Pengantar -->
+                    <div class="col-lg-2 col-md-3 col-sm-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card shadow-lg border-0 rounded-lg h-100">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon mb-3">
+                                    <i class="bi bi-file-earmark-text"
+                                        style="font-size: 2.5rem; color: #2c3e50;"></i>
+                                </div>
+                                <h5 class="card-title mb-3">SIK
+                                    {{-- {{ $item->nama_surat }} --}}
+                                </h5>
+                                <p class="card-text">Surat Izin Keramaian
+                                    {{-- {{ $item->deskripsi }} --}}
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End Card Surat Pengantar -->
+                    <div class="col-lg-2 col-md-3 col-sm-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card shadow-lg border-0 rounded-lg h-100">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon mb-3">
+                                    <i class="bi bi-file-earmark-text"
+                                        style="font-size: 2.5rem; color: #2c3e50;"></i>
+                                </div>
+                                <h5 class="card-title mb-3">SP
+                                    {{-- {{ $item->nama_surat }} --}}
+                                </h5>
+                                <p class="card-text">Surat Pengantar
+                                    {{-- {{ $item->deskripsi }} --}}
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End Card Surat Pengantar -->
+                    <div class="col-lg-2 col-md-3 col-sm-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card shadow-lg border-0 rounded-lg h-100">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon mb-3">
+                                    <i class="bi bi-file-earmark-text"
+                                        style="font-size: 2.5rem; color: #2c3e50;"></i>
+                                </div>
+                                <h5 class="card-title mb-3">SKL
+                                    {{-- {{ $item->nama_surat }} --}}
+                                </h5>
+                                <p class="card-text">Surat Keterangan Lainya
+                                    {{-- {{ $item->deskripsi }} --}}
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- End Card Surat Pengantar -->
                     {{-- @endforeach --}}
 
                 </div>
