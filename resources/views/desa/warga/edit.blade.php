@@ -75,6 +75,34 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <x-input-label>Pendidikan terahir : </x-input-label>
+                                    <x-text-input name="pendidikan" type="text" class="form-control" value="{{old('pendidikan', $detailWarga->pendidikan ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('pendidikan')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>No. Telp : </x-input-label>
+                                    <x-text-input name="no_tlp" type="text" class="form-control" value="{{old('no_tlp', $detailWarga->no_tlp ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('no_tlp')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>No. Rumah : </x-input-label>
+                                    <x-text-input name="no_rumah" type="text" class="form-control" value="{{old('no_rumah', $detailWarga->no_rumah ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('no_rumah')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>Alamat : </x-input-label>
+                                    <x-text-input name="alamat" type="text" class="form-control" value="{{old('alamat', $detailWarga->alamat ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Status Pernikahan :</label>
                                     <select name="status_pernikahan" class="form-control">
                                         <option>Pilih Status Pernikahan</option>
@@ -87,13 +115,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dusun</label>
-                                    <select name="desa" class="form-control">
+                                    <select name="dusun" class="form-control">
                                         <option>Pilih Dusun</option>
-                                        <option {{ $detailWarga->desa == 'Alaraya' ? 'selected' : '' }} value="Alaraya">Alaraya</option>
-                                        <option {{ $detailWarga->desa == 'Tanah Eja' ? 'selected' : '' }} value="Tanah Eja">Tanah Eja</option>
-                                        <option {{ $detailWarga->desa == 'Dongi' ? 'selected' : '' }} value="Dongi">Dongi</option>
-                                        <option {{ $detailWarga->desa == 'Mampua' ? 'selected' : '' }} value="Mampua">Mampua</option>
-                                        <option {{ $detailWarga->desa == 'Luppung' ? 'selected' : '' }} value="Luppung">Luppung</option>
+                                        <option {{ $detailWarga->dusun == 'Alaraya' ? 'selected' : '' }} value="Alaraya">Alaraya</option>
+                                        <option {{ $detailWarga->dusun == 'Tanah Eja' ? 'selected' : '' }} value="Tanah Eja">Tanah Eja</option>
+                                        <option {{ $detailWarga->dusun == 'Dongi' ? 'selected' : '' }} value="Dongi">Dongi</option>
+                                        <option {{ $detailWarga->dusun == 'Mampua' ? 'selected' : '' }} value="Mampua">Mampua</option>
+                                        <option {{ $detailWarga->dusun == 'Luppung' ? 'selected' : '' }} value="Luppung">Luppung</option>
                                     </select>
                                 </div>
                             </div>

@@ -68,6 +68,12 @@ class WargaController extends Controller
             'desa' => $request->dusun,
             'rt' => $request->rt,
             'rw' => $request->rw,
+            'dusun' => $request->dusun,
+            'no_rumah' => $request->no_rumah,
+            'alamat' => $request->alamat,
+            'no_tlp' => $request->no_tlp,
+            'pendidikan' => $request->pendidikan,
+            
         ];
 
         $warga = DataWarga::create($data);
@@ -111,6 +117,11 @@ class WargaController extends Controller
             'desa' => $request->desa,
             'rt' => $request->rt,
             'rw' => $request->rw,
+            'dusun' => $request->dusun,
+            'no_rumah' => $request->no_rumah,
+            'alamat' => $request->alamat,
+            'no_tlp' => $request->no_tlp,
+            'pendidikan' => $request->pendidikan,
         ]);
 
         Alert::success('Sukses!', 'Data Berhasil DiEdit');
@@ -220,47 +231,61 @@ class WargaController extends Controller
         }
     }
 
+public function pdf($id)
+{
+    $dataWarga = DataWarga::findOrFail($id);
+    $pdf = Pdf::loadView('desa.warga.pdf', compact('dataWarga'));
+    return $pdf->stream('data-warga-'.$dataWarga->nama.'.pdf');
+}
 
+public function __datatable_warga(Request $request)
+{
+    $query = DataWarga::latest();
 
- public function __datatable_warga(Request $request)
-    {
-        $query = dataWarga::latest();
+    return DataTables::of($query)->addIndexColumn()
+        ->addColumn('action', function ($model) {
+            $download_btn = '';
+            $edit_btn = '';
+            $delete_btn = '';
+            $view_btn = '';
 
-        return DataTables::of($query)->addIndexColumn()
-            ->addColumn('action', function ($model) {
-                $download_btn = '';
-                $edit_btn = '';
-                $delete_btn = '';
-
-                // Download button (jika ada file)
-                if ($model->file) {
-                    $downloadURL = asset('storage/' . $model->file);
-                    $download_btn = "
-                        <a class='btn btn-icon btn-primary mr-1 mb-1' href='$downloadURL' target='_blank'
-                        data-toggle='tooltip' data-placement='top' title='Download File'>
-                            <i class='icon-copy bi bi-download' style='font-size: 2vh !important;'></i>
-                        </a>";
-                }
-
-                // Edit button
-                $editURL = route('desa.warga.edit', $model->id);
-                $edit_btn = "
-                    <a class='btn btn-icon btn-warning mr-1 mb-1' href='$editURL'
-                    data-toggle='tooltip' data-placement='top' title='Edit'>
-                        <i class='icon-copy bi bi-pencil' style='font-size: 2vh !important;'></i>
+            // Download button (jika ada file)
+            if ($model->file) {
+                $downloadURL = asset('storage/' . $model->file);
+                $download_btn = "
+                    <a class='btn btn-icon btn-primary mr-1 mb-1' href='$downloadURL' target='_blank'
+                    data-toggle='tooltip' data-placement='top' title='Download File'>
+                        <i class='icon-copy bi bi-download' style='font-size: 2vh !important;'></i>
                     </a>";
+            }
 
-                // Delete button
-                $delete_btn = "
-                    <button class='btn btn-icon btn-danger delete-btn'
-                    data-id='$model->id' data-nama='$model->nama'
-                    data-toggle='tooltip' data-placement='top' title='Delete'>
-                        <i class='icon-copy bi bi-trash' style='font-size: 2vh !important;'></i>
-                    </button>";
+            // View PDF button
+            $viewURL = route('desa.warga.pdf', $model->id);
+            $view_btn = "
+                <a class='btn btn-icon btn-info mr-1 mb-1' href='$viewURL' target='_blank'
+                data-toggle='tooltip' data-placement='top' title='Lihat PDF'>
+                    <i class='icon-copy bi bi-eye' style='font-size: 2vh !important;'></i>
+                </a>";
 
-                $action = $download_btn . $edit_btn . $delete_btn;
-                return $action;
-            })
-            ->make(true);
-    }
+            // Edit button
+            $editURL = route('desa.warga.edit', $model->id);
+            $edit_btn = "
+                <a class='btn btn-icon btn-warning mr-1 mb-1' href='$editURL'
+                data-toggle='tooltip' data-placement='top' title='Edit'>
+                    <i class='icon-copy bi bi-pencil' style='font-size: 2vh !important;'></i>
+                </a>";
+
+            // Delete button
+            $delete_btn = "
+                <button class='btn btn-icon btn-danger delete-btn'
+                data-id='$model->id' data-nama='$model->nama'
+                data-toggle='tooltip' data-placement='top' title='Delete'>
+                    <i class='icon-copy bi bi-trash' style='font-size: 2vh !important;'></i>
+                </button>";
+
+            $action = $download_btn . $view_btn . $edit_btn . $delete_btn;
+            return $action;
+        })
+        ->make(true);
+}
 }

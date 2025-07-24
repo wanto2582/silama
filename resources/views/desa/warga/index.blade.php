@@ -71,7 +71,7 @@
                             name: 'action',
                             orderable: false,
                             searchable: false
-                        }
+                        },
                     ]
                 });
 

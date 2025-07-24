@@ -186,6 +186,7 @@ Route::middleware(['auth', 'verified', 'role:desa'])->group(function () {
         'destroysuratkeluar' => 'desa.suratkeluar.destroysuratkeluar'
     ]);
     Route::get('/desa/get-warga-data/{nik}', [WargaController::class, 'getWargaData'])->name('desa.getWargaData');
+    Route::get('desa/warga/{id}/pdf', [WargaController::class, 'pdf'])->name('desa.warga.pdf');
     Route::get('/datatable_warga.json', [WargaController::class, '__datatable_warga'])->name('desa.warga_table');
     Route::resource('desa/warga', WargaController::class)->names([
         'index' => 'desa.warga.index',

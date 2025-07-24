@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Silama Desa</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="Sistem Aplikasi Layanan Masyarakat dan Administrasi Desa">
+    <meta name="keywords" content="Layanan Desa, Surat Desa, Aplikasi Desa, Silama, Administrasi desa">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{asset('vendors/images/apple-touch-icon.png')}}" rel="icon">
+    <link href="{{asset('vendors/images/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -769,6 +769,28 @@
                         <li><a href="#kontak">Kontak Kami</a></li>
                     </ul>
                 </div>
+                <div class="col-lg-6 col-md-6">
+                                <div class="card shadow-sm border-light"
+                                    style="border-radius: 15px; background-color: #ffffff;">
+                                    <div class="card-body text-center">
+                                        {{-- <i class="bi bi-pencil" style="font-size: 40px; color: #3688a2;"></i> --}}
+                                        <h5 class="card-title mt-3" style="font-size: 18px; font-weight: bold;">Pengembangan</h5>
+                                        <p class="card-text" style="color: #6c757d;">Aplikasi ini akan terus dikembangkan mengikuti perkembangan teknologi dan kebutuhan pengguna dengan fitur-fitur baru yang disesuaikan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                <!-- Social Media Links Kanan -->
+                {{-- <div class="col-lg-2 col-md-6 ms-auto d-flex align-items-center justify-content-lg-end justify-content-center">
+                    <div class="social-links mt-4">
+                        <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://youtube.com/" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://wa.me/6285299768443" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div> --}}
+                <!-- End Social Media Links Kanan -->
+
             </div>
         </div>
 

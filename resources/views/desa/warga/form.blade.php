@@ -79,6 +79,34 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <x-input-label>No Tlp : </x-input-label>
+                                    <x-text-input name="no_tlp" type="text" class="form-control" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('no_tlp')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>No Rumah : </x-input-label>
+                                    <x-text-input name="no_rumah" type="text" class="form-control" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('no_rumah')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6"> 
+                                <div class="form-group">
+                                    <x-input-label>Pendidikan Terahir : </x-input-label>
+                                    <x-text-input name="pendidikan" type="text" class="form-control" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('pendidikan')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>Alamat : </x-input-label>
+                                    <x-text-input name="alamat" type="text" class="form-control" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Status Pernikahan :</label>
                                     <select name="status_pernikahan" class="form-control">
                                         <option>Pilih Status Pernikahan</option>
