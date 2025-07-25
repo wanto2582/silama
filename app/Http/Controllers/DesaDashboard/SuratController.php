@@ -30,8 +30,15 @@ class SuratController extends Controller
     public function index()
     {
         $detailSurat = DetailSurat::get();
+        // Dapatkan ID terakhir
+        $lastId = PengajuanSurat::max('id');
+
+        // Jika belum ada record sama sekali, mulai dari 1 atau nilai awal yang Anda inginkan
+        // Jika sudah ada record, tambahkan 1
+        $nextId = $lastId ? $lastId + 1 : 1;
         $warga = DataWarga::get();
-        return view('desa.surat.index', compact('detailSurat', 'warga'));
+        // dd($nextId);
+        return view('desa.surat.index', compact('detailSurat', 'warga', 'nextId'));
     }
 
     public function getWargaData($nik)
@@ -63,13 +70,35 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $status = 'Diproses'; // Default status
+
+        if ($request->jenis_surat == 'sksp') {
+            $status = 'Selesai';
+        }
+
         $pengajuan = PengajuanSurat::create(
             [
                 'users_id' => Auth::user()->id,
                 'tanggal_pengajuan' => date('Y-m-d'),
-                'status' => 'Diproses',
+                'status' => $status, // Gunakan variabel $status yang sudah ditentukan
             ]
         );
+
+        if ($request->jenis_surat == 'sksp') {
+            DetailSurat::create([
+                'users_id' => Auth::user()->id,
+                'pengajuan_surat_id' => $pengajuan->id,
+                // 'nama' => $request->nama,
+                // 'nik' => $request->nik,
+                // 'kewarganegaraan' => $request->kewarganegaraan,
+                'tujuan' => $request->tujuan,
+                'jenis_surat' => 'Surat Kesepakatan',
+                'kode_surat' => 'sksp',
+                'file_kesepakatan' => $request->file('file')->store('assets/file_kesepakatan', 'public'),
+
+
+            ]);
+        }
 
         if ($request->jenis_surat == 'skd') {
             DetailSurat::create([
@@ -282,7 +311,7 @@ class SuratController extends Controller
                 'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
                 'ttd_nama' => $request->ttd_nama,
                 'ttd_jabatan' => $request->ttd_jabatan,
-                
+
 
             ]);
         }
@@ -362,7 +391,7 @@ class SuratController extends Controller
                 'paragraf_1' => $request->paragraf_1,
             ]);
         }
-         if ($request->jenis_surat == 'sptn') {
+        if ($request->jenis_surat == 'sptn') {
             DetailSurat::create([
                 'users_id' => Auth::user()->id,
                 'pengajuan_surat_id' => $pengajuan->id,
@@ -377,7 +406,7 @@ class SuratController extends Controller
                 'status_pernikahan' => $request->status_pernikahan,
                 'tujuan' => $request->tujuan,
                 'alamat' => $request->alamat,
-                'jenis_surat' => 'Surat Pernyataan', 
+                'jenis_surat' => 'Surat Pernyataan',
                 'kode_surat' => 'sptn',
                 'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
                 'dusun' => $request->dusun,
@@ -388,7 +417,7 @@ class SuratController extends Controller
             ]);
         }
 
-         if ($request->jenis_surat == 'speng') {
+        if ($request->jenis_surat == 'speng') {
             DetailSurat::create([
                 'users_id' => Auth::user()->id,
                 'pengajuan_surat_id' => $pengajuan->id,
@@ -403,7 +432,7 @@ class SuratController extends Controller
                 'status_pernikahan' => $request->status_pernikahan,
                 'tujuan' => $request->tujuan,
                 'alamat' => $request->alamat,
-                'jenis_surat' => 'Surat Pengantar', 
+                'jenis_surat' => 'Surat Pengantar',
                 'kode_surat' => 'speng',
                 'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
                 'dusun' => $request->dusun,
@@ -430,7 +459,7 @@ class SuratController extends Controller
                 'status_pernikahan' => $request->status_pernikahan,
                 'tujuan' => $request->tujuan,
                 'alamat' => $request->alamat,
-                'jenis_surat' => 'Surat Rekomendasi', 
+                'jenis_surat' => 'Surat Rekomendasi',
                 'kode_surat' => 'srek',
                 'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
                 'dusun' => $request->dusun,
@@ -456,7 +485,7 @@ class SuratController extends Controller
                 'status_pernikahan' => $request->status_pernikahan,
                 'tujuan' => $request->tujuan,
                 'alamat' => $request->alamat,
-                'jenis_surat' => 'Surat Izin', 
+                'jenis_surat' => 'Surat Izin',
                 'kode_surat' => 'si',
                 'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
                 'dusun' => $request->dusun,
@@ -532,7 +561,7 @@ class SuratController extends Controller
             ]);
         }
 
-         if ($request->jenis_surat == 'sks') {
+        if ($request->jenis_surat == 'sks') {
             DetailSurat::where('id', $id)->update([
                 'nama' => $request->nama,
                 'bin' => $request->bin,
@@ -629,7 +658,7 @@ class SuratController extends Controller
         }
 
 
-         if ($request->jenis_surat == 'skkk') {
+        if ($request->jenis_surat == 'skkk') {
             DetailSurat::where('id', $id)->update([
                 'nama' => $request->nama,
                 'nik' => $request->nik,
@@ -726,7 +755,7 @@ class SuratController extends Controller
                 'tujuan' => $request->tujuan,
                 'ttd_nama' => $request->ttd_nama,
                 'ttd_jabatan' => $request->ttd_jabatan,
-               
+
             ]);
         }
 
@@ -774,7 +803,7 @@ class SuratController extends Controller
                 'rw' => $request->rw,
             ]);
         }
-         if ($request->jenis_surat == 'sptn') {
+        if ($request->jenis_surat == 'sptn') {
             DetailSurat::where('id', $id)->update([
                 'nama' => $request->nama,
                 'nik' => $request->nik,
@@ -1022,25 +1051,34 @@ class SuratController extends Controller
             });
         }
 
-        // $pengajuanSurat = $query->latest()->first();
-        // dd($pengajuanSurat);
-        // dd($model['1']['product']);
         $data = DataTables::of($query)->addIndexColumn()
-
             ->addColumn('action', function ($model) {
                 $download_btn = '';
                 $URL = route('unduh.surat', ['id' => $model->id]);
 
+                // Get the first detail surat from the collection
+                $detailSurat = $model->detail_surats->where('pengajuan_surat_id', $model->id)->first();
+
                 // Check if the status of the model is 'Selesai' (Completed)
                 if ($model->status == 'Selesai') {
-                    // If status is 'Selesai', generate the download button HTML
-                    $download_btn = "
+                    // Cek jika detailSurat ada dan kode_surat adalah 'sksp'
+                    if ($detailSurat && $detailSurat->kode_surat == 'sksp') {
+                        // Jika kode_surat adalah 'sksp', gunakan file_kesepakatan
+                        $downloadURL = asset('storage/' . $detailSurat->file_kesepakatan);
+                        $download_btn = "
+                        <a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:22px;padding:0;' href='$downloadURL' target='_blank'
+                            data-toggle='tooltip' data-placement='top' title='Download Surat Kesepakatan'>
+                            <i class='dw dw-download' style='font-size:1.rem;'></i>
+                        </a>";
+                    } else {
+                        // Jika status 'Selesai' tapi bukan 'sksp', gunakan rute unduh.surat
+                        $download_btn = "
                         <a class='btn btn-icon btn-success mr-1 mb-1 d-flex align-items-center justify-content-center' style='width:32px;height:22px;padding:0;' href='$URL' target='_blank'
-                                data-toggle='tooltip' data-placement='top' title='Download Surat'>
-                                    <i class='dw dw-download' style='font-size:1.rem;'></i>
-                                </a>";
+                            data-toggle='tooltip' data-placement='top' title='Download Surat'>
+                            <i class='dw dw-download' style='font-size:1.rem;'></i>
+                        </a>";
+                    }
                 }
-
 
                 $action = $download_btn;
                 return $action;

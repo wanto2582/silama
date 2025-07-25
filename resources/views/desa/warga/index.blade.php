@@ -8,19 +8,21 @@
             <div class="h5 pd-20 mb-0">
                 <x-button.primary-button class="btn btn-primary"><a href="{{ route('desa.warga.create') }}" style="text-decoration: none; color:white;"> Add Warga </a></x-button.primary-button>
            </div>
-            <div class="table-responsive">
-                <table id="contentTable" class="display table table-striped table-hover" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="table-plus" style="width: 5%;">#</th>
-                            <th style="width: 30%;">Nama</th>
-                            <th style="width: 25%;">NIK</th>
-                            <th style="width: 20%;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+           
+            <div class="table-responsive">  
+
+                 <table id="contentTable" class="display table table-striped table-hover table-responsive" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="table-plus">#</th>
+                          <th >Nama</th>
+                            <th >NIK</th>
+                            <th >Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
             </div>
         </div>
     </div>

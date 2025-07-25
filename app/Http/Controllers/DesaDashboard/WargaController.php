@@ -237,6 +237,11 @@ public function pdf($id)
     $pdf = Pdf::loadView('desa.warga.pdf', compact('dataWarga'));
     return $pdf->stream('data-warga-'.$dataWarga->nama.'.pdf');
 }
+public function idcard($id)
+{
+    $dataWarga = DataWarga::findOrFail($id);
+    return view('desa.warga.idcard', compact('dataWarga'));
+}
 
 public function __datatable_warga(Request $request)
 {
@@ -248,42 +253,50 @@ public function __datatable_warga(Request $request)
             $edit_btn = '';
             $delete_btn = '';
             $view_btn = '';
+            $idcard_btn = '';
 
             // Download button (jika ada file)
             if ($model->file) {
                 $downloadURL = asset('storage/' . $model->file);
                 $download_btn = "
-                    <a class='btn btn-icon btn-primary mr-1 mb-1' href='$downloadURL' target='_blank'
+                    <a class='btn btn-icon btn-primary mr-1 mb-1'  style='width:32px;height:22px;padding:0;' href='$downloadURL' target='_blank'
                     data-toggle='tooltip' data-placement='top' title='Download File'>
-                        <i class='icon-copy bi bi-download' style='font-size: 2vh !important;'></i>
+                        <i class='icon-copy bi bi-download' style='font-size: 1.5vh !important;'></i>
                     </a>";
             }
 
             // View PDF button
             $viewURL = route('desa.warga.pdf', $model->id);
             $view_btn = "
-                <a class='btn btn-icon btn-info mr-1 mb-1' href='$viewURL' target='_blank'
+                <a class='btn btn-icon btn-info mr-1 mb-1' style='width:32px;height:22px;padding:0;' href='$viewURL' target='_blank'
                 data-toggle='tooltip' data-placement='top' title='Lihat PDF'>
-                    <i class='icon-copy bi bi-eye' style='font-size: 2vh !important;'></i>
+                    <i class='icon-copy bi bi-eye' style='font-size: 1.5vh !important;'></i>
+                </a>";
+            // View ID Card button
+            $idCardURL = route('desa.warga.idcard', $model->id);
+            $idcard_btn = "
+                <a class='btn btn-icon btn-secondary mr-1 mb-1' style='width:32px;height:22px;padding:0;' href='$idCardURL' target='_blank'
+                data-toggle='tooltip' data-placement='top' title='Lihat ID Card'>
+                    <i class='icon-copy bi bi-card-text' style='font-size: 1.5vh !important;'></i>
                 </a>";
 
             // Edit button
             $editURL = route('desa.warga.edit', $model->id);
             $edit_btn = "
-                <a class='btn btn-icon btn-warning mr-1 mb-1' href='$editURL'
+                <a class='btn btn-icon btn-warning mr-1 mb-1' style='width:32px;height:22px;padding:0;' href='$editURL'
                 data-toggle='tooltip' data-placement='top' title='Edit'>
-                    <i class='icon-copy bi bi-pencil' style='font-size: 2vh !important;'></i>
+                    <i class='icon-copy bi bi-pencil' style='font-size: 1.5vh !important;'></i>
                 </a>";
 
             // Delete button
             $delete_btn = "
-                <button class='btn btn-icon btn-danger delete-btn'
+                <button class='btn btn-icon btn-danger delete-btn' style='width:32px;height:22px;padding:0;'
                 data-id='$model->id' data-nama='$model->nama'
                 data-toggle='tooltip' data-placement='top' title='Delete'>
-                    <i class='icon-copy bi bi-trash' style='font-size: 2vh !important;'></i>
+                    <i class='icon-copy bi bi-trash' style='font-size: 1.5vh !important;'></i>
                 </button>";
 
-            $action = $download_btn . $view_btn . $edit_btn . $delete_btn;
+            $action = $download_btn . $view_btn . $idcard_btn . $edit_btn . $delete_btn;
             return $action;
         })
         ->make(true);

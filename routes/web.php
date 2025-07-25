@@ -25,6 +25,7 @@ use App\Http\Controllers\DesaDashboard\TanahKasdesaController;
 use App\Http\Controllers\DesaDashboard\WargaController;
 use App\Models\AparaturPemdes;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IdCardController;
 use App\Http\Controllers\PdfController; // Pastikan Anda mengimpor controller
 Route::get('/preview-surat/{filename}', [PdfController::class, 'showPublicPdf'])->name('public.pdf.show');
 
@@ -187,6 +188,7 @@ Route::middleware(['auth', 'verified', 'role:desa'])->group(function () {
     ]);
     Route::get('/desa/get-warga-data/{nik}', [WargaController::class, 'getWargaData'])->name('desa.getWargaData');
     Route::get('desa/warga/{id}/pdf', [WargaController::class, 'pdf'])->name('desa.warga.pdf');
+    Route::get('desa/warga/{id}/idcard', [WargaController::class, 'idcard'])->name('desa.warga.idcard');
     Route::get('/datatable_warga.json', [WargaController::class, '__datatable_warga'])->name('desa.warga_table');
     Route::resource('desa/warga', WargaController::class)->names([
         'index' => 'desa.warga.index',
@@ -366,6 +368,11 @@ Route::get('/unduh-suratkeluar/{id}', function($id) {
     return $pdf->download('surat_' . $listkeluar->jenis_surat . '_' . $listkeluar->id . '.pdf');
 })->name('unduh.suratkeluar');
 
+    // Rute untuk menampilkan satu ID Card berdasarkan ID warga
+Route::get('/idcard/{id}', [IdCardController::class, 'show'])->name('idcard.show');
+
+// Opsional: Rute untuk menampilkan daftar semua ID Card (jika Anda ingin halaman indeks)
+Route::get('/idcards', [IdCardController::class, 'index'])->name('idcard.index');
 
 
 require __DIR__ . '/auth.php';

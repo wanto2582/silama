@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SURAT KETERANGAN DOMISILI</title>
+    <title>Detail Warga</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -640,7 +640,7 @@
             <div class="header">
             <div class="logo" >
             {{-- <img src="src/images/logo.png" alt="logo" class="logo" style="width: 100px; height: 100px; padding-left: -20px;"><SPAN> --}}
-            <img src="src/images/qrcode.png" alt="Foto Warga" class="foto-img" style="width: 100px; height: 100px; margin-left: -90px;">
+            <img src="src/images/qrcode.png" alt="Qr Code" class="foto-img" style="width: 100px; height: 100px; margin-left: -90px;">
              </div>
                 <div class="item" style="margin-left: 105px;">
                      <table style="width:200px; font-size:12px;">
