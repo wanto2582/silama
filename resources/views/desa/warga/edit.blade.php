@@ -23,6 +23,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <x-input-label>No. KK :</x-input-label>
+                                    <x-text-input id="kk" name="kk" type="number" class="form-control" value="{{old('kk', $detailWarga->kk ?? '')}}" required autocomplete="kk" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('kk')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label>Jenis Kelamin :</label>
                                     <select name="jenis_kelamin" class="custom-select form-control">
                                         <option value="">Pilih Jenis Kelamin</option>
@@ -82,6 +89,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <x-input-label>Dapat Membaca Huruf : </x-input-label>
+                                    <x-text-input name="dapat_membaca_huruf" type="text" class="form-control" value="{{old('dapat_membaca_huruf', $detailWarga->dapat_membaca_huruf ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('dapat_membaca_huruf')" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <x-input-label>No. Telp : </x-input-label>
                                     <x-text-input name="no_tlp" type="text" class="form-control" value="{{old('no_tlp', $detailWarga->no_tlp ?? '')}}" />
                                     <x-input-error class="mt-2" :messages="$errors->get('no_tlp')" />
@@ -110,6 +124,13 @@
                                         <option {{ $detailWarga->status_pernikahan == 'Menikah' ? 'selected' : '' }} value="Menikah">Menikah</option>
                                         <option {{ $detailWarga->status_pernikahan == 'Pernah Menikah' ? 'selected' : '' }} value="Pernah Menikah">Pernah Menikah</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>kedudukan dalam keluarga : </x-input-label>
+                                    <x-text-input name="kedudukan_dlm_keluarga" type="text" class="form-control" value="{{old('kedudukan_dlm_keluarga', $detailWarga->kedudukan_dlm_keluarga ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('kedudukan_dlm_keluarga')" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -145,6 +166,13 @@
                                             <option {{ $detailWarga->rw == $i ? 'selected' : '' }}>{{$i}}</option>
                                             @endfor
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input-label>Keterangan : </x-input-label>
+                                    <x-text-input name="keterangan" type="text" class="form-control" value="{{old('keterangan', $detailWarga->keterangan ?? '')}}" />
+                                    <x-input-error class="mt-2" :messages="$errors->get('keterangan')" />
                                 </div>
                             </div>
                         </div>

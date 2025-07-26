@@ -73,7 +73,11 @@ class WargaController extends Controller
             'alamat' => $request->alamat,
             'no_tlp' => $request->no_tlp,
             'pendidikan' => $request->pendidikan,
-            
+            'kedudukan_dlm_keluarga' => $request->kedudukan_dlm_keluarga,
+            'dapat_membaca_huruf' => $request->dapat_membaca_huruf,
+            'keterangan' => $request->keterangan,
+            'kk' => $request->kk,
+            // 'file' => $request->file('file') ? $request->file('file')->store('warga', 'public') : null,
         ];
 
         $warga = DataWarga::create($data);
@@ -122,6 +126,11 @@ class WargaController extends Controller
             'alamat' => $request->alamat,
             'no_tlp' => $request->no_tlp,
             'pendidikan' => $request->pendidikan,
+            'kedudukan_dlm_keluarga' => $request->kedudukan_dlm_keluarga,
+            'dapat_membaca_huruf' => $request->dapat_membaca_huruf,
+            'keterangan' => $request->keterangan,
+            'kk' => $request->kk,
+            // 'file' => $request->file('file') ? $request->file('file')->store('warga', 'public') : null,
         ]);
 
         Alert::success('Sukses!', 'Data Berhasil DiEdit');

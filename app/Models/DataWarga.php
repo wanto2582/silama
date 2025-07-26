@@ -35,7 +35,7 @@ class DataWarga extends Model
         'kabupaten',
         'provinsi',
         'kode_pos',
-        'no_kk',
+        'kk',
         'no_hp',
         'email',
         'pendidikan',
@@ -44,5 +44,8 @@ class DataWarga extends Model
         'status',
         'no_rumah',
         'no_tlp',
+        'kedudukan_dlm_keluarga',
+        'dapat_membaca_huruf',
+        'keterangan',
     ];
 }
