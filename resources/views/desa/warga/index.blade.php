@@ -1,17 +1,4 @@
 <x-app-layout>
-    <x-slot name="title">Data Warga</x-slot>
-    <div class="card-box mb-30">
-        <div class="pd-20">
-            <h4 class="text-blue h4">Data Warga Desa Manyampa</h4>
-        </div>
-        <div class="card-body">
-            <div class="h5 pd-20 mb-0">
-                <x-button.primary-button class="btn btn-primary"><a href="{{ route('desa.warga.create') }}" style="text-decoration: none; color:white;"> Add Warga </a></x-button.primary-button>
-           </div>
-           
-           {{-- <!DOCTYPE html>
-<html lang="id"> --}}
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku Induk Penduduk</title>
@@ -36,19 +23,27 @@
         /* Ensure table is responsive */
         .table-responsive {
             overflow-x: auto;
+            text-align: left;
+            padding-left: 2px;
         }
     </style>
-</head>
-<body class="font-sans antialiased bg-gray-100 p-4 sm:p-6 md:p-8">
+    <x-slot name="title">Data Warga</x-slot>
+    <div class="card-box mb-10">
+        <div class="pd-10">
+            <h4 class="text-blue h4">Data Warga Desa Manyampa</h4>
+        </div>
+            <div class="h5 pd-10 mb-0">
+                <x-button.primary-button class="btn btn-primary"><a href="{{ route('desa.warga.create') }}" style="text-decoration: none; color:white;"> Tambah Data Penduduk </a></x-button.primary-button>
+           </div>
 
     <div class="max-w-full mx-auto bg-white rounded-lg shadow-md p-6">
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">BUKU INDUK PENDUDUK</h1>
 
         <div class="table-responsive">
-            <table id="contentTable" class="min-w-full bg-white rounded-sm overflow-hidden" style="font-size: 13px; margin-left:2px;">
+            <table id="contentTable" class="min-w-full bg-white rounded-sm overflow-hidden table-striped table-hover table-responsive" style="font-size: 13px; margin-left:2px;">
                 <thead style="font-size: 13px; ">
                     <tr class="bg-gray-90">
-                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider rounded-tl-lg">NOMOR<br>URUT</th>
+                        <th rowspan="2" class="px-1 py-1 text-xs text-align-center font-medium text-black uppercase tracking-wider rounded-tl-lg">NOMOR<br>URUT</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">NAMA<br>LENGKAP/<br>PANGGILAN</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">JENIS<br>KELAMIN</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">STATUS<br>PERKAWINAN</th>
@@ -56,10 +51,10 @@
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">AGAMA</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">PENDIDIKAN<br>TERAKHIR</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">PEKERJAAN</th>
-                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">DAPAT<br>MEMBACA<br>HURUF</th>
-                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">KEWARGANEGARAAN</th>
+                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">DAPAT<br>MEMBACA HURUF</th>
+                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">KEWARGA<br>NEGARAAN</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">ALAMAT LENGKAP</th>
-                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">KEDUDUKAN<br>DLM<br>KELUARGA</th>
+                        <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">KEDUDUKAN<br>DLM KELUARGA</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">NIK</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">NOMOR<br>KK</th>
                         <th rowspan="2" class="px-1 py-1 text-xs font-medium text-black uppercase tracking-wider">KET</th>
